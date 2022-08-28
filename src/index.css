@@ -1,0 +1,7 @@
+body {
+    margin: 16px;
+    font-family: "Space Mono", monospace;
+    font-size: 14px;
+    text-underline-offset: 2px;
+    color: rgba(0, 0, 0, 0.9);
+}
