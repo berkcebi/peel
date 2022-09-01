@@ -22,7 +22,7 @@ function Step(props: {
     return (
         <button
             className={classNames.join(" ")}
-            aria-label={`Step ${props.index}`}
+            aria-label={`Step ${props.index + 1}`}
             onClick={() => props.onClick(props.index)}
         />
     );

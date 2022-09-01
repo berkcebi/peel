@@ -23,7 +23,7 @@ input[type="range"]::-webkit-slider-thumb {
     height: 8px;
     width: 8px;
     border-radius: 4px;
-    background-color: var(--secondary-color);
+    background-color: var(--secondary-label-color);
 }
 
 input[type="range"]::-moz-range-thumb {
@@ -31,7 +31,7 @@ input[type="range"]::-moz-range-thumb {
     width: 8px;
     border: none;
     border-radius: 4px;
-    background-color: var(--secondary-color);
+    background-color: var(--secondary-label-color);
 }
 
 input[type="range"]:focus {

@@ -6,6 +6,11 @@ import Track from "./Track";
 
 function App() {
     const [tracks, setTracks] = useState(defaultTracks());
+    const [isPlaying, setIsPlaying] = useState(false);
+
+    function handleHeaderButtonClick() {
+        setIsPlaying(!isPlaying);
+    }
 
     function handleStepClick(trackId: number, stepIndex: number) {
         setTracks(
@@ -36,7 +41,10 @@ function App() {
 
     return (
         <>
-            <Header />
+            <Header
+                isPlaying={isPlaying}
+                onButtonClick={handleHeaderButtonClick}
+            />
             {tracks.map((track) => (
                 <Track
                     track={track}

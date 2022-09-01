@@ -1,5 +1,28 @@
+.Header {
+    display: flex;
+    gap: inherit;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .Header-name {
     width: 96px;
     font-size: 18px;
     text-align: right;
+}
+
+.Header-button {
+    width: 48px;
+    height: 28px;
+    padding: 0;
+    border: none;
+    border-radius: 4px;
+    background-color: var(--accent-color);
+    color: var(--primary-label-on-accent-color);
+    font-family: inherit;
+    font-size: inherit;
+}
+
+.Header-button:focus {
+    outline: 2px solid rgba(0, 122, 255, 0.25);
 }

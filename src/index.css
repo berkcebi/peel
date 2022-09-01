@@ -1,6 +1,7 @@
 :root {
-    --primary-color: #1a1a1a;
-    --secondary-color: #808080;
+    --primary-label-color: #1a1a1a;
+    --secondary-label-color: #808080;
+    --primary-label-on-accent-color: #fff;
     --accent-color: #007aff;
     --purple-accent-color: #5856d6;
     --yellow-accent-color: #ffcc00;
@@ -17,7 +18,7 @@ body {
     margin: 24px 12px;
     font-family: "Space Mono", monospace;
     font-size: 12px;
-    color: var(--primary-color);
+    color: var(--primary-label-color);
 }
 
 #root {
@@ -27,5 +28,5 @@ body {
 }
 
 .secondary {
-    color: var(--secondary-color);
+    color: var(--secondary-label-color);
 }
