@@ -1,0 +1,41 @@
+.Step-button {
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    border-radius: 4px;
+    background-color: var(--control-background-color);
+    border: 2px solid var(--tertiary-border-color);
+}
+
+.Step-button--downbeat {
+    border-color: var(--primary-border-color);
+}
+
+.Step-button--on-purple {
+    background-color: var(--purple-accent-color);
+    border-color: var(--primary-border-color);
+}
+
+.Step-button--on-yellow {
+    background-color: var(--yellow-accent-color);
+    border-color: var(--secondary-border-color);
+}
+
+.Step-button--on-green {
+    background-color: var(--green-accent-color);
+    border-color: var(--secondary-border-color);
+}
+
+.Step-button--on-mint {
+    background-color: var(--mint-accent-color);
+    border-color: var(--secondary-border-color);
+}
+
+.Step-button--on-pink {
+    background-color: var(--pink-accent-color);
+    border-color: var(--secondary-border-color);
+}
+
+.Step-button:focus {
+    outline: none;
+}

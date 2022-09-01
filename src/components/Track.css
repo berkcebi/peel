@@ -1,0 +1,17 @@
+.Track {
+    display: flex;
+    flex-wrap: wrap;
+    gap: inherit;
+    align-items: center;
+}
+
+.Track-name {
+    width: 96px;
+    margin-right: 12px;
+    text-align: right;
+}
+
+.Track-volume {
+    width: 72px;
+    margin-left: 12px;
+}
