@@ -1,4 +1,5 @@
 import Step from "./Step";
+import Volume from "./Volume";
 
 const DEFAULT_STEP_LENGTH = 16;
 
@@ -10,8 +11,7 @@ interface Track {
     readonly description?: string;
     readonly color: TrackColor;
     readonly steps: Step[];
-    readonly volume: number;
-    readonly isMuted: boolean;
+    readonly volume: Volume;
 }
 
 function defaultSteps(): Step[] {
@@ -25,6 +25,13 @@ function defaultSteps(): Step[] {
     return steps;
 }
 
+function defaultVolume(): Volume {
+    return {
+        percentage: 1.0,
+        isMuted: false,
+    };
+}
+
 export function defaultTracks(): Track[] {
     return [
         {
@@ -32,16 +39,14 @@ export function defaultTracks(): Track[] {
             name: "Bass Drum",
             color: "purple",
             steps: defaultSteps(),
-            volume: 1.0,
-            isMuted: false,
+            volume: defaultVolume(),
         },
         {
             id: 1,
             name: "Snare",
             color: "yellow",
             steps: defaultSteps(),
-            volume: 1.0,
-            isMuted: false,
+            volume: defaultVolume(),
         },
         {
             id: 2,
@@ -49,8 +54,7 @@ export function defaultTracks(): Track[] {
             description: "Open",
             color: "green",
             steps: defaultSteps(),
-            volume: 1.0,
-            isMuted: false,
+            volume: defaultVolume(),
         },
         {
             id: 3,
@@ -58,8 +62,7 @@ export function defaultTracks(): Track[] {
             description: "Closed",
             color: "green",
             steps: defaultSteps(),
-            volume: 1.0,
-            isMuted: false,
+            volume: defaultVolume(),
         },
     ];
 }

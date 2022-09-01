@@ -1,11 +1,13 @@
 import React from "react";
 import TrackInterface from "../interfaces/Track";
 import Step from "./Step";
+import Volume from "./Volume";
 import "./Track.css";
 
 function Track(props: {
     track: TrackInterface;
     onStepClick: (trackId: number, stepIndex: number) => void;
+    onVolumeChange: (trackId: number, volumePercentage: number) => void;
 }) {
     const track = props.track;
 
@@ -23,12 +25,17 @@ function Track(props: {
                     index={index}
                     trackColor={track.color}
                     onClick={(stepIndex) =>
-                        props.onStepClick(props.track.id, stepIndex)
+                        props.onStepClick(track.id, stepIndex)
                     }
                     key={index}
                 />
             ))}
-            <div className="Track-volume">{track.volume * 100}%</div>
+            <Volume
+                volume={track.volume}
+                onChange={(volumePercentage) =>
+                    props.onVolumeChange(track.id, volumePercentage)
+                }
+            />
         </div>
     );
 }

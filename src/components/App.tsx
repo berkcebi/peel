@@ -11,16 +11,25 @@ function App() {
         setTracks(
             produce((draftTracks) => {
                 const track = draftTracks.find((track) => track.id === trackId);
-                if (!track) {
-                    return;
-                }
-
-                const step = track.steps[stepIndex];
+                const step = track?.steps[stepIndex];
                 if (!step) {
                     return;
                 }
 
                 step.isOn = !step.isOn;
+            })
+        );
+    }
+
+    function handleVolumeChange(trackId: number, volumePercentage: number) {
+        setTracks(
+            produce((draftTracks) => {
+                const track = draftTracks.find((track) => track.id === trackId);
+                if (!track) {
+                    return;
+                }
+
+                track.volume.percentage = volumePercentage;
             })
         );
     }
@@ -32,6 +41,7 @@ function App() {
                 <Track
                     track={track}
                     onStepClick={handleStepClick}
+                    onVolumeChange={handleVolumeChange}
                     key={track.id}
                 />
             ))}
