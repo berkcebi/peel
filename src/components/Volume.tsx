@@ -13,7 +13,7 @@ function Volume(props: {
         <div title={`Volume ${volume.percentage * 100}%`} className="Volume">
             <Slider
                 percentage={volume.percentage}
-                onValueChange={props.onChange}
+                onPercentageChange={props.onChange}
             />
         </div>
     );

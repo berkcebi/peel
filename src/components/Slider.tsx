@@ -3,11 +3,11 @@ import "./Slider.css";
 
 function Slider(props: {
     percentage: number;
-    onValueChange: (value: number) => void;
+    onPercentageChange: (value: number) => void;
 }) {
     function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
         const value = event.target.valueAsNumber / 100;
-        props.onValueChange(value);
+        props.onPercentageChange(value);
     }
 
     return (
