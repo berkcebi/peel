@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import produce from "immer";
 import { defaultTracks } from "../interfaces/Track";
+import Header from "./Header";
 import Track from "./Track";
 
 function App() {
@@ -26,7 +27,7 @@ function App() {
 
     return (
         <>
-            peel
+            <Header />
             {tracks.map((track) => (
                 <Track
                     track={track}
