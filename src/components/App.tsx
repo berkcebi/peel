@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import produce from "immer";
 import Sequencer from "../Sequencer";
 import { defaultTracks } from "../interfaces/Track";
@@ -10,6 +10,10 @@ function App() {
     const [isPlaying, setIsPlaying] = useState(false);
     const [playheadPosition, setPlayheadPosition] = useState(0);
     const sequencer = useRef(new Sequencer());
+
+    useEffect(() => {
+        sequencer.current.update(tracks);
+    }, [tracks]);
 
     async function handleHeaderButtonClick() {
         if (isPlaying) {
@@ -33,11 +37,9 @@ function App() {
                 step.isOn = !step.isOn;
             })
         );
-
-        // TODO: Update sequencer.
     }
 
-    function handleVolumeChange(trackId: number, volumePercentage: number) {
+    function handleVolumeChange(trackId: number, volumeValue: number) {
         setTracks(
             produce((draftTracks) => {
                 const track = draftTracks.find((track) => track.id === trackId);
@@ -45,7 +47,7 @@ function App() {
                     return;
                 }
 
-                track.volume.percentage = volumePercentage;
+                track.volume.value = volumeValue;
             })
         );
     }

@@ -1,19 +1,24 @@
 import React from "react";
 import Slider from "./Slider";
-import VolumeInterface from "../interfaces/Volume";
+import VolumeInterface, {
+    VOLUME_MIN_VALUE,
+    VOLUME_MAX_VALUE,
+} from "../interfaces/Volume";
 import "./Volume.css";
 
 function Volume(props: {
     volume: VolumeInterface;
-    onChange: (percentage: number) => void;
+    onChange: (value: number) => void;
 }) {
     const volume = props.volume;
 
     return (
-        <div title={`Volume ${volume.percentage * 100}%`} className="Volume">
+        <div title={`Volume ${volume.value} dB`} className="Volume">
             <Slider
-                percentage={volume.percentage}
-                onPercentageChange={props.onChange}
+                min={VOLUME_MIN_VALUE}
+                max={VOLUME_MAX_VALUE}
+                value={volume.value}
+                onChange={props.onChange}
             />
         </div>
     );

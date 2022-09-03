@@ -29,7 +29,7 @@ function defaultSteps(): Step[] {
 
 function defaultVolume(): Volume {
     return {
-        percentage: 1.0,
+        value: 0,
         isMuted: false,
     };
 }

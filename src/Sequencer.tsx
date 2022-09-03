@@ -56,6 +56,19 @@ class Sequencer {
         Tone.Transport.start();
     }
 
+    update(tracks: Track[]) {
+        for (const track of tracks) {
+            const samplePlayer = this.samplePlayers.player(track.sample);
+            samplePlayer.volume.value = track.volume.value;
+        }
+
+        if (Tone.Transport.state !== "started") {
+            return;
+        }
+
+        // TODO: Update transport repeat events.
+    }
+
     stop() {
         Tone.Transport.stop();
         Tone.Transport.cancel();

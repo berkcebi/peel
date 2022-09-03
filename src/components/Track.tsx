@@ -7,7 +7,7 @@ import "./Track.css";
 function Track(props: {
     track: TrackInterface;
     onStepClick: (trackId: number, stepIndex: number) => void;
-    onVolumeChange: (trackId: number, volumePercentage: number) => void;
+    onVolumeChange: (trackId: number, volumeValue: number) => void;
 }) {
     const track = props.track;
 
@@ -32,8 +32,8 @@ function Track(props: {
             ))}
             <Volume
                 volume={track.volume}
-                onChange={(volumePercentage) =>
-                    props.onVolumeChange(track.id, volumePercentage)
+                onChange={(volumeValue) =>
+                    props.onVolumeChange(track.id, volumeValue)
                 }
             />
         </div>
