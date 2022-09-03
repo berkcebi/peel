@@ -70,6 +70,30 @@ export function defaultTracks(): Track[] {
             steps: defaultSteps(),
             volume: defaultVolume(),
         },
+        {
+            id: 4,
+            sample: Sample.Cymbal,
+            name: "Cymbal",
+            color: "mint",
+            steps: defaultSteps(),
+            volume: defaultVolume(),
+        },
+        {
+            id: 5,
+            sample: Sample.Clap,
+            name: "Clap",
+            color: "pink",
+            steps: defaultSteps(),
+            volume: defaultVolume(),
+        },
+        {
+            id: 6,
+            sample: Sample.Cowbell,
+            name: "Cowbell",
+            color: "pink",
+            steps: defaultSteps(),
+            volume: defaultVolume(),
+        },
     ];
 }
 
