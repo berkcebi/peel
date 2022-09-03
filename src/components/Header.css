@@ -5,10 +5,14 @@
     align-items: center;
 }
 
-.Header-name {
+.Header-logo-container {
     width: 96px;
-    font-size: 18px;
-    text-align: right;
+}
+
+.Header-logo {
+    display: block;
+    margin-left: auto;
+    color: var(--secondary-label-color);
 }
 
 .Header-button {
