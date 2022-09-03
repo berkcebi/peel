@@ -52,6 +52,19 @@ function App() {
         );
     }
 
+    function handleMute(trackId: number) {
+        setTracks(
+            produce((draftTracks) => {
+                const track = draftTracks.find((track) => track.id === trackId);
+                if (!track) {
+                    return;
+                }
+
+                track.volume.isMuted = !track.volume.isMuted;
+            })
+        );
+    }
+
     function handlePlayheadAdvance(position: number) {
         setPlayheadPosition(position);
     }
@@ -67,6 +80,7 @@ function App() {
                     track={track}
                     onStepClick={handleStepClick}
                     onVolumeChange={handleVolumeChange}
+                    onMute={handleMute}
                     key={track.id}
                 />
             ))}

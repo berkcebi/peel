@@ -8,6 +8,7 @@ function Track(props: {
     track: TrackInterface;
     onStepClick: (trackId: number, stepIndex: number) => void;
     onVolumeChange: (trackId: number, volumeValue: number) => void;
+    onMute: (trackId: number) => void;
 }) {
     const track = props.track;
 
@@ -35,6 +36,7 @@ function Track(props: {
                 onChange={(volumeValue) =>
                     props.onVolumeChange(track.id, volumeValue)
                 }
+                onMute={() => props.onMute(track.id)}
             />
         </div>
     );
