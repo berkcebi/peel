@@ -16,7 +16,12 @@ function Volume(props: {
     const volume = props.volume;
 
     return (
-        <div title={`Volume ${volume.value} dB`} className="Volume">
+        <div
+            title={`Volume ${volume.value} dB${
+                volume.isMuted ? " (Muted)" : ""
+            }`}
+            className="Volume"
+        >
             <button
                 className="Volume-mute-button"
                 aria-label={volume.isMuted ? "Unmute" : "Mute"}
