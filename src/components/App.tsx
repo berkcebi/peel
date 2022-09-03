@@ -9,7 +9,7 @@ function App() {
     const [tracks, setTracks] = useState(defaultTracks());
     const [isPlaying, setIsPlaying] = useState(false);
     const [playheadPosition, setPlayheadPosition] = useState(0);
-    const sequencer = useRef(new Sequencer());
+    const sequencer = useRef(new Sequencer(handlePlayheadAdvance));
 
     useEffect(() => {
         sequencer.current.update(tracks);
@@ -19,17 +19,17 @@ function App() {
         if (isPlaying) {
             sequencer.current.stop();
         } else {
-            await sequencer.current.start(tracks, handlePlayheadAdvance);
+            await sequencer.current.start();
         }
 
         setIsPlaying(!isPlaying);
     }
 
-    function handleStepClick(trackId: number, stepIndex: number) {
+    function handleStepClick(trackId: number, stepPosition: number) {
         setTracks(
             produce((draftTracks) => {
                 const track = draftTracks.find((track) => track.id === trackId);
-                const step = track?.steps[stepIndex];
+                const step = track?.steps[stepPosition];
                 if (!step) {
                     return;
                 }

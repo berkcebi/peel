@@ -2,7 +2,7 @@ import Sample from "./Sample";
 import Step from "./Step";
 import Volume from "./Volume";
 
-const DEFAULT_STEP_LENGTH = 16;
+export const STEP_LENGTH = 16;
 
 export type TrackColor = "purple" | "yellow" | "green" | "mint" | "pink";
 
@@ -18,7 +18,7 @@ interface Track {
 
 function defaultSteps(): Step[] {
     const steps = [];
-    for (let index = 0; index < DEFAULT_STEP_LENGTH; index++) {
+    for (let index = 0; index < STEP_LENGTH; index++) {
         steps.push({
             isOn: false,
         });
