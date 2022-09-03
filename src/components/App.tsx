@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import produce from "immer";
+import Sequencer from "../Sequencer";
 import { defaultTracks } from "../interfaces/Track";
 import Header from "./Header";
 import Track from "./Track";
@@ -7,8 +8,16 @@ import Track from "./Track";
 function App() {
     const [tracks, setTracks] = useState(defaultTracks());
     const [isPlaying, setIsPlaying] = useState(false);
+    const [playheadPosition, setPlayheadPosition] = useState(0);
+    const sequencer = useRef(new Sequencer());
 
-    function handleHeaderButtonClick() {
+    async function handleHeaderButtonClick() {
+        if (isPlaying) {
+            sequencer.current.stop();
+        } else {
+            await sequencer.current.start(tracks, handlePlayheadAdvance);
+        }
+
         setIsPlaying(!isPlaying);
     }
 
@@ -24,6 +33,8 @@ function App() {
                 step.isOn = !step.isOn;
             })
         );
+
+        // TODO: Update sequencer.
     }
 
     function handleVolumeChange(trackId: number, volumePercentage: number) {
@@ -37,6 +48,10 @@ function App() {
                 track.volume.percentage = volumePercentage;
             })
         );
+    }
+
+    function handlePlayheadAdvance(position: number) {
+        setPlayheadPosition(position);
     }
 
     return (
@@ -53,6 +68,8 @@ function App() {
                     key={track.id}
                 />
             ))}
+            {/* TODO: Highlight step buttons instead. */}
+            {isPlaying && <span className="secondary">{playheadPosition}</span>}
         </>
     );
 }

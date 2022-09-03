@@ -1,3 +1,4 @@
+import Sample from "./Sample";
 import Step from "./Step";
 import Volume from "./Volume";
 
@@ -7,6 +8,7 @@ export type TrackColor = "purple" | "yellow" | "green" | "mint" | "pink";
 
 interface Track {
     readonly id: number;
+    readonly sample: Sample;
     readonly name: string;
     readonly description?: string;
     readonly color: TrackColor;
@@ -36,6 +38,7 @@ export function defaultTracks(): Track[] {
     return [
         {
             id: 0,
+            sample: Sample.BassDrum,
             name: "Bass Drum",
             color: "purple",
             steps: defaultSteps(),
@@ -43,6 +46,7 @@ export function defaultTracks(): Track[] {
         },
         {
             id: 1,
+            sample: Sample.Snare,
             name: "Snare",
             color: "yellow",
             steps: defaultSteps(),
@@ -50,16 +54,18 @@ export function defaultTracks(): Track[] {
         },
         {
             id: 2,
+            sample: Sample.HihatClosed,
             name: "Hihat",
-            description: "Open",
+            description: "Closed",
             color: "green",
             steps: defaultSteps(),
             volume: defaultVolume(),
         },
         {
             id: 3,
+            sample: Sample.HihatOpen,
             name: "Hihat",
-            description: "Closed",
+            description: "Open",
             color: "green",
             steps: defaultSteps(),
             volume: defaultVolume(),
