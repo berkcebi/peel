@@ -11,20 +11,19 @@ function Step(props: {
 }) {
     const classNames = ["Step-button"];
 
-    if (props.index % 4 === 0) {
-        classNames.push("Step-button--downbeat");
-    }
-
     if (props.step.isOn) {
         classNames.push(`Step-button--on-${props.trackColor}`);
     }
 
     return (
-        <button
-            className={classNames.join(" ")}
-            aria-label={`Step ${props.index + 1}`}
-            onClick={() => props.onClick(props.index)}
-        />
+        <div className="Step">
+            <button
+                className={classNames.join(" ")}
+                aria-label={`Step ${props.index + 1}`}
+                onClick={() => props.onClick(props.index)}
+            />
+            {props.index % 4 === 0 && <div className="Step-downbeat" />}
+        </div>
     );
 }
 
