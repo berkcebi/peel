@@ -1,6 +1,5 @@
 .Track {
     display: flex;
-    flex-wrap: wrap;
     gap: inherit;
     align-items: center;
 }
