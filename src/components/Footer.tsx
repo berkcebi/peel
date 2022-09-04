@@ -4,7 +4,7 @@ import "./Footer.css";
 function Header() {
     return (
         <footer className="Footer">
-            Press P to start/stop playback, 1 to 7 to mute/unmute tracks.
+            Press P to start/stop playback, 1 to 9 to mute/unmute tracks.
             <br />
             Ping me at{" "}
             <a

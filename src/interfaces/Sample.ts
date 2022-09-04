@@ -4,6 +4,10 @@ const enum Sample {
     HihatClosed = "hihat-closed",
     HihatOpen = "hihat-open",
     Cymbal = "cymbal",
+    TomLow = "tom-low",
+    TomMid = "tom-mid",
+    TomHi = "tom-hi",
+    RimShot = "rim-shot",
     Clap = "clap",
     Cowbell = "cowbell",
 }
@@ -14,6 +18,10 @@ export const ALL_SAMPLES = [
     Sample.HihatClosed,
     Sample.HihatOpen,
     Sample.Cymbal,
+    Sample.TomLow,
+    Sample.TomMid,
+    Sample.TomHi,
+    Sample.RimShot,
     Sample.Clap,
     Sample.Cowbell,
 ];
