@@ -1,5 +1,6 @@
 import * as Tone from "tone";
-import Track, { STEP_LENGTH } from "./interfaces/Track";
+import Pattern, { STEP_LENGTH } from "./interfaces/Pattern";
+import Track from "./interfaces/Track";
 import { ALL_SAMPLES } from "./interfaces/Sample";
 
 class Sequencer {
@@ -68,8 +69,10 @@ class Sequencer {
         Tone.Transport.start();
     }
 
-    update(tracks: Track[]) {
-        for (const track of tracks) {
+    update(pattern: Pattern) {
+        Tone.Transport.bpm.value = pattern.tempo;
+
+        for (const track of pattern.tracks) {
             const samplePlayer = this.players.player(track.sample);
             samplePlayer.volume.value = track.volume.value;
             samplePlayer.mute = track.volume.isMuted;

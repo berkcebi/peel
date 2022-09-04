@@ -1,19 +1,19 @@
 import React, { useState, useRef, useEffect } from "react";
 import produce from "immer";
 import Sequencer from "../Sequencer";
-import { defaultTracks } from "../interfaces/Track";
+import { defaultPattern } from "../interfaces/Pattern";
 import Header from "./Header";
 import Track from "./Track";
 
 function App() {
-    const [tracks, setTracks] = useState(defaultTracks());
+    const [pattern, setPattern] = useState(defaultPattern());
     const [isPlaying, setIsPlaying] = useState(false);
     const [playheadPosition, setPlayheadPosition] = useState(0);
     const sequencer = useRef(new Sequencer(handlePlayheadAdvance));
 
     useEffect(() => {
-        sequencer.current.update(tracks);
-    }, [tracks]);
+        sequencer.current.update(pattern);
+    }, [pattern]);
 
     async function handleHeaderButtonClick() {
         if (isPlaying) {
@@ -26,9 +26,11 @@ function App() {
     }
 
     function handleStepClick(trackId: number, stepPosition: number) {
-        setTracks(
-            produce((draftTracks) => {
-                const track = draftTracks.find((track) => track.id === trackId);
+        setPattern(
+            produce((pattern) => {
+                const track = pattern.tracks.find(
+                    (track) => track.id === trackId
+                );
                 const step = track?.steps[stepPosition];
                 if (!step) {
                     return;
@@ -40,9 +42,11 @@ function App() {
     }
 
     function handleVolumeChange(trackId: number, volumeValue: number) {
-        setTracks(
-            produce((draftTracks) => {
-                const track = draftTracks.find((track) => track.id === trackId);
+        setPattern(
+            produce((pattern) => {
+                const track = pattern.tracks.find(
+                    (track) => track.id === trackId
+                );
                 if (!track) {
                     return;
                 }
@@ -53,9 +57,11 @@ function App() {
     }
 
     function handleMute(trackId: number) {
-        setTracks(
-            produce((draftTracks) => {
-                const track = draftTracks.find((track) => track.id === trackId);
+        setPattern(
+            produce((pattern) => {
+                const track = pattern.tracks.find(
+                    (track) => track.id === trackId
+                );
                 if (!track) {
                     return;
                 }
@@ -75,7 +81,7 @@ function App() {
                 isPlaying={isPlaying}
                 onButtonClick={handleHeaderButtonClick}
             />
-            {tracks.map((track, index) => (
+            {pattern.tracks.map((track, index) => (
                 <Track
                     track={track}
                     playheadPosition={
