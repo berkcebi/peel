@@ -10,7 +10,7 @@ function Header(props: {
     onTempoChange: (tempo: number) => void;
 }) {
     return (
-        <div className="Header">
+        <header className="Header">
             <div className="Header-logo-container">
                 <Logo className="Header-logo" />
             </div>
@@ -20,7 +20,7 @@ function Header(props: {
                     {props.isPlaying ? "Stop" : "Play"}
                 </button>
             </div>
-        </div>
+        </header>
     );
 }
 
