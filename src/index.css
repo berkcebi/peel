@@ -21,6 +21,10 @@ body {
     color: var(--primary-label-color);
 }
 
+a {
+    color: inherit;
+}
+
 #root {
     display: grid;
     gap: 12px;
