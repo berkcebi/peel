@@ -4,6 +4,8 @@ import Step from "./Step";
 import Volume from "./Volume";
 
 export const STEP_LENGTH = 16;
+export const MIN_TEMPO = 60;
+export const MAX_TEMPO = 180;
 
 interface Pattern {
     readonly tracks: Track[];

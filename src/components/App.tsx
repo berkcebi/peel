@@ -71,6 +71,14 @@ function App() {
         );
     }
 
+    function handleTempoChange(tempo: number) {
+        setPattern(
+            produce((pattern) => {
+                pattern.tempo = tempo;
+            })
+        );
+    }
+
     function handlePlayheadAdvance(position: number) {
         setPlayheadPosition(position);
     }
@@ -79,7 +87,9 @@ function App() {
         <>
             <Header
                 isPlaying={isPlaying}
+                tempo={pattern.tempo}
                 onButtonClick={handleHeaderButtonClick}
+                onTempoChange={handleTempoChange}
             />
             {pattern.tracks.map((track, index) => (
                 <Track
