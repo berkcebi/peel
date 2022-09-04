@@ -92,7 +92,7 @@ export function defaultPattern(): Pattern {
                 volume: defaultVolume(),
             },
         ],
-        tempo: 120,
+        tempo: 90,
     };
 }
 
