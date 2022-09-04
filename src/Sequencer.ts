@@ -6,7 +6,7 @@ class Sequencer {
     private players: Tone.Players;
     private playerEventIds: { [stepId: string]: number };
     private playheadPosition: number;
-    private playheadEventId: number | undefined;
+    private playheadEventId?: number;
     onPlayheadAdvance?: (stepPosition: number) => void;
 
     constructor(onPlayheadAdvance?: (stepPosition: number) => void) {
