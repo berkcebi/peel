@@ -50,3 +50,13 @@
     border-radius: 1px;
     background-color: var(--secondary-border-color);
 }
+
+.Step-playhead {
+    position: absolute;
+    height: 12px;
+    top: -24px;
+    left: 12px;
+    right: 12px;
+    border-radius: 2px;
+    background-color: var(--accent-color);
+}

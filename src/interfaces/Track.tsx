@@ -18,7 +18,7 @@ interface Track {
 
 function defaultSteps(): Step[] {
     const steps = [];
-    for (let index = 0; index < STEP_LENGTH; index++) {
+    for (let position = 0; position < STEP_LENGTH; position++) {
         steps.push({
             isOn: false,
         });

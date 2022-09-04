@@ -5,9 +5,10 @@ import "./Step.css";
 
 function Step(props: {
     step: StepInterface;
-    index: number;
+    position: number;
+    playheadPosition?: number;
     trackColor: TrackColor;
-    onClick: (index: number) => void;
+    onClick: (position: number) => void;
 }) {
     const classNames = ["Step-button"];
 
@@ -19,10 +20,13 @@ function Step(props: {
         <div className="Step">
             <button
                 className={classNames.join(" ")}
-                aria-label={`Step ${props.index + 1}`}
-                onClick={() => props.onClick(props.index)}
+                aria-label={`Step ${props.position + 1}`}
+                onClick={() => props.onClick(props.position)}
             />
-            {props.index % 4 === 0 && <div className="Step-downbeat" />}
+            {props.position % 4 === 0 && <div className="Step-downbeat" />}
+            {props.position === props.playheadPosition && (
+                <div className="Step-playhead" />
+            )}
         </div>
     );
 }

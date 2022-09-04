@@ -1,5 +1,6 @@
 .Header {
     display: flex;
+    margin-bottom: 12px;
     gap: inherit;
     justify-content: space-between;
     align-items: center;

@@ -75,17 +75,18 @@ function App() {
                 isPlaying={isPlaying}
                 onButtonClick={handleHeaderButtonClick}
             />
-            {tracks.map((track) => (
+            {tracks.map((track, index) => (
                 <Track
                     track={track}
+                    playheadPosition={
+                        isPlaying && index === 0 ? playheadPosition : undefined
+                    }
                     onStepClick={handleStepClick}
                     onVolumeChange={handleVolumeChange}
                     onMute={handleMute}
                     key={track.id}
                 />
             ))}
-            {/* TODO: Highlight step buttons instead. */}
-            {isPlaying && <span className="secondary">{playheadPosition}</span>}
         </>
     );
 }

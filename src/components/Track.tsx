@@ -6,6 +6,7 @@ import "./Track.css";
 
 function Track(props: {
     track: TrackInterface;
+    playheadPosition?: number;
     onStepClick: (trackId: number, stepPosition: number) => void;
     onVolumeChange: (trackId: number, volumeValue: number) => void;
     onMute: (trackId: number) => void;
@@ -20,15 +21,16 @@ function Track(props: {
                     <span className="secondary">, {track.description}</span>
                 )}
             </div>
-            {track.steps.map((step, index) => (
+            {track.steps.map((step, position) => (
                 <Step
                     step={step}
-                    index={index}
+                    position={position}
                     trackColor={track.color}
+                    playheadPosition={props.playheadPosition}
                     onClick={(stepPosition) =>
                         props.onStepClick(track.id, stepPosition)
                     }
-                    key={index}
+                    key={position}
                 />
             ))}
             <Volume
