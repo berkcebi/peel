@@ -2,7 +2,13 @@ import Sample from "./Sample";
 import Step from "./Step";
 import Volume from "./Volume";
 
-export type TrackColor = "purple" | "yellow" | "green" | "mint" | "pink";
+export type TrackColor =
+    | "indigo"
+    | "yellow"
+    | "green"
+    | "cyan"
+    | "red"
+    | "pink";
 
 interface Track {
     readonly id: number;

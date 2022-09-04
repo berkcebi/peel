@@ -12,8 +12,8 @@
     border: 2px solid var(--tertiary-border-color);
 }
 
-.Step-button--on-purple {
-    background-color: var(--purple-accent-color);
+.Step-button--on-indigo {
+    background-color: var(--indigo-accent-color);
     border-color: var(--primary-border-color);
 }
 
@@ -27,8 +27,13 @@
     border-color: var(--secondary-border-color);
 }
 
-.Step-button--on-mint {
-    background-color: var(--mint-accent-color);
+.Step-button--on-cyan {
+    background-color: var(--cyan-accent-color);
+    border-color: var(--secondary-border-color);
+}
+
+.Step-button--on-red {
+    background-color: var(--red-accent-color);
     border-color: var(--secondary-border-color);
 }
 
@@ -49,6 +54,17 @@
     height: 2px;
     border-radius: 1px;
     background-color: var(--secondary-border-color);
+}
+
+.Step-emoji {
+    font-size: 16px;
+}
+
+/* Reduce emoji size on Safari to match. */
+_::-webkit-full-page-media,
+_:future,
+:root .Step-emoji {
+    font-size: 12px;
 }
 
 .Step-playhead {

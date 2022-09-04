@@ -1,8 +1,14 @@
 import React from "react";
 import TrackInterface from "../interfaces/Track";
+import Sample from "../interfaces/Sample";
 import Step from "./Step";
 import Volume from "./Volume";
 import "./Track.css";
+
+const SAMPLE_EMOJIS: { [sample: string]: string } = {
+    [Sample.Clap]: "👏",
+    [Sample.Cowbell]: "🐮",
+};
 
 function Track(props: {
     track: TrackInterface;
@@ -25,8 +31,9 @@ function Track(props: {
                 <Step
                     step={step}
                     position={position}
-                    trackColor={track.color}
                     playheadPosition={props.playheadPosition}
+                    trackColor={track.color}
+                    emoji={SAMPLE_EMOJIS[track.sample]}
                     onClick={(stepPosition) =>
                         props.onStepClick(track.id, stepPosition)
                     }

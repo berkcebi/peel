@@ -3,11 +3,12 @@
     --secondary-label-color: #808080;
     --primary-label-on-accent-color: #fff;
     --accent-color: #007aff;
-    --purple-accent-color: #5856d6;
+    --indigo-accent-color: #5856d6;
     --yellow-accent-color: #ffcc00;
     --green-accent-color: #34c759;
-    --mint-accent-color: #00c7be;
-    --pink-accent-color: #ff2d55;
+    --cyan-accent-color: #32ade6;
+    --red-accent-color: #ff2d55;
+    --pink-accent-color: #ffdfe5;
     --control-background-color: #f2f2f2;
     --primary-border-color: rgba(0, 0, 0, 0.2);
     --secondary-border-color: rgba(0, 0, 0, 0.1);

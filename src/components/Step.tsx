@@ -8,6 +8,7 @@ function Step(props: {
     position: number;
     playheadPosition?: number;
     trackColor: TrackColor;
+    emoji?: string;
     onClick: (position: number) => void;
 }) {
     const classNames = ["Step-button"];
@@ -22,7 +23,11 @@ function Step(props: {
                 className={classNames.join(" ")}
                 aria-label={`Step ${props.position + 1}`}
                 onClick={() => props.onClick(props.position)}
-            />
+            >
+                {props.step.isOn && props.emoji && (
+                    <span className="Step-emoji">{props.emoji}</span>
+                )}
+            </button>
             {props.position % 4 === 0 && <div className="Step-downbeat" />}
             {props.position === props.playheadPosition && (
                 <div className="Step-playhead" />
