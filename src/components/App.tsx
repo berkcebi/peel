@@ -4,6 +4,7 @@ import Sequencer from "../Sequencer";
 import { defaultPattern } from "../interfaces/Pattern";
 import Header from "./Header";
 import Track from "./Track";
+import Footer from "./Footer";
 
 function App() {
     const [pattern, setPattern] = useState(defaultPattern());
@@ -15,14 +16,40 @@ function App() {
         sequencer.current.update(pattern);
     }, [pattern]);
 
-    async function handleHeaderButtonClick() {
-        if (isPlaying) {
-            sequencer.current.stop();
-        } else {
-            await sequencer.current.start();
-        }
+    useEffect(() => {
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if (event.key === "p") {
+                handlePlayStop();
 
-        setIsPlaying(!isPlaying);
+                return;
+            }
+
+            const trackKeys = ["1", "2", "3", "4", "5", "6", "7"];
+            const trackId = trackKeys.indexOf(event.key);
+            if (trackId >= 0) {
+                handleMute(trackId);
+            }
+        };
+
+        document.addEventListener("keydown", handleKeyDown);
+
+        return () => {
+            document.removeEventListener("keydown", handleKeyDown);
+        };
+    }, []);
+
+    function handlePlayStop() {
+        setIsPlaying((isPlaying) => {
+            if (isPlaying) {
+                sequencer.current.stop();
+            } else {
+                (async () => {
+                    await sequencer.current.start();
+                })();
+            }
+
+            return !isPlaying;
+        });
     }
 
     function handleStepClick(trackId: number, stepPosition: number) {
@@ -88,7 +115,7 @@ function App() {
             <Header
                 isPlaying={isPlaying}
                 tempo={pattern.tempo}
-                onButtonClick={handleHeaderButtonClick}
+                onPlayStop={handlePlayStop}
                 onTempoChange={handleTempoChange}
             />
             {pattern.tracks.map((track, index) => (
@@ -103,6 +130,7 @@ function App() {
                     key={track.id}
                 />
             ))}
+            <Footer />
         </>
     );
 }
