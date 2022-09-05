@@ -13,6 +13,16 @@ function App() {
     const sequencer = useRef(new Sequencer(handlePlayheadAdvance));
 
     useEffect(() => {
+        if (isPlaying) {
+            (async () => {
+                await sequencer.current.start();
+            })();
+        } else {
+            sequencer.current.stop();
+        }
+    }, [isPlaying]);
+
+    useEffect(() => {
         sequencer.current.update(pattern);
     }, [pattern]);
 
@@ -51,17 +61,7 @@ function App() {
     }, []);
 
     function handlePlayStop() {
-        setIsPlaying((isPlaying) => {
-            if (isPlaying) {
-                sequencer.current.stop();
-            } else {
-                (async () => {
-                    await sequencer.current.start();
-                })();
-            }
-
-            return !isPlaying;
-        });
+        setIsPlaying((isPlaying) => !isPlaying);
     }
 
     function handleStepClick(trackId: number, stepPosition: number) {
