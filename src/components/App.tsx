@@ -1,13 +1,21 @@
 import React, { useState, useRef, useEffect } from "react";
 import produce from "immer";
 import Sequencer from "../Sequencer";
-import { defaultPattern } from "../interfaces/Pattern";
+import Pattern, { defaultPattern } from "../interfaces/Pattern";
 import Header from "./Header";
 import Track from "./Track";
 import Footer from "./Footer";
 
+const PATTERN_STORAGE_KEY = "pattern";
+const PATTERN_STORAGE_DELAY = 5000;
+
 function App() {
-    const [pattern, setPattern] = useState(defaultPattern());
+    const [pattern, setPattern] = useState(() => {
+        const patternValue = localStorage.getItem(PATTERN_STORAGE_KEY);
+        return patternValue
+            ? (JSON.parse(patternValue) as Pattern)
+            : defaultPattern();
+    });
     const [isPlaying, setIsPlaying] = useState(false);
     const [playheadPosition, setPlayheadPosition] = useState(0);
     const sequencer = useRef(new Sequencer(handlePlayheadAdvance));
@@ -24,6 +32,14 @@ function App() {
 
     useEffect(() => {
         sequencer.current.update(pattern);
+    }, [pattern]);
+
+    useEffect(() => {
+        const timeoutId = setTimeout(() => {
+            localStorage.setItem(PATTERN_STORAGE_KEY, JSON.stringify(pattern));
+        }, PATTERN_STORAGE_DELAY);
+
+        return () => clearTimeout(timeoutId);
     }, [pattern]);
 
     useEffect(() => {
