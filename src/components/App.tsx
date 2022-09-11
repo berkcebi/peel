@@ -1,6 +1,6 @@
-import React, { useState, useRef, useEffect } from "react";
-import produce from "immer";
+import React, { useState, useRef, useEffect, useReducer } from "react";
 import Sequencer from "../Sequencer";
+import reducer from "../reducer";
 import Pattern, { defaultPattern } from "../interfaces/Pattern";
 import Header from "./Header";
 import Track from "./Track";
@@ -10,7 +10,7 @@ const PATTERN_STORAGE_KEY = "pattern";
 const PATTERN_STORAGE_DELAY = 5000;
 
 function App() {
-    const [pattern, setPattern] = useState(() => {
+    const [pattern, dispatch] = useReducer(reducer, undefined, () => {
         const patternValue = localStorage.getItem(PATTERN_STORAGE_KEY);
         return patternValue
             ? (JSON.parse(patternValue) as Pattern)
@@ -65,7 +65,7 @@ function App() {
             ];
             const trackId = trackKeys.indexOf(event.key);
             if (trackId >= 0) {
-                handleMute(trackId);
+                dispatch({ type: "mute", trackId });
             }
         };
 
@@ -81,57 +81,19 @@ function App() {
     }
 
     function handleStepClick(trackId: number, stepPosition: number) {
-        setPattern(
-            produce((pattern) => {
-                const track = pattern.tracks.find(
-                    (track) => track.id === trackId
-                );
-                const step = track?.steps[stepPosition];
-                if (!step) {
-                    return;
-                }
-
-                step.isOn = !step.isOn;
-            })
-        );
+        dispatch({ type: "toggleStep", trackId, stepPosition });
     }
 
     function handleVolumeChange(trackId: number, volumeValue: number) {
-        setPattern(
-            produce((pattern) => {
-                const track = pattern.tracks.find(
-                    (track) => track.id === trackId
-                );
-                if (!track) {
-                    return;
-                }
-
-                track.volume.value = volumeValue;
-            })
-        );
+        dispatch({ type: "changeVolume", trackId, volumeValue });
     }
 
     function handleMute(trackId: number) {
-        setPattern(
-            produce((pattern) => {
-                const track = pattern.tracks.find(
-                    (track) => track.id === trackId
-                );
-                if (!track) {
-                    return;
-                }
-
-                track.volume.isMuted = !track.volume.isMuted;
-            })
-        );
+        dispatch({ type: "mute", trackId });
     }
 
     function handleTempoChange(tempo: number) {
-        setPattern(
-            produce((pattern) => {
-                pattern.tempo = tempo;
-            })
-        );
+        dispatch({ type: "changeTempo", tempo });
     }
 
     function handlePlayheadAdvance(position: number) {
