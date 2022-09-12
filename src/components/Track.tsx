@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Context } from "../Context";
 import TrackInterface from "../interfaces/Track";
 import Sample from "../interfaces/Sample";
 import Step from "./Step";
@@ -10,14 +11,10 @@ const SAMPLE_EMOJIS: { [sample: string]: string } = {
     [Sample.Cowbell]: "🐮",
 };
 
-function Track(props: {
-    track: TrackInterface;
-    playheadPosition?: number;
-    onStepClick: (trackId: number, stepPosition: number) => void;
-    onVolumeChange: (trackId: number, volumeValue: number) => void;
-    onMute: (trackId: number) => void;
-}) {
+function Track(props: { track: TrackInterface; playheadPosition?: number }) {
+    const dispatch = useContext(Context);
     const track = props.track;
+    const trackId = track.id;
 
     return (
         <div className="Track">
@@ -35,7 +32,7 @@ function Track(props: {
                     trackColor={track.color}
                     emoji={SAMPLE_EMOJIS[track.sample]}
                     onClick={(stepPosition) =>
-                        props.onStepClick(track.id, stepPosition)
+                        dispatch({ type: "toggleStep", trackId, stepPosition })
                     }
                     key={position}
                 />
@@ -43,9 +40,9 @@ function Track(props: {
             <Volume
                 volume={track.volume}
                 onChange={(volumeValue) =>
-                    props.onVolumeChange(track.id, volumeValue)
+                    dispatch({ type: "changeVolume", trackId, volumeValue })
                 }
-                onMute={() => props.onMute(track.id)}
+                onMute={() => dispatch({ type: "mute", trackId })}
             />
         </div>
     );

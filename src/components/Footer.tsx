@@ -1,7 +1,7 @@
 import React from "react";
 import "./Footer.css";
 
-function Header() {
+function Footer() {
     return (
         <footer className="Footer">
             Press P to start/stop playback, 1 to 9 to mute/unmute tracks.
@@ -19,4 +19,4 @@ function Header() {
     );
 }
 
-export default Header;
+export default Footer;

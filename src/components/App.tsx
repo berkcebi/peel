@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect, useReducer } from "react";
 import Sequencer from "../Sequencer";
 import reducer from "../reducer";
+import { Context } from "../Context";
 import Pattern, { defaultPattern } from "../interfaces/Pattern";
 import Header from "./Header";
 import Track from "./Track";
@@ -80,18 +81,6 @@ function App() {
         setIsPlaying((isPlaying) => !isPlaying);
     }
 
-    function handleStepClick(trackId: number, stepPosition: number) {
-        dispatch({ type: "toggleStep", trackId, stepPosition });
-    }
-
-    function handleVolumeChange(trackId: number, volumeValue: number) {
-        dispatch({ type: "changeVolume", trackId, volumeValue });
-    }
-
-    function handleMute(trackId: number) {
-        dispatch({ type: "mute", trackId });
-    }
-
     function handleTempoChange(tempo: number) {
         dispatch({ type: "changeTempo", tempo });
     }
@@ -101,7 +90,7 @@ function App() {
     }
 
     return (
-        <>
+        <Context.Provider value={dispatch}>
             <Header
                 isPlaying={isPlaying}
                 tempo={pattern.tempo}
@@ -114,14 +103,11 @@ function App() {
                     playheadPosition={
                         isPlaying && index === 0 ? playheadPosition : undefined
                     }
-                    onStepClick={handleStepClick}
-                    onVolumeChange={handleVolumeChange}
-                    onMute={handleMute}
                     key={track.id}
                 />
             ))}
             <Footer />
-        </>
+        </Context.Provider>
     );
 }
 

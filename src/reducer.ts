@@ -1,7 +1,7 @@
 import produce from "immer";
 import Pattern from "./interfaces/Pattern";
 
-type Action =
+export type Action =
     | { type: "toggleStep"; trackId: number; stepPosition: number }
     | { type: "changeVolume"; trackId: number; volumeValue: number }
     | { type: "mute"; trackId: number }
