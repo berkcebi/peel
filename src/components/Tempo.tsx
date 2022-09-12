@@ -3,16 +3,21 @@ import { MIN_TEMPO, MAX_TEMPO } from "../interfaces/Pattern";
 import Slider from "./Slider";
 import "./Tempo.css";
 
-function Tempo(props: { value: number; onChange: (value: number) => void }) {
+interface TempoProps {
+    value: number;
+    onChange: (value: number) => void;
+}
+
+function Tempo({ value, onChange }: TempoProps) {
     return (
-        <div title={`Tempo ${props.value} bpm`} className="Tempo">
-            <span className="secondary">{props.value} bpm</span>
+        <div title={`Tempo ${value} bpm`} className="Tempo">
+            <span className="secondary">{value} bpm</span>
             <Slider
                 min={MIN_TEMPO}
                 max={MAX_TEMPO}
-                value={props.value}
+                value={value}
                 step={5}
-                onChange={props.onChange}
+                onChange={onChange}
             />
         </div>
     );

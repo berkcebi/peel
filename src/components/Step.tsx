@@ -3,35 +3,42 @@ import { TrackColor } from "../interfaces/Track";
 import StepInterface from "../interfaces/Step";
 import "./Step.css";
 
-function Step(props: {
+interface StepProps {
     step: StepInterface;
     position: number;
     playheadPosition?: number;
     trackColor: TrackColor;
     emoji?: string;
     onClick: (position: number) => void;
-}) {
+}
+
+function Step({
+    step,
+    position,
+    playheadPosition,
+    trackColor,
+    emoji,
+    onClick,
+}: StepProps) {
     const classNames = ["Step-button"];
 
-    if (props.step.isOn) {
-        classNames.push(`Step-button--on-${props.trackColor}`);
+    if (step.isOn) {
+        classNames.push(`Step-button--on-${trackColor}`);
     }
 
     return (
         <div className="Step">
             <button
                 className={classNames.join(" ")}
-                aria-label={`Step ${props.position + 1}`}
-                onClick={() => props.onClick(props.position)}
+                aria-label={`Step ${position + 1}`}
+                onClick={() => onClick(position)}
             >
-                {props.step.isOn && props.emoji && (
-                    <span className="Step-emoji">{props.emoji}</span>
+                {step.isOn && emoji && (
+                    <span className="Step-emoji">{emoji}</span>
                 )}
             </button>
-            {props.position % 4 === 0 && <div className="Step-downbeat" />}
-            {props.position === props.playheadPosition && (
-                <div className="Step-playhead" />
-            )}
+            {position % 4 === 0 && <div className="Step-downbeat" />}
+            {position === playheadPosition && <div className="Step-playhead" />}
         </div>
     );
 }

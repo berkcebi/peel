@@ -1,24 +1,26 @@
 import React from "react";
 import "./Slider.css";
 
-function Slider(props: {
+interface SliderProps {
     min: number;
     max: number;
     value: number;
     step?: number;
     onChange: (value: number) => void;
-}) {
+}
+
+function Slider({ min, max, value, step, onChange }: SliderProps) {
     function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
-        props.onChange(event.target.valueAsNumber);
+        onChange(event.target.valueAsNumber);
     }
 
     return (
         <input
             type="range"
-            min={props.min}
-            max={props.max}
-            value={props.value}
-            step={props.step || 1}
+            min={min}
+            max={max}
+            value={value}
+            step={step || 1}
             onChange={handleChange}
         />
     );

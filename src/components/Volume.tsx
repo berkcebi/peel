@@ -8,13 +8,13 @@ import "./Volume.css";
 import { ReactComponent as VolumeIcon } from "./assets/volume.svg";
 import { ReactComponent as VolumeMutedIcon } from "./assets/volumeMuted.svg";
 
-function Volume(props: {
+interface VolumeProps {
     volume: VolumeInterface;
     onChange: (value: number) => void;
     onMute: () => void;
-}) {
-    const volume = props.volume;
+}
 
+function Volume({ volume, onChange, onMute }: VolumeProps) {
     return (
         <div
             title={`Volume ${volume.value} dB${
@@ -25,7 +25,7 @@ function Volume(props: {
             <button
                 className="Volume-mute-button"
                 aria-label={volume.isMuted ? "Unmute" : "Mute"}
-                onClick={props.onMute}
+                onClick={onMute}
             >
                 {volume.isMuted ? <VolumeMutedIcon /> : <VolumeIcon />}
             </button>
@@ -33,7 +33,7 @@ function Volume(props: {
                 min={VOLUME_MIN_VALUE}
                 max={VOLUME_MAX_VALUE}
                 value={volume.value}
-                onChange={props.onChange}
+                onChange={onChange}
             />
         </div>
     );

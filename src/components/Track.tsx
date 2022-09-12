@@ -11,9 +11,13 @@ const SAMPLE_EMOJIS: { [sample: string]: string } = {
     [Sample.Cowbell]: "🐮",
 };
 
-function Track(props: { track: TrackInterface; playheadPosition?: number }) {
+interface TrackProps {
+    track: TrackInterface;
+    playheadPosition?: number;
+}
+
+function Track({ track, playheadPosition }: TrackProps) {
     const dispatch = useContext(Context);
-    const track = props.track;
     const trackId = track.id;
 
     return (
@@ -28,7 +32,7 @@ function Track(props: { track: TrackInterface; playheadPosition?: number }) {
                 <Step
                     step={step}
                     position={position}
-                    playheadPosition={props.playheadPosition}
+                    playheadPosition={playheadPosition}
                     trackColor={track.color}
                     emoji={SAMPLE_EMOJIS[track.sample]}
                     onClick={(stepPosition) =>
