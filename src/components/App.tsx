@@ -9,6 +9,8 @@ import Footer from "./Footer";
 
 const PATTERN_STORAGE_KEY = "pattern";
 const PATTERN_STORAGE_DELAY = 5000;
+// prettier-ignore
+const TRACK_SHORTCUT_KEYS = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-"];
 
 function App() {
     const [pattern, dispatch] = useReducer(reducer, undefined, () => {
@@ -45,28 +47,8 @@ function App() {
 
     useEffect(() => {
         const handleKeyDown = (event: KeyboardEvent) => {
-            if (event.key === "p") {
+            if (event.key.toLowerCase() === "p") {
                 handlePlayStop();
-
-                return;
-            }
-
-            const trackKeys = [
-                "1",
-                "2",
-                "3",
-                "4",
-                "5",
-                "6",
-                "7",
-                "8",
-                "9",
-                "0",
-                "-",
-            ];
-            const trackId = trackKeys.indexOf(event.key);
-            if (trackId >= 0) {
-                dispatch({ type: "mute", trackId });
             }
         };
 
@@ -100,6 +82,7 @@ function App() {
             {pattern.tracks.map((track, index) => (
                 <Track
                     track={track}
+                    shortcutKey={TRACK_SHORTCUT_KEYS[index]}
                     playheadPosition={
                         isPlaying && index === 0 ? playheadPosition : undefined
                     }

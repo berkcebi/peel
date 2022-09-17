@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Context } from "../Context";
 import TrackInterface from "../interfaces/Track";
 import Sample from "../interfaces/Sample";
@@ -13,12 +13,27 @@ const SAMPLE_EMOJIS: { [sample: string]: string } = {
 
 interface TrackProps {
     track: TrackInterface;
+    shortcutKey: string;
     playheadPosition?: number;
 }
 
-function Track({ track, playheadPosition }: TrackProps) {
+function Track({ track, shortcutKey, playheadPosition }: TrackProps) {
     const dispatch = useContext(Context);
     const trackId = track.id;
+
+    useEffect(() => {
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if (event.key === shortcutKey) {
+                dispatch({ type: "mute", trackId: trackId });
+            }
+        };
+
+        document.addEventListener("keydown", handleKeyDown);
+
+        return () => {
+            document.removeEventListener("keydown", handleKeyDown);
+        };
+    }, [trackId, shortcutKey, dispatch]);
 
     return (
         <div className="Track">
