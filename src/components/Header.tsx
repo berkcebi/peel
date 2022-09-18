@@ -5,16 +5,27 @@ import { ReactComponent as Logo } from "./assets/logo.svg";
 
 interface HeaderProps {
     isPlaying: boolean;
+    playheadPosition: number;
     tempo: number;
     onPlayStop: () => void;
     onTempoChange: (tempo: number) => void;
 }
 
-function Header({ isPlaying, tempo, onPlayStop, onTempoChange }: HeaderProps) {
+function Header({
+    isPlaying,
+    playheadPosition,
+    tempo,
+    onPlayStop,
+    onTempoChange,
+}: HeaderProps) {
+    const isUpbeat = isPlaying && playheadPosition % 4 !== 0;
+
     return (
         <header className="Header">
             <div className="Header-logo-container">
-                <Logo className="Header-logo" />
+                <Logo
+                    className={isUpbeat ? "Header-logo--upbeat" : "Header-logo"}
+                />
             </div>
             <div className="Header-container">
                 <Tempo value={tempo} onChange={onTempoChange} />

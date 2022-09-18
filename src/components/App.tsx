@@ -75,6 +75,7 @@ function App() {
         <Context.Provider value={dispatch}>
             <Header
                 isPlaying={isPlaying}
+                playheadPosition={playheadPosition}
                 tempo={pattern.tempo}
                 onPlayStop={handlePlayStop}
                 onTempoChange={handleTempoChange}
