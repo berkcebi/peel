@@ -47,7 +47,9 @@ function App() {
 
     useEffect(() => {
         const handleKeyDown = (event: KeyboardEvent) => {
-            if (event.key.toLowerCase() === "p") {
+            if (event.code === "Space") {
+                event.preventDefault();
+
                 handlePlayStop();
             }
         };
