@@ -3,6 +3,7 @@ input[type="range"] {
     appearance: none;
     background: transparent;
     width: 48px;
+    margin: 0;
 }
 
 input[type="range"]::-webkit-slider-runnable-track {
@@ -39,9 +40,9 @@ input[type="range"]:focus {
 }
 
 input[type="range"]:focus::-webkit-slider-thumb {
-    outline: 2px solid rgba(0, 122, 255, 0.25);
+    outline: 2px solid var(--accent-border-color);
 }
 
 input[type="range"]:focus::-moz-range-thumb {
-    outline: 2px solid rgba(0, 122, 255, 0.25);
+    outline: 2px solid var(--accent-border-color);
 }

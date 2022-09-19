@@ -43,7 +43,7 @@
 }
 
 .Step-button:focus {
-    outline: 2px solid rgba(0, 122, 255, 0.25);
+    outline: 2px solid var(--accent-border-color);
 }
 
 .Step-downbeat {

@@ -1,7 +1,7 @@
 :root {
     --primary-label-color: #1a1a1a;
     --secondary-label-color: #808080;
-    --primary-label-on-accent-color: #fff;
+    --primary-label-on-inverse-color: #fff;
     --accent-color: #007aff;
     --indigo-accent-color: #5856d6;
     --yellow-accent-color: #ffcc00;

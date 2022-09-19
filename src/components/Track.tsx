@@ -35,6 +35,12 @@ function Track({ track, shortcutKey, playheadPosition }: TrackProps) {
         };
     }, [trackId, shortcutKey, dispatch]);
 
+    const buttonClassNames = ["Track-button"];
+
+    if (track.volume.isMuted) {
+        buttonClassNames.push("Track-button--muted");
+    }
+
     return (
         <div className="Track">
             <div className="Track-name">
@@ -43,6 +49,14 @@ function Track({ track, shortcutKey, playheadPosition }: TrackProps) {
                     <span className="secondary">, {track.description}</span>
                 )}
             </div>
+            <button
+                className={buttonClassNames.join(" ")}
+                onClick={(event) => {
+                    dispatch({ type: "mute", trackId: trackId });
+                }}
+            >
+                {shortcutKey}
+            </button>
             {track.steps.map((step, position) => (
                 <Step
                     step={step}
@@ -61,7 +75,6 @@ function Track({ track, shortcutKey, playheadPosition }: TrackProps) {
                 onChange={(volumeValue) =>
                     dispatch({ type: "changeVolume", trackId, volumeValue })
                 }
-                onMute={() => dispatch({ type: "mute", trackId })}
             />
         </div>
     );

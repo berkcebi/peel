@@ -5,16 +5,13 @@ import VolumeInterface, {
     VOLUME_MAX_VALUE,
 } from "../interfaces/Volume";
 import "./Volume.css";
-import { ReactComponent as VolumeIcon } from "./assets/volume.svg";
-import { ReactComponent as VolumeMutedIcon } from "./assets/volumeMuted.svg";
 
 interface VolumeProps {
     volume: VolumeInterface;
     onChange: (value: number) => void;
-    onMute: () => void;
 }
 
-function Volume({ volume, onChange, onMute }: VolumeProps) {
+function Volume({ volume, onChange }: VolumeProps) {
     return (
         <div
             title={`Volume ${volume.value} dB${
@@ -22,13 +19,6 @@ function Volume({ volume, onChange, onMute }: VolumeProps) {
             }`}
             className="Volume"
         >
-            <button
-                className="Volume-mute-button"
-                aria-label={volume.isMuted ? "Unmute" : "Mute"}
-                onClick={onMute}
-            >
-                {volume.isMuted ? <VolumeMutedIcon /> : <VolumeIcon />}
-            </button>
             <Slider
                 min={VOLUME_MIN_VALUE}
                 max={VOLUME_MAX_VALUE}

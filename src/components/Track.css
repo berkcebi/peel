@@ -6,6 +6,30 @@
 
 .Track-name {
     width: 96px;
-    margin-right: 12px;
     text-align: right;
+}
+
+.Track-button {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    border: none;
+    border-radius: 10px;
+    background-color: var(--primary-label-color);
+    color: var(--primary-label-on-inverse-color);
+    margin-right: 12px;
+    font-family: inherit;
+    font-size: inherit;
+    cursor: pointer;
+}
+
+.Track-button--muted {
+    border: 1px solid var(--primary-label-color);
+    background: none;
+    color: var(--primary-label-color);
+}
+
+.Track-button:focus {
+    outline: 2px solid var(--accent-border-color);
 }

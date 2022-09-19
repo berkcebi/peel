@@ -7,7 +7,7 @@
 }
 
 .Header-logo-container {
-    width: 96px;
+    width: 124px;
     display: flex;
     justify-content: right;
 }
@@ -35,17 +35,17 @@
 }
 
 .Header-button {
-    width: 76px;
+    width: 72px;
     height: 28px;
     padding: 0;
     border: none;
     border-radius: 4px;
     background-color: var(--accent-color);
-    color: var(--primary-label-on-accent-color);
+    color: var(--primary-label-on-inverse-color);
     font-family: inherit;
     font-size: inherit;
 }
 
 .Header-button:focus {
-    outline: 2px solid rgba(0, 122, 255, 0.25);
+    outline: 2px solid var(--accent-border-color);
 }
