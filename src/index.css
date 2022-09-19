@@ -13,6 +13,7 @@
     --primary-border-color: rgba(0, 0, 0, 0.2);
     --secondary-border-color: rgba(0, 0, 0, 0.1);
     --tertiary-border-color: rgba(0, 0, 0, 0.05);
+    --accent-border-color: rgba(0, 122, 255, 0.25);
 }
 
 body {
