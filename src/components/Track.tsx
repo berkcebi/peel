@@ -1,15 +1,10 @@
 import React, { useContext, useEffect } from "react";
+import sequencer from "../sequencer";
 import { Context } from "../Context";
 import TrackInterface from "../interfaces/Track";
-import Sample from "../interfaces/Sample";
 import Step from "./Step";
 import Volume from "./Volume";
 import "./Track.css";
-
-const SAMPLE_EMOJIS: { [sample: string]: string } = {
-    [Sample.Clap]: "👏",
-    [Sample.Cowbell]: "🐮",
-};
 
 interface TrackProps {
     track: TrackInterface;
@@ -19,12 +14,17 @@ interface TrackProps {
 
 function Track({ track, shortcutKey, playheadPosition }: TrackProps) {
     const dispatch = useContext(Context);
-    const trackId = track.id;
+    const id = track.id;
+    const sample = track.sample;
+
+    useEffect(() => {
+        sequencer.setVolume(sample, track.volume.value, track.volume.isMuted);
+    }, [sample, track.volume.value, track.volume.isMuted]);
 
     useEffect(() => {
         const handleKeyDown = (event: KeyboardEvent) => {
             if (event.key === shortcutKey) {
-                dispatch({ type: "mute", trackId: trackId });
+                dispatch({ type: "mute", trackId: id });
             }
         };
 
@@ -33,7 +33,7 @@ function Track({ track, shortcutKey, playheadPosition }: TrackProps) {
         return () => {
             document.removeEventListener("keydown", handleKeyDown);
         };
-    }, [trackId, shortcutKey, dispatch]);
+    }, [id, shortcutKey, dispatch]);
 
     const buttonClassNames = ["Track-button"];
 
@@ -52,7 +52,7 @@ function Track({ track, shortcutKey, playheadPosition }: TrackProps) {
             <button
                 className={buttonClassNames.join(" ")}
                 onClick={(event) => {
-                    dispatch({ type: "mute", trackId: trackId });
+                    dispatch({ type: "mute", trackId: id });
                 }}
             >
                 {shortcutKey}
@@ -62,10 +62,14 @@ function Track({ track, shortcutKey, playheadPosition }: TrackProps) {
                     step={step}
                     position={position}
                     playheadPosition={playheadPosition}
+                    trackSample={sample}
                     trackColor={track.color}
-                    emoji={SAMPLE_EMOJIS[track.sample]}
                     onClick={(stepPosition) =>
-                        dispatch({ type: "toggleStep", trackId, stepPosition })
+                        dispatch({
+                            type: "toggleStep",
+                            trackId: id,
+                            stepPosition,
+                        })
                     }
                     key={position}
                 />
@@ -73,7 +77,7 @@ function Track({ track, shortcutKey, playheadPosition }: TrackProps) {
             <Volume
                 volume={track.volume}
                 onChange={(volumeValue) =>
-                    dispatch({ type: "changeVolume", trackId, volumeValue })
+                    dispatch({ type: "changeVolume", trackId: id, volumeValue })
                 }
             />
         </div>

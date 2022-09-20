@@ -8,7 +8,6 @@ interface HeaderProps {
     playheadPosition: number;
     tempo: number;
     onPlayStop: () => void;
-    onTempoChange: (tempo: number) => void;
 }
 
 function Header({
@@ -16,7 +15,6 @@ function Header({
     playheadPosition,
     tempo,
     onPlayStop,
-    onTempoChange,
 }: HeaderProps) {
     const isUpbeat = isPlaying && playheadPosition % 4 !== 0;
 
@@ -28,7 +26,7 @@ function Header({
                 />
             </div>
             <div className="Header-container">
-                <Tempo value={tempo} onChange={onTempoChange} />
+                <Tempo value={tempo} />
                 <button className="Header-button" onClick={onPlayStop}>
                     {isPlaying ? "Stop" : "Play"}
                 </button>

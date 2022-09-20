@@ -1,5 +1,5 @@
-import React, { useState, useRef, useEffect, useReducer } from "react";
-import Sequencer from "../Sequencer";
+import React, { useState, useEffect, useReducer } from "react";
+import sequencer from "../sequencer";
 import reducer from "../reducer";
 import { Context } from "../Context";
 import Pattern, { defaultPattern } from "../interfaces/Pattern";
@@ -21,21 +21,16 @@ function App() {
     });
     const [isPlaying, setIsPlaying] = useState(false);
     const [playheadPosition, setPlayheadPosition] = useState(0);
-    const sequencer = useRef(new Sequencer(handlePlayheadAdvance));
 
     useEffect(() => {
         if (isPlaying) {
             (async () => {
-                await sequencer.current.start();
+                await sequencer.start();
             })();
         } else {
-            sequencer.current.stop();
+            sequencer.stop();
         }
     }, [isPlaying]);
-
-    useEffect(() => {
-        sequencer.current.update(pattern);
-    }, [pattern]);
 
     useEffect(() => {
         const timeoutId = setTimeout(() => {
@@ -65,13 +60,8 @@ function App() {
         setIsPlaying((isPlaying) => !isPlaying);
     }
 
-    function handleTempoChange(tempo: number) {
-        dispatch({ type: "changeTempo", tempo });
-    }
-
-    function handlePlayheadAdvance(position: number) {
-        setPlayheadPosition(position);
-    }
+    sequencer.onCurrentSixteenthChange = (currentSixteenth: number) =>
+        setPlayheadPosition(currentSixteenth);
 
     return (
         <Context.Provider value={dispatch}>
@@ -80,7 +70,6 @@ function App() {
                 playheadPosition={playheadPosition}
                 tempo={pattern.tempo}
                 onPlayStop={handlePlayStop}
-                onTempoChange={handleTempoChange}
             />
             {pattern.tracks.map((track, index) => (
                 <Track
