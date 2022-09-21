@@ -51,9 +51,7 @@ function Track({ track, shortcutKey, playheadPosition }: TrackProps) {
             </div>
             <button
                 className={buttonClassNames.join(" ")}
-                onClick={(event) => {
-                    dispatch({ type: "mute", trackId: id });
-                }}
+                onClick={() => dispatch({ type: "mute", trackId: id })}
             >
                 {shortcutKey}
             </button>

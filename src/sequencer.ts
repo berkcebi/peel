@@ -36,7 +36,7 @@ Tone.Transport.scheduleRepeat((time) => {
 }, "0:0:1");
 
 let currentSixteenth = 0;
-let transportEventIds: { [id: string]: number } = {};
+const transportEventIds: { [id: string]: number } = {};
 
 function getId(sample: string, sixteenth: number) {
     return `${sample}:${sixteenth}`;

@@ -12,22 +12,6 @@
     justify-content: right;
 }
 
-.Header-logo .downbeat {
-    visibility: visible;
-}
-
-.Header-logo .upbeat {
-    visibility: hidden;
-}
-
-.Header-logo--upbeat .downbeat {
-    visibility: hidden;
-}
-
-.Header-logo--upbeat .upbeat {
-    visibility: visible;
-}
-
 .Header-container {
     display: flex;
     gap: 24px;
