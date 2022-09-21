@@ -6,7 +6,7 @@
         "start": "vite",
         "build": "tsc && vite build",
         "preview": "vite preview",
-        "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx"
+        "lint": "eslint ."
     },
     "dependencies": {
         "@amplitude/analytics-browser": "^1.4.0",
