@@ -1,6 +1,6 @@
+import * as amplitude from "@amplitude/analytics-browser";
 import React from "react";
 import ReactDOM from "react-dom/client";
-import * as amplitude from "@amplitude/analytics-browser";
 import "./index.css";
 import App from "./components/App";
 

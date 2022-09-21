@@ -1,9 +1,9 @@
 import React from "react";
-import Slider from "./Slider";
 import VolumeInterface, {
     VOLUME_MIN_VALUE,
     VOLUME_MAX_VALUE,
 } from "../interfaces/Volume";
+import Slider from "./Slider";
 import "./Volume.css";
 
 interface VolumeProps {

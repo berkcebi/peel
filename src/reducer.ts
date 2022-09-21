@@ -1,4 +1,4 @@
-import produce from "immer";
+import { produce } from "immer";
 import Pattern from "./interfaces/Pattern";
 
 export type Action =

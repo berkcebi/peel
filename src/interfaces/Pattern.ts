@@ -1,6 +1,6 @@
-import Track from "./Track";
 import Sample from "./Sample";
 import Step from "./Step";
+import Track from "./Track";
 import Volume from "./Volume";
 
 export const STEP_LENGTH = 16;

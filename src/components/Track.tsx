@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
-import sequencer from "../sequencer";
 import { Context } from "../Context";
 import TrackInterface from "../interfaces/Track";
+import sequencer from "../sequencer";
 import Step from "./Step";
 import Volume from "./Volume";
 import "./Track.css";

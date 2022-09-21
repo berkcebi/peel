@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from "react";
-import sequencer from "../sequencer";
 import { Context } from "../Context";
 import { MIN_TEMPO, MAX_TEMPO } from "../interfaces/Pattern";
+import sequencer from "../sequencer";
 import Slider from "./Slider";
 import "./Tempo.css";
 

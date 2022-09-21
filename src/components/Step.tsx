@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
-import sequencer from "../sequencer";
-import { TrackColor } from "../interfaces/Track";
 import Sample from "../interfaces/Sample";
 import StepInterface from "../interfaces/Step";
+import { TrackColor } from "../interfaces/Track";
+import sequencer from "../sequencer";
 import "./Step.css";
 
 const SAMPLE_EMOJIS: { [sample: string]: string } = {

@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useReducer } from "react";
-import sequencer from "../sequencer";
-import reducer from "../reducer";
 import { Context } from "../Context";
 import Pattern, { defaultPattern } from "../interfaces/Pattern";
+import reducer from "../reducer";
+import sequencer from "../sequencer";
+import Footer from "./Footer";
 import Header from "./Header";
 import Track from "./Track";
-import Footer from "./Footer";
 
 const PATTERN_STORAGE_KEY = "pattern";
 const PATTERN_STORAGE_DELAY = 5000;
