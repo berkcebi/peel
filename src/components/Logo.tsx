@@ -1,10 +1,10 @@
 import React from "react";
 
-interface TempoProps {
+interface LogoProps {
     isUpbeat: boolean;
 }
 
-function Logo({ isUpbeat }: TempoProps) {
+function Logo({ isUpbeat }: LogoProps) {
     return (
         <svg
             width="76"

@@ -5,5 +5,10 @@
         "plugin:react-hooks/recommended",
         "plugin:@typescript-eslint/recommended",
         "eslint-config-prettier"
-    ]
+    ],
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
+    }
 }
