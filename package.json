@@ -1,5 +1,6 @@
 {
     "name": "peel",
+    "private": true,
     "workspaces": [
         "web",
         "api"
