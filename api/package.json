@@ -1,0 +1,11 @@
+{
+    "name": "peel-api",
+    "version": "0.1.0",
+    "scripts": {
+        "start": "netlify functions:serve"
+    },
+    "devDependencies": {
+        "@netlify/functions": "^1.2.0",
+        "netlify-cli": "^11.8.3"
+    }
+}

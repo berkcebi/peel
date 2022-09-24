@@ -1,0 +1,26 @@
+{
+    "name": "peel-web",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "start": "vite",
+        "build": "tsc && vite build",
+        "preview": "vite preview",
+        "lint": "eslint ."
+    },
+    "dependencies": {
+        "@amplitude/analytics-browser": "^1.4.0",
+        "immer": "^9.0.15",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "tone": "^14.7.77"
+    },
+    "devDependencies": {
+        "@types/react": "^18.0.17",
+        "@types/react-dom": "^18.0.6",
+        "@vitejs/plugin-react": "^2.1.0",
+        "eslint-plugin-react": "^7.31.8",
+        "eslint-plugin-react-hooks": "^4.6.0",
+        "prettier": "^2.7.1"
+    }
+}
