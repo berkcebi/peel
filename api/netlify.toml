@@ -1,0 +1,8 @@
+[build]
+publish = "public"
+
+[dev]
+autoLaunch = false
+
+[functions]
+directory = "functions"
