@@ -1,0 +1,16 @@
+{
+    "root": true,
+    "env": {
+        "commonjs": true,
+        "es2021": true,
+        "node": true
+    },
+    "extends": [
+        "../../.eslintrc.base.json",
+        // Add prettier config last to disable rules from previous configs.
+        "eslint-config-prettier"
+    ],
+    "parserOptions": {
+        "ecmaVersion": 2021
+    }
+}
