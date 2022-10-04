@@ -1,13 +1,13 @@
 import React from "react";
-import VolumeInterface, {
+import VolumeType, {
     VOLUME_MIN_VALUE,
     VOLUME_MAX_VALUE,
-} from "../interfaces/Volume";
+} from "../types/Volume";
 import Slider from "./Slider";
 import "./Volume.css";
 
 interface VolumeProps {
-    volume: VolumeInterface;
+    volume: VolumeType;
     onChange: (value: number) => void;
 }
 

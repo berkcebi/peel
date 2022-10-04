@@ -1,19 +1,20 @@
-import Sample from "./Sample";
+import { z } from "zod";
 import Step from "./Step";
-import Track from "./Track";
+import { TrackSchema, STEP_LENGTH } from "./Track";
 import Volume from "./Volume";
 
-export const STEP_LENGTH = 16;
 export const MIN_TEMPO = 60;
 export const MAX_TEMPO = 180;
 
-interface Pattern {
-    readonly tracks: Track[];
-    readonly tempo: number;
-}
+export const PatternSchema = z.object({
+    tracks: z.array(TrackSchema),
+    tempo: z.number().gte(MIN_TEMPO).lte(MAX_TEMPO),
+});
 
-function defaultSteps(): Step[] {
-    const steps = [];
+type Pattern = z.infer<typeof PatternSchema>;
+
+function defaultSteps() {
+    const steps: Step[] = [];
     for (let position = 0; position < STEP_LENGTH; position++) {
         steps.push({
             isOn: false,
@@ -35,7 +36,7 @@ export function defaultPattern(): Pattern {
         tracks: [
             {
                 id: 0,
-                sample: Sample.BassDrum,
+                sample: "bass-drum",
                 name: "Bass Drum",
                 color: "indigo",
                 steps: defaultSteps(),
@@ -43,7 +44,7 @@ export function defaultPattern(): Pattern {
             },
             {
                 id: 1,
-                sample: Sample.Snare,
+                sample: "snare",
                 name: "Snare",
                 color: "yellow",
                 steps: defaultSteps(),
@@ -51,7 +52,7 @@ export function defaultPattern(): Pattern {
             },
             {
                 id: 2,
-                sample: Sample.HihatClosed,
+                sample: "hihat-closed",
                 name: "Hihat",
                 description: "Closed",
                 color: "green",
@@ -60,7 +61,7 @@ export function defaultPattern(): Pattern {
             },
             {
                 id: 3,
-                sample: Sample.HihatOpen,
+                sample: "hihat-open",
                 name: "Hihat",
                 description: "Open",
                 color: "green",
@@ -69,7 +70,7 @@ export function defaultPattern(): Pattern {
             },
             {
                 id: 4,
-                sample: Sample.Cymbal,
+                sample: "cymbal",
                 name: "Cymbal",
                 color: "cyan",
                 steps: defaultSteps(),
@@ -77,7 +78,7 @@ export function defaultPattern(): Pattern {
             },
             {
                 id: 5,
-                sample: Sample.TomLow,
+                sample: "tom-low",
                 name: "Tom",
                 description: "Low",
                 color: "red",
@@ -86,7 +87,7 @@ export function defaultPattern(): Pattern {
             },
             {
                 id: 6,
-                sample: Sample.TomMid,
+                sample: "tom-mid",
                 name: "Tom",
                 description: "Mid",
                 color: "red",
@@ -95,7 +96,7 @@ export function defaultPattern(): Pattern {
             },
             {
                 id: 7,
-                sample: Sample.TomHi,
+                sample: "tom-hi",
                 name: "Tom",
                 description: "Hi",
                 color: "red",
@@ -104,7 +105,7 @@ export function defaultPattern(): Pattern {
             },
             {
                 id: 8,
-                sample: Sample.RimShot,
+                sample: "rim-shot",
                 name: "Rim Shot",
                 color: "pink",
                 steps: defaultSteps(),
@@ -112,7 +113,7 @@ export function defaultPattern(): Pattern {
             },
             {
                 id: 9,
-                sample: Sample.Clap,
+                sample: "clap",
                 name: "Clap",
                 color: "pink",
                 steps: defaultSteps(),
@@ -120,7 +121,7 @@ export function defaultPattern(): Pattern {
             },
             {
                 id: 10,
-                sample: Sample.Cowbell,
+                sample: "cowbell",
                 name: "Cowbell",
                 color: "pink",
                 steps: defaultSteps(),

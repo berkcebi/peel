@@ -1,5 +1,5 @@
 import { produce } from "immer";
-import Pattern from "./interfaces/Pattern";
+import Pattern from "./types/Pattern";
 
 export type Action =
     | { type: "toggleStep"; trackId: number; stepPosition: number }

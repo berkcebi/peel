@@ -1,13 +1,13 @@
 import React, { useContext, useEffect } from "react";
 import { Context } from "../Context";
-import TrackInterface from "../interfaces/Track";
 import sequencer from "../sequencer";
+import TrackType from "../types/Track";
 import Step from "./Step";
 import Volume from "./Volume";
 import "./Track.css";
 
 interface TrackProps {
-    track: TrackInterface;
+    track: TrackType;
     shortcutKey: string;
     playheadPosition?: number;
 }

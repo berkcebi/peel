@@ -1,17 +1,17 @@
 import React, { useEffect } from "react";
-import Sample from "../interfaces/Sample";
-import StepInterface from "../interfaces/Step";
-import { TrackColor } from "../interfaces/Track";
 import sequencer from "../sequencer";
+import Sample from "../types/Sample";
+import StepType from "../types/Step";
+import { TrackColor } from "../types/Track";
 import "./Step.css";
 
-const SAMPLE_EMOJIS: { [sample: string]: string } = {
-    [Sample.Clap]: "👏",
-    [Sample.Cowbell]: "🐮",
+const SAMPLE_EMOJIS: { [sample in Sample]?: string } = {
+    clap: "👏",
+    cowbell: "🐮",
 };
 
 interface StepProps {
-    step: StepInterface;
+    step: StepType;
     position: number;
     trackSample: Sample;
     playheadPosition?: number;

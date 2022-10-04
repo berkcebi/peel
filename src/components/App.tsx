@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useReducer } from "react";
 import { Context } from "../Context";
-import Pattern, { defaultPattern } from "../interfaces/Pattern";
 import reducer from "../reducer";
 import sequencer from "../sequencer";
+import { PatternSchema, defaultPattern } from "../types/Pattern";
 import Footer from "./Footer";
 import Header from "./Header";
 import Track from "./Track";
@@ -14,10 +14,20 @@ const TRACK_SHORTCUT_KEYS = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "
 
 function App() {
     const [pattern, dispatch] = useReducer(reducer, undefined, () => {
-        const patternValue = localStorage.getItem(PATTERN_STORAGE_KEY);
-        return patternValue
-            ? (JSON.parse(patternValue) as Pattern)
-            : defaultPattern();
+        try {
+            const patternValue = localStorage.getItem(PATTERN_STORAGE_KEY);
+            if (!patternValue) {
+                return defaultPattern();
+            }
+
+            const patternData = JSON.parse(patternValue);
+
+            return PatternSchema.parse(patternData);
+        } catch (error) {
+            console.error("Reading pattern from local storage failed", error);
+
+            return defaultPattern();
+        }
     });
     const [isPlaying, setIsPlaying] = useState(false);
     const [playheadPosition, setPlayheadPosition] = useState(0);
@@ -34,7 +44,15 @@ function App() {
 
     useEffect(() => {
         const timeoutId = setTimeout(() => {
-            localStorage.setItem(PATTERN_STORAGE_KEY, JSON.stringify(pattern));
+            try {
+                const parsedPattern = PatternSchema.parse(pattern);
+                localStorage.setItem(
+                    PATTERN_STORAGE_KEY,
+                    JSON.stringify(parsedPattern)
+                );
+            } catch (error) {
+                console.error("Writing pattern to local storage failed", error);
+            }
         }, PATTERN_STORAGE_DELAY);
 
         return () => clearTimeout(timeoutId);

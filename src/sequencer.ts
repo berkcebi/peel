@@ -1,5 +1,5 @@
 import * as Tone from "tone";
-import Sample, { ALL_SAMPLES } from "./interfaces/Sample";
+import Sample, { ALL_SAMPLES } from "./types/Sample";
 
 interface Sequencer {
     onCurrentSixteenthChange?: (currentSixteenth: number) => void;
