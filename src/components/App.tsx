@@ -2,29 +2,32 @@ import React, { useState, useEffect, useReducer } from "react";
 import { Context } from "../Context";
 import reducer from "../reducer";
 import sequencer from "../sequencer";
-import { PatternSchema, defaultPattern } from "../types/Pattern";
+import Jam, { JamSchema } from "../types/Jam";
+import { defaultPattern } from "../types/Pattern";
 import Footer from "./Footer";
 import Header from "./Header";
 import Track from "./Track";
 
-const PATTERN_STORAGE_KEY = "pattern";
-const PATTERN_STORAGE_DELAY = 5000;
+const STORAGE_KEY = "jam";
+const DEPRECATED_STORAGE_KEY = "pattern";
+const STORAGE_DELAY = 5000;
 // prettier-ignore
 const TRACK_SHORTCUT_KEYS = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-"];
 
 function App() {
     const [pattern, dispatch] = useReducer(reducer, undefined, () => {
         try {
-            const patternValue = localStorage.getItem(PATTERN_STORAGE_KEY);
-            if (!patternValue) {
+            const jamValue = localStorage.getItem(STORAGE_KEY);
+            if (!jamValue) {
                 return defaultPattern();
             }
 
-            const patternData = JSON.parse(patternValue);
+            const jamObject = JSON.parse(jamValue);
+            const jam = JamSchema.parse(jamObject);
 
-            return PatternSchema.parse(patternData);
+            return jam.patterns[0];
         } catch (error) {
-            console.error("Reading pattern from local storage failed", error);
+            console.error("Reading jam from local storage failed", error);
 
             return defaultPattern();
         }
@@ -45,15 +48,16 @@ function App() {
     useEffect(() => {
         const timeoutId = setTimeout(() => {
             try {
-                const parsedPattern = PatternSchema.parse(pattern);
-                localStorage.setItem(
-                    PATTERN_STORAGE_KEY,
-                    JSON.stringify(parsedPattern)
-                );
+                const jam: Jam = { patterns: [pattern] };
+                const parsedJam = JamSchema.parse(jam);
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(parsedJam));
+
+                // TODO: Remove after November 5, 2022.
+                localStorage.removeItem(DEPRECATED_STORAGE_KEY);
             } catch (error) {
-                console.error("Writing pattern to local storage failed", error);
+                console.error("Writing jam to local storage failed", error);
             }
-        }, PATTERN_STORAGE_DELAY);
+        }, STORAGE_DELAY);
 
         return () => clearTimeout(timeoutId);
     }, [pattern]);
