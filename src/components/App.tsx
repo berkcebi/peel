@@ -6,6 +6,7 @@ import Jam, { JamSchema } from "../types/Jam";
 import { defaultPattern } from "../types/Pattern";
 import Footer from "./Footer";
 import Header from "./Header";
+import Toast from "./Toast";
 import Track from "./Track";
 
 const STORAGE_KEY = "jam";
@@ -104,6 +105,7 @@ function App() {
                 />
             ))}
             <Footer />
+            <Toast />
         </Context.Provider>
     );
 }
