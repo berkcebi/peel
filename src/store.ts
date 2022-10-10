@@ -68,6 +68,28 @@ export const useJamStore = create<JamState>()(
     )
 );
 
+interface PlayState {
+    isPlaying: boolean;
+    playheadPosition: number;
+    toggleIsPlaying: () => void;
+    setPlayheadPosition: (playheadPosition: number) => void;
+}
+
+export const usePlayStore = create<PlayState>()(
+    immer((set) => ({
+        isPlaying: false,
+        playheadPosition: 0,
+        toggleIsPlaying: () =>
+            set((state) => {
+                state.isPlaying = !state.isPlaying;
+            }),
+        setPlayheadPosition: (playheadPosition) =>
+            set((state) => {
+                state.playheadPosition = playheadPosition;
+            }),
+    }))
+);
+
 interface ToastState {
     message?: string;
     setMessage: (message?: string) => void;
