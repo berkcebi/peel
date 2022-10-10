@@ -34,7 +34,7 @@ function App() {
 
     return (
         <>
-            <Header tempo={pattern.tempo} />
+            <Header />
             {pattern.tracks.map((track, index) => (
                 <Track
                     track={track}
@@ -43,7 +43,7 @@ function App() {
                     key={track.id}
                 />
             ))}
-            <Footer />
+            <Footer tempo={pattern.tempo} />
             <Toast />
         </>
     );
