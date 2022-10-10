@@ -1,38 +1,16 @@
-import React, { useState, useEffect, useReducer } from "react";
-import { Context } from "../Context";
-import reducer from "../reducer";
+import React, { useState, useEffect } from "react";
 import sequencer from "../sequencer";
-import Jam, { JamSchema } from "../types/Jam";
-import { defaultPattern } from "../types/Pattern";
+import { usePatternStore } from "../store";
 import Footer from "./Footer";
 import Header from "./Header";
 import Toast from "./Toast";
 import Track from "./Track";
 
-const STORAGE_KEY = "jam";
-const DEPRECATED_STORAGE_KEY = "pattern";
-const STORAGE_DELAY = 5000;
 // prettier-ignore
 const TRACK_SHORTCUT_KEYS = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-"];
 
 function App() {
-    const [pattern, dispatch] = useReducer(reducer, undefined, () => {
-        try {
-            const jamValue = localStorage.getItem(STORAGE_KEY);
-            if (!jamValue) {
-                return defaultPattern();
-            }
-
-            const jamObject = JSON.parse(jamValue);
-            const jam = JamSchema.parse(jamObject);
-
-            return jam.patterns[0];
-        } catch (error) {
-            console.error("Reading jam from local storage failed", error);
-
-            return defaultPattern();
-        }
-    });
+    const pattern = usePatternStore((state) => state.pattern);
     const [isPlaying, setIsPlaying] = useState(false);
     const [playheadPosition, setPlayheadPosition] = useState(0);
 
@@ -45,23 +23,6 @@ function App() {
             sequencer.stop();
         }
     }, [isPlaying]);
-
-    useEffect(() => {
-        const timeoutId = setTimeout(() => {
-            try {
-                const jam: Jam = { patterns: [pattern] };
-                const parsedJam = JamSchema.parse(jam);
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(parsedJam));
-
-                // TODO: Remove after November 5, 2022.
-                localStorage.removeItem(DEPRECATED_STORAGE_KEY);
-            } catch (error) {
-                console.error("Writing jam to local storage failed", error);
-            }
-        }, STORAGE_DELAY);
-
-        return () => clearTimeout(timeoutId);
-    }, [pattern]);
 
     useEffect(() => {
         const handleKeyDown = (event: KeyboardEvent) => {
@@ -87,7 +48,7 @@ function App() {
         setPlayheadPosition(currentSixteenth);
 
     return (
-        <Context.Provider value={dispatch}>
+        <>
             <Header
                 isPlaying={isPlaying}
                 playheadPosition={playheadPosition}
@@ -106,7 +67,7 @@ function App() {
             ))}
             <Footer />
             <Toast />
-        </Context.Provider>
+        </>
     );
 }
 

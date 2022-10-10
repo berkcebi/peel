@@ -1,6 +1,6 @@
-import React, { useEffect, useContext } from "react";
-import { Context } from "../Context";
+import React, { useEffect } from "react";
 import sequencer from "../sequencer";
+import { usePatternStore } from "../store";
 import { MIN_TEMPO, MAX_TEMPO } from "../types/Pattern";
 import Slider from "./Slider";
 import "./Tempo.css";
@@ -10,7 +10,7 @@ interface TempoProps {
 }
 
 function Tempo({ value }: TempoProps) {
-    const dispatch = useContext(Context);
+    const changeTempo = usePatternStore((state) => state.changeTempo);
 
     useEffect(() => sequencer.setTempo(value), [value]);
 
@@ -22,9 +22,7 @@ function Tempo({ value }: TempoProps) {
                 max={MAX_TEMPO}
                 value={value}
                 step={5}
-                onChange={(value) =>
-                    dispatch({ type: "changeTempo", tempo: value })
-                }
+                onChange={(value) => changeTempo(value)}
             />
         </div>
     );
