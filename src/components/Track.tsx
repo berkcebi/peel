@@ -1,6 +1,6 @@
-import React, { useContext, useEffect } from "react";
-import { Context } from "../Context";
+import React, { useEffect } from "react";
 import sequencer from "../sequencer";
+import { useJamStore } from "../store";
 import TrackType from "../types/Track";
 import Step from "./Step";
 import Volume from "./Volume";
@@ -9,11 +9,14 @@ import "./Track.css";
 interface TrackProps {
     track: TrackType;
     shortcutKey: string;
-    playheadPosition?: number;
+    isFirst: boolean;
 }
 
-function Track({ track, shortcutKey, playheadPosition }: TrackProps) {
-    const dispatch = useContext(Context);
+function Track({ track, shortcutKey, isFirst }: TrackProps) {
+    const toggleStep = useJamStore((state) => state.toggleStep);
+    const changeVolume = useJamStore((state) => state.changeVolume);
+    const mute = useJamStore((state) => state.mute);
+
     const id = track.id;
     const sample = track.sample;
 
@@ -24,7 +27,7 @@ function Track({ track, shortcutKey, playheadPosition }: TrackProps) {
     useEffect(() => {
         const handleKeyDown = (event: KeyboardEvent) => {
             if (event.key === shortcutKey) {
-                dispatch({ type: "mute", trackId: id });
+                mute(id);
             }
         };
 
@@ -33,7 +36,7 @@ function Track({ track, shortcutKey, playheadPosition }: TrackProps) {
         return () => {
             document.removeEventListener("keydown", handleKeyDown);
         };
-    }, [id, shortcutKey, dispatch]);
+    }, [id, shortcutKey, mute]);
 
     const buttonClassNames = ["Track-button"];
 
@@ -51,7 +54,7 @@ function Track({ track, shortcutKey, playheadPosition }: TrackProps) {
             </div>
             <button
                 className={buttonClassNames.join(" ")}
-                onClick={() => dispatch({ type: "mute", trackId: id })}
+                onClick={() => mute(id)}
             >
                 {shortcutKey}
             </button>
@@ -59,24 +62,16 @@ function Track({ track, shortcutKey, playheadPosition }: TrackProps) {
                 <Step
                     step={step}
                     position={position}
-                    playheadPosition={playheadPosition}
+                    isFirstTrack={isFirst}
                     trackSample={sample}
                     trackColor={track.color}
-                    onClick={(stepPosition) =>
-                        dispatch({
-                            type: "toggleStep",
-                            trackId: id,
-                            stepPosition,
-                        })
-                    }
+                    onClick={(stepPosition) => toggleStep(id, stepPosition)}
                     key={position}
                 />
             ))}
             <Volume
                 volume={track.volume}
-                onChange={(volumeValue) =>
-                    dispatch({ type: "changeVolume", trackId: id, volumeValue })
-                }
+                onChange={(volumeValue) => changeVolume(id, volumeValue)}
             />
         </div>
     );

@@ -16,7 +16,8 @@
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "tone": "^14.7.77",
-        "zod": "^3.19.1"
+        "zod": "^3.19.1",
+        "zustand": "^4.1.1"
     },
     "devDependencies": {
         "@netlify/functions": "^1.2.0",

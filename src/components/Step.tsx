@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import sequencer from "../sequencer";
+import { usePlayStore } from "../store";
 import Sample from "../types/Sample";
 import StepType from "../types/Step";
 import { TrackColor } from "../types/Track";
@@ -13,8 +14,8 @@ const SAMPLE_EMOJIS: { [sample in Sample]?: string } = {
 interface StepProps {
     step: StepType;
     position: number;
+    isFirstTrack: boolean;
     trackSample: Sample;
-    playheadPosition?: number;
     trackColor: TrackColor;
     onClick: (position: number) => void;
 }
@@ -22,11 +23,14 @@ interface StepProps {
 function Step({
     step,
     position,
-    playheadPosition,
+    isFirstTrack,
     trackSample,
     trackColor,
     onClick,
 }: StepProps) {
+    const isPlaying = usePlayStore((state) => state.isPlaying);
+    const playheadPosition = usePlayStore((state) => state.playheadPosition);
+
     useEffect(
         () => sequencer.setStepOn(trackSample, position, step.isOn),
         [step.isOn, position, trackSample]
@@ -38,6 +42,8 @@ function Step({
     }
 
     const emoji = SAMPLE_EMOJIS[trackSample];
+    const displayPlayhead =
+        isFirstTrack && isPlaying && position == playheadPosition;
 
     return (
         <div className="Step">
@@ -51,7 +57,7 @@ function Step({
                 )}
             </button>
             {position % 4 === 0 && <div className="Step-downbeat" />}
-            {position === playheadPosition && <div className="Step-playhead" />}
+            {displayPlayhead && <div className="Step-playhead" />}
         </div>
     );
 }
