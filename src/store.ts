@@ -1,26 +1,27 @@
 import create from "zustand";
 import { persist } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
-import Pattern, { defaultPattern } from "./types/Pattern";
+import Jam, { PATTERN_INDEX, defaultJam } from "./types/Jam";
 import debouncedStateStorage from "./utils/debouncedStateStorage";
 
-const PATTERN_PERSIST_NAME = "pattern";
+const JAM_PERSIST_NAME = "jam";
 
-interface PatternState {
-    pattern: Pattern;
+interface JamState {
+    jam: Jam;
     toggleStep: (trackId: number, stepPosition: number) => void;
     changeVolume: (trackId: number, volumeValue: number) => void;
     mute: (trackId: number) => void;
     changeTempo: (tempo: number) => void;
 }
 
-export const usePatternStore = create<PatternState>()(
+export const useJamStore = create<JamState>()(
     persist(
         immer((set) => ({
-            pattern: defaultPattern(),
+            jam: defaultJam(),
             toggleStep: (trackId, stepPosition) =>
                 set((state) => {
-                    const track = state.pattern.tracks.find(
+                    const pattern = state.jam.patterns[PATTERN_INDEX];
+                    const track = pattern.tracks.find(
                         (track) => track.id === trackId
                     );
                     const step = track?.steps[stepPosition];
@@ -32,7 +33,8 @@ export const usePatternStore = create<PatternState>()(
                 }),
             changeVolume: (trackId, volumeValue) =>
                 set((state) => {
-                    const track = state.pattern.tracks.find(
+                    const pattern = state.jam.patterns[PATTERN_INDEX];
+                    const track = pattern.tracks.find(
                         (track) => track.id === trackId
                     );
                     if (!track) {
@@ -43,7 +45,8 @@ export const usePatternStore = create<PatternState>()(
                 }),
             mute: (trackId) =>
                 set((state) => {
-                    const track = state.pattern.tracks.find(
+                    const pattern = state.jam.patterns[PATTERN_INDEX];
+                    const track = pattern.tracks.find(
                         (track) => track.id === trackId
                     );
                     if (!track) {
@@ -54,11 +57,12 @@ export const usePatternStore = create<PatternState>()(
                 }),
             changeTempo: (tempo) =>
                 set((state) => {
-                    state.pattern.tempo = tempo;
+                    const pattern = state.jam.patterns[PATTERN_INDEX];
+                    pattern.tempo = tempo;
                 }),
         })),
         {
-            name: PATTERN_PERSIST_NAME,
+            name: JAM_PERSIST_NAME,
             getStorage: () => debouncedStateStorage(localStorage),
         }
     )

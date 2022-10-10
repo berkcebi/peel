@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import sequencer from "../sequencer";
-import { usePatternStore } from "../store";
+import { useJamStore } from "../store";
 import TrackType from "../types/Track";
 import Step from "./Step";
 import Volume from "./Volume";
@@ -13,9 +13,9 @@ interface TrackProps {
 }
 
 function Track({ track, shortcutKey, playheadPosition }: TrackProps) {
-    const toggleStep = usePatternStore((state) => state.toggleStep);
-    const changeVolume = usePatternStore((state) => state.changeVolume);
-    const mute = usePatternStore((state) => state.mute);
+    const toggleStep = useJamStore((state) => state.toggleStep);
+    const changeVolume = useJamStore((state) => state.changeVolume);
+    const mute = useJamStore((state) => state.mute);
 
     const id = track.id;
     const sample = track.sample;

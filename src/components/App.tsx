@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import sequencer from "../sequencer";
-import { usePatternStore } from "../store";
+import { useJamStore } from "../store";
+import { PATTERN_INDEX } from "../types/Jam";
 import Footer from "./Footer";
 import Header from "./Header";
 import Toast from "./Toast";
@@ -10,7 +11,7 @@ import Track from "./Track";
 const TRACK_SHORTCUT_KEYS = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-"];
 
 function App() {
-    const pattern = usePatternStore((state) => state.pattern);
+    const jam = useJamStore((state) => state.jam);
     const [isPlaying, setIsPlaying] = useState(false);
     const [playheadPosition, setPlayheadPosition] = useState(0);
 
@@ -46,6 +47,8 @@ function App() {
 
     sequencer.onCurrentSixteenthChange = (currentSixteenth: number) =>
         setPlayheadPosition(currentSixteenth);
+
+    const pattern = jam.patterns[PATTERN_INDEX];
 
     return (
         <>

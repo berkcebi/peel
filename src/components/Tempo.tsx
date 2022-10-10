@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import sequencer from "../sequencer";
-import { usePatternStore } from "../store";
+import { useJamStore } from "../store";
 import { MIN_TEMPO, MAX_TEMPO } from "../types/Pattern";
 import Slider from "./Slider";
 import "./Tempo.css";
@@ -10,7 +10,7 @@ interface TempoProps {
 }
 
 function Tempo({ value }: TempoProps) {
-    const changeTempo = usePatternStore((state) => state.changeTempo);
+    const changeTempo = useJamStore((state) => state.changeTempo);
 
     useEffect(() => sequencer.setTempo(value), [value]);
 
