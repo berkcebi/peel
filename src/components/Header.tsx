@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { usePlayStore } from "../store";
 import Logo from "./Logo";
+import Share from "./Share";
 import "./Header.css";
 
 function Header() {
@@ -30,6 +31,7 @@ function Header() {
                 <Logo isUpbeat={isPlaying && playheadPosition % 4 !== 0} />
             </div>
             <div className="Header-container">
+                <Share />
                 <button
                     className="Header-button"
                     onClick={() => toggleIsPlaying()}

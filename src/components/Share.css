@@ -1,0 +1,14 @@
+.Share-button {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    color: var(--accent-color);
+    cursor: pointer;
+}
+
+.Share-button:focus {
+    outline: none;
+}
