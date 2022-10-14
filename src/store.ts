@@ -1,13 +1,10 @@
 import create from "zustand";
-import { persist } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
-import Jam, { PATTERN_INDEX, defaultJam } from "./types/Jam";
-import debouncedStateStorage from "./utils/debouncedStateStorage";
-
-const JAM_PERSIST_NAME = "jam";
+import Jam, { PATTERN_INDEX } from "./types/Jam";
 
 interface JamState {
-    jam: Jam;
+    jam?: Jam;
+    setJam: (jam: Jam) => void;
     toggleStep: (trackId: number, stepPosition: number) => void;
     changeVolume: (trackId: number, volumeValue: number) => void;
     mute: (trackId: number) => void;
@@ -15,57 +12,59 @@ interface JamState {
 }
 
 export const useJamStore = create<JamState>()(
-    persist(
-        immer((set) => ({
-            jam: defaultJam(),
-            toggleStep: (trackId, stepPosition) =>
-                set((state) => {
-                    const pattern = state.jam.patterns[PATTERN_INDEX];
-                    const track = pattern.tracks.find(
-                        (track) => track.id === trackId
-                    );
-                    const step = track?.steps[stepPosition];
-                    if (!step) {
-                        return;
-                    }
+    immer((set) => ({
+        jam: undefined,
+        setJam: (jam) =>
+            set((state) => {
+                state.jam = jam;
+            }),
+        toggleStep: (trackId, stepPosition) =>
+            set((state) => {
+                const pattern = state.jam?.patterns[PATTERN_INDEX];
+                const track = pattern?.tracks.find(
+                    (track) => track.id === trackId
+                );
+                const step = track?.steps[stepPosition];
+                if (!step) {
+                    return;
+                }
 
-                    step.isOn = !step.isOn;
-                }),
-            changeVolume: (trackId, volumeValue) =>
-                set((state) => {
-                    const pattern = state.jam.patterns[PATTERN_INDEX];
-                    const track = pattern.tracks.find(
-                        (track) => track.id === trackId
-                    );
-                    if (!track) {
-                        return;
-                    }
+                step.isOn = !step.isOn;
+            }),
+        changeVolume: (trackId, volumeValue) =>
+            set((state) => {
+                const pattern = state.jam?.patterns[PATTERN_INDEX];
+                const track = pattern?.tracks.find(
+                    (track) => track.id === trackId
+                );
+                if (!track) {
+                    return;
+                }
 
-                    track.volume.value = volumeValue;
-                }),
-            mute: (trackId) =>
-                set((state) => {
-                    const pattern = state.jam.patterns[PATTERN_INDEX];
-                    const track = pattern.tracks.find(
-                        (track) => track.id === trackId
-                    );
-                    if (!track) {
-                        return;
-                    }
+                track.volume.value = volumeValue;
+            }),
+        mute: (trackId) =>
+            set((state) => {
+                const pattern = state.jam?.patterns[PATTERN_INDEX];
+                const track = pattern?.tracks.find(
+                    (track) => track.id === trackId
+                );
+                if (!track) {
+                    return;
+                }
 
-                    track.volume.isMuted = !track.volume.isMuted;
-                }),
-            changeTempo: (tempo) =>
-                set((state) => {
-                    const pattern = state.jam.patterns[PATTERN_INDEX];
-                    pattern.tempo = tempo;
-                }),
-        })),
-        {
-            name: JAM_PERSIST_NAME,
-            getStorage: () => debouncedStateStorage(localStorage),
-        }
-    )
+                track.volume.isMuted = !track.volume.isMuted;
+            }),
+        changeTempo: (tempo) =>
+            set((state) => {
+                const pattern = state.jam?.patterns[PATTERN_INDEX];
+                if (!pattern) {
+                    return;
+                }
+
+                pattern.tempo = tempo;
+            }),
+    }))
 );
 
 interface PlayState {

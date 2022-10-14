@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import source from "../source";
 import { useJamStore, useToastStore } from "../store";
 import "./Share.css";
 
@@ -56,7 +57,9 @@ function Share() {
         <span className="secondary">Fetching link…</span>
     ) : (
         <button className="Share-button" onClick={handleButtonClick}>
-            {hash ? "Copy link ->" : "Share jam ->"}
+            {hash
+                ? "Copy link ->"
+                : `${source.type === "remote" ? "Share" : "Share jam"} ->`}
         </button>
     );
 }
