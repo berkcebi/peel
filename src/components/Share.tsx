@@ -54,7 +54,7 @@ function Share() {
         } catch (error) {
             console.error(error);
 
-            setMessage("Fetching link failed");
+            setMessage({ text: "Fetching link failed", type: "error" });
         } finally {
             setIsLoading(false);
         }

@@ -52,7 +52,10 @@ function App() {
                     } catch (error) {
                         console.error("Fetching jam failed", error);
 
-                        setMessage("Fetching link failed");
+                        setMessage({
+                            text: "Fetching jam failed",
+                            type: "error",
+                        });
                     }
                 })();
 
@@ -89,7 +92,12 @@ function App() {
         setPlayheadPosition(currentSixteenth);
 
     if (!jam) {
-        return <div className="App-title secondary">Fetching jam…</div>;
+        return (
+            <>
+                <div className="App-title secondary">Fetching jam…</div>
+                <Toast />
+            </>
+        );
     }
 
     const pattern = jam.patterns[PATTERN_INDEX];

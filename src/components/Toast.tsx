@@ -21,8 +21,18 @@ function Toast() {
         };
     }, [message, setMessage]);
 
+    const classNames = ["Toast"];
+    if (typeof message === "object" && message.type === "error") {
+        classNames.push(`Toast--error`);
+    }
+
     return message
-        ? createPortal(<div className="Toast">{message}</div>, document.body)
+        ? createPortal(
+              <div className={classNames.join(" ")}>
+                  {typeof message === "object" ? message.text : message}
+              </div>,
+              document.body
+          )
         : null;
 }
 

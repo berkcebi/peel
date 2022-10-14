@@ -1,6 +1,7 @@
 import create from "zustand";
 import { immer } from "zustand/middleware/immer";
 import Jam, { PATTERN_INDEX } from "./types/Jam";
+import Message from "./types/Message";
 
 interface JamState {
     jam?: Jam;
@@ -90,8 +91,8 @@ export const usePlayStore = create<PlayState>()(
 );
 
 interface ToastState {
-    message?: string;
-    setMessage: (message?: string) => void;
+    message?: Message;
+    setMessage: (message?: Message) => void;
 }
 
 export const useToastStore = create<ToastState>()(

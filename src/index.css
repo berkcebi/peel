@@ -1,6 +1,7 @@
 :root {
     --primary-label-color: #1a1a1a;
     --secondary-label-color: #808080;
+    --error-label-color: red;
     --primary-label-on-inverse-color: #fff;
     --accent-color: #007aff;
     --indigo-accent-color: #5856d6;
@@ -10,6 +11,7 @@
     --red-accent-color: #ff2d55;
     --pink-accent-color: #ffdfe5;
     --control-background-color: #f2f2f2;
+    --error-background-color: rgba(255, 0, 0, 0.1);
     --primary-border-color: rgba(0, 0, 0, 0.2);
     --secondary-border-color: rgba(0, 0, 0, 0.1);
     --tertiary-border-color: rgba(0, 0, 0, 0.05);
