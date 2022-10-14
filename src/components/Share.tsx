@@ -3,6 +3,8 @@ import source from "../source";
 import { useJamStore, useToastStore } from "../store";
 import "./Share.css";
 
+const ORIGIN = "peel.fm";
+
 function Share() {
     const jam = useJamStore((state) => state.jam);
     const setMessage = useToastStore((state) => state.setMessage);
@@ -13,14 +15,19 @@ function Share() {
         setHash(undefined);
     }, [jam, setHash]);
 
-    function writeLinkToClipboard(hash: string) {
-        navigator.clipboard.writeText(`${location.origin}/${hash}`);
-        setMessage("Link copied to clipboard");
+    async function writeLinkToClipboard(hash: string) {
+        try {
+            await navigator.clipboard.writeText(`${location.origin}/${hash}`);
+
+            setMessage("Link copied to clipboard");
+        } catch (error) {
+            console.warn("Writing link to clipboard failed.", error);
+        }
     }
 
     async function handleButtonClick() {
         if (hash) {
-            writeLinkToClipboard(hash);
+            await writeLinkToClipboard(hash);
 
             return;
         }
@@ -43,7 +50,7 @@ function Share() {
             const responseHash = responseJSON.hash;
 
             setHash(responseHash);
-            writeLinkToClipboard(responseHash);
+            await writeLinkToClipboard(responseHash);
         } catch (error) {
             console.error(error);
 
@@ -53,14 +60,34 @@ function Share() {
         }
     }
 
-    return isLoading ? (
-        <span className="secondary">Fetching link…</span>
-    ) : (
+    if (isLoading) {
+        return <span className="Share-loading">Fetching link…</span>;
+    }
+
+    return (
         <button className="Share-button" onClick={handleButtonClick}>
+            <Icon />
             {hash
-                ? "Copy link ->"
-                : `${source.type === "remote" ? "Share" : "Share jam"} ->`}
+                ? `${ORIGIN}/${hash}`
+                : `${source.type === "remote" ? "Share" : "Share jam"}`}
         </button>
+    );
+}
+
+function Icon() {
+    return (
+        <svg
+            width="16"
+            height="8"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <path
+                d="M7 1.5H4a2.5 2.5 0 1 0 0 5h3V8H4a4 4 0 1 1 0-8h3v1.5ZM9 8h3a4 4 0 1 0 0-8H9v1.5h3a2.5 2.5 0 0 1 0 5H9V8Z"
+                fill="currentColor"
+            />
+            <path d="M5 4.75h6v-1.5H5v1.5Z" fill="currentColor" />
+        </svg>
     );
 }
 

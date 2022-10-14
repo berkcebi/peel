@@ -1,4 +1,7 @@
 .Share-button {
+    display: flex;
+    gap: 8px;
+    align-items: center;
     background: none;
     border: none;
     padding: 0;
@@ -11,4 +14,9 @@
 
 .Share-button:focus {
     outline: none;
+}
+
+.Share-loading {
+    color: var(--secondary-label-color);
+    cursor: progress;
 }
