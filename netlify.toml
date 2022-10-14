@@ -5,11 +5,11 @@ publish = "dist"
 directory = "src/functions"
 
 [[redirects]]
-from = "/*"
-to = "/"
+from = "/api/*"
+to = "/.netlify/functions/:splat"
 status = 200
 
 [[redirects]]
-from = "/api/*"
-to = "/.netlify/functions/:splat"
+from = "/*"
+to = "/"
 status = 200
