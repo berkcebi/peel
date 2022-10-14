@@ -3,7 +3,7 @@ import { createPortal } from "react-dom";
 import "./Toast.css";
 import { useToastStore } from "../store";
 
-const DURATION = 5000;
+const DURATION = 3000;
 
 function Toast() {
     const message = useToastStore((state) => state.message);
