@@ -2,7 +2,6 @@ import Source from "./types/Source";
 
 const HASH_REGEX = /^[\da-f]{7}$/;
 const SOURCE: Source = (() => {
-    console.log("looking at source");
     const hash = location.pathname.slice(1);
     if (!hash.length) {
         return { type: "local" };
