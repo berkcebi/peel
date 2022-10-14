@@ -12,11 +12,11 @@ export const JamSchema = z.object({
 
 type Jam = z.infer<typeof JamSchema>;
 
-function defaultSteps() {
+function defaultSteps(positions?: number[]) {
     const steps: Step[] = [];
     for (let position = 0; position < STEP_LENGTH; position++) {
         steps.push({
-            isOn: false,
+            isOn: positions?.includes(position) ?? false,
         });
     }
 
@@ -40,7 +40,7 @@ export function defaultJam(): Jam {
                         sample: "bass-drum",
                         name: "Bass Drum",
                         color: "indigo",
-                        steps: defaultSteps(),
+                        steps: defaultSteps([0, 6, 8]),
                         volume: defaultVolume(),
                     },
                     {
@@ -48,7 +48,7 @@ export function defaultJam(): Jam {
                         sample: "snare",
                         name: "Snare",
                         color: "yellow",
-                        steps: defaultSteps(),
+                        steps: defaultSteps([4, 12, 15]),
                         volume: defaultVolume(),
                     },
                     {
@@ -57,7 +57,7 @@ export function defaultJam(): Jam {
                         name: "Hihat",
                         description: "Closed",
                         color: "green",
-                        steps: defaultSteps(),
+                        steps: defaultSteps([0, 2, 4, 6, 8, 10, 12, 14]),
                         volume: defaultVolume(),
                     },
                     {

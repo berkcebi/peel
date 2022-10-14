@@ -1,14 +1,10 @@
 import React, { useEffect } from "react";
 import { usePlayStore } from "../store";
 import Logo from "./Logo";
-import Tempo from "./Tempo";
+import Share from "./Share";
 import "./Header.css";
 
-interface HeaderProps {
-    tempo: number;
-}
-
-function Header({ tempo }: HeaderProps) {
+function Header() {
     const isPlaying = usePlayStore((state) => state.isPlaying);
     const playheadPosition = usePlayStore((state) => state.playheadPosition);
     const toggleIsPlaying = usePlayStore((state) => state.toggleIsPlaying);
@@ -35,7 +31,7 @@ function Header({ tempo }: HeaderProps) {
                 <Logo isUpbeat={isPlaying && playheadPosition % 4 !== 0} />
             </div>
             <div className="Header-container">
-                <Tempo value={tempo} />
+                <Share />
                 <button
                     className="Header-button"
                     onClick={() => toggleIsPlaying()}

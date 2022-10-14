@@ -1,5 +1,12 @@
 .Footer {
-    margin-top: 24px;
-    text-align: right;
-    color: var(--secondary-label-color);
+    display: flex;
+    margin-top: 12px;
+    gap: inherit;
+    justify-content: space-between;
+}
+
+.Footer-container {
+    width: 128px;
+    display: flex;
+    justify-content: right;
 }

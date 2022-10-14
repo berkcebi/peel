@@ -3,7 +3,7 @@ import { createPortal } from "react-dom";
 import "./Toast.css";
 import { useToastStore } from "../store";
 
-const DURATION = 5000;
+const DURATION = 3000;
 
 function Toast() {
     const message = useToastStore((state) => state.message);
@@ -21,8 +21,18 @@ function Toast() {
         };
     }, [message, setMessage]);
 
+    const classNames = ["Toast"];
+    if (typeof message === "object" && message.type === "error") {
+        classNames.push(`Toast--error`);
+    }
+
     return message
-        ? createPortal(<div className="Toast">{message}</div>, document.body)
+        ? createPortal(
+              <div className={classNames.join(" ")}>
+                  {typeof message === "object" ? message.text : message}
+              </div>,
+              document.body
+          )
         : null;
 }
 
