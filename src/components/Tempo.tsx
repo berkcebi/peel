@@ -21,7 +21,7 @@ function Tempo({ value }: TempoProps) {
                 min={MIN_TEMPO}
                 max={MAX_TEMPO}
                 value={value}
-                step={5}
+                step={1}
                 onChange={(value) => changeTempo(value)}
             />
         </div>
