@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import sequencer from "../sequencer";
-import source from "../source";
+import SOURCE from "../source";
 import * as storage from "../storage";
 import { useJamStore, usePlayStore, useToastStore } from "../store";
 import { JamSchema, PATTERN_INDEX } from "../types/Jam";
@@ -24,7 +24,7 @@ function App() {
     const setMessage = useToastStore((state) => state.setMessage);
 
     useEffect(() => {
-        switch (source.type) {
+        switch (SOURCE.type) {
             case "local": {
                 const jam = storage.getJam();
                 setJam(jam);
@@ -39,7 +39,7 @@ function App() {
                         const response = await fetch(
                             `https://${
                                 import.meta.env.VITE_PEEL_AWS_S3_BUCKET
-                            }.s3.amazonaws.com/jams/${source.hash}`
+                            }.s3.amazonaws.com/jams/${SOURCE.hash}`
                         );
 
                         if (didCancel) {
@@ -67,7 +67,7 @@ function App() {
     }, [setJam, setMessage]);
 
     useEffect(() => {
-        if (!jam || source.type !== "local") {
+        if (!jam || SOURCE.type !== "local") {
             return;
         }
 
@@ -104,7 +104,7 @@ function App() {
 
     return (
         <>
-            {source.type === "remote" && (
+            {SOURCE.type === "remote" && (
                 <div className="App-title">Shared jam</div>
             )}
             <Header />

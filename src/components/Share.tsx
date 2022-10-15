@@ -1,5 +1,6 @@
+import * as amplitude from "@amplitude/analytics-browser";
 import React, { useEffect, useState } from "react";
-import source from "../source";
+import SOURCE from "../source";
 import { useJamStore, useToastStore } from "../store";
 import "./Share.css";
 
@@ -50,6 +51,9 @@ function Share() {
             const responseHash = responseJSON.hash;
 
             setHash(responseHash);
+
+            amplitude.track("Share Jam");
+
             await writeLinkToClipboard(responseHash);
         } catch (error) {
             console.error(error);
@@ -69,7 +73,7 @@ function Share() {
             <Icon />
             {hash
                 ? `${ORIGIN}/${hash}`
-                : `${source.type === "remote" ? "Share" : "Share jam"}`}
+                : `${SOURCE.type === "remote" ? "Share" : "Share jam"}`}
         </button>
     );
 }
