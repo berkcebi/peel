@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import sequencer from "../sequencer";
 import { usePlayStore } from "../store";
+import { DEFAULT_REPEAT } from "../types/Repeat";
 import Sample from "../types/Sample";
 import StepType from "../types/Step";
 import { TrackColor } from "../types/Track";
@@ -32,8 +33,14 @@ function Step({
     const playheadPosition = usePlayStore((state) => state.playheadPosition);
 
     useEffect(
-        () => sequencer.setStepOn(trackSample, position, step.isOn),
-        [step.isOn, position, trackSample]
+        () =>
+            sequencer.setStepOn(
+                trackSample,
+                position,
+                step.repeat ?? DEFAULT_REPEAT,
+                step.isOn
+            ),
+        [step.isOn, step.repeat, position, trackSample]
     );
 
     const classNames = ["Step-button"];

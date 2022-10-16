@@ -1,4 +1,5 @@
 import * as Tone from "tone";
+import Repeat from "./types/Repeat";
 import Sample, { ALL_SAMPLES } from "./types/Sample";
 
 interface Sequencer {
@@ -8,6 +9,7 @@ interface Sequencer {
     readonly setStepOn: (
         sample: Sample,
         sixteenth: number,
+        repeat: Repeat,
         isOn: boolean
     ) => void;
     readonly setVolume: (
@@ -42,7 +44,7 @@ function getId(sample: string, sixteenth: number) {
     return `${sample}:${sixteenth}`;
 }
 
-function addTransportEvent(sample: Sample, sixteenth: number) {
+function addTransportEvent(sample: Sample, sixteenth: number, repeat: Repeat) {
     const id = getId(sample, sixteenth);
 
     const previousId = transportEventIds[id];
@@ -50,12 +52,17 @@ function addTransportEvent(sample: Sample, sixteenth: number) {
         Tone.Transport.clear(previousId);
     }
 
+    const [startBar, intervalBar] = repeat.split(":");
+    if (intervalBar === undefined) {
+        throw new Error("Parsing repeat failed");
+    }
+
     transportEventIds[id] = Tone.Transport.scheduleRepeat(
         (time) => {
             PLAYERS.player(sample).start(time);
         },
-        "1:0:0",
-        `0:0:${sixteenth}`
+        `${intervalBar}:0:0`,
+        `${startBar}:0:${sixteenth}`
     );
 }
 
@@ -77,9 +84,9 @@ const sequencer: Sequencer = {
     stop() {
         Tone.Transport.stop();
     },
-    setStepOn(sample, sixteenth, isOn) {
+    setStepOn(sample, sixteenth, repeat, isOn) {
         if (isOn) {
-            addTransportEvent(sample, sixteenth);
+            addTransportEvent(sample, sixteenth, repeat);
         } else {
             removeTransportEvent(sample, sixteenth);
         }
