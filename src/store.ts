@@ -2,11 +2,17 @@ import create from "zustand";
 import { immer } from "zustand/middleware/immer";
 import Jam, { PATTERN_INDEX } from "./types/Jam";
 import Message from "./types/Message";
+import Repeat from "./types/Repeat";
 
 interface JamState {
     jam?: Jam;
     setJam: (jam: Jam) => void;
     toggleStep: (trackId: number, stepPosition: number) => void;
+    changeStepRepeat: (
+        trackId: number,
+        stepPosition: number,
+        repeat: Repeat
+    ) => void;
     changeVolume: (trackId: number, volumeValue: number) => void;
     mute: (trackId: number) => void;
     changeTempo: (tempo: number) => void;
@@ -31,6 +37,19 @@ export const useJamStore = create<JamState>()(
                 }
 
                 step.isOn = !step.isOn;
+            }),
+        changeStepRepeat: (trackId, stepPosition, repeat) =>
+            set((state) => {
+                const pattern = state.jam?.patterns[PATTERN_INDEX];
+                const track = pattern?.tracks.find(
+                    (track) => track.id === trackId
+                );
+                const step = track?.steps[stepPosition];
+                if (!step) {
+                    return;
+                }
+
+                step.repeat = repeat === "0:1" ? undefined : repeat;
             }),
         changeVolume: (trackId, volumeValue) =>
             set((state) => {
