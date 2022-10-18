@@ -1,5 +1,5 @@
 import * as Tone from "tone";
-import Repeat from "./types/Repeat";
+import Repeat, { parseRepeat } from "./types/Repeat";
 import Sample, { ALL_SAMPLES } from "./types/Sample";
 
 interface Sequencer {
@@ -52,10 +52,7 @@ function addTransportEvent(sample: Sample, sixteenth: number, repeat: Repeat) {
         Tone.Transport.clear(previousId);
     }
 
-    const [startBar, intervalBar] = repeat.split(":");
-    if (intervalBar === undefined) {
-        throw new Error("Parsing repeat failed");
-    }
+    const [startBar, intervalBar] = parseRepeat(repeat);
 
     transportEventIds[id] = Tone.Transport.scheduleRepeat(
         (time) => {

@@ -2,10 +2,11 @@ import * as ContextMenu from "@radix-ui/react-context-menu";
 import React, { useEffect } from "react";
 import sequencer from "../sequencer";
 import { useJamStore, usePlayStore } from "../store";
-import Repeat, {
-    ALL_REPEATS,
+import RepeatType, {
     DEFAULT_REPEAT,
-    repeatDescription,
+    ALL_REPEATS,
+    getRepeatDescription,
+    parseRepeat,
 } from "../types/Repeat";
 import Sample from "../types/Sample";
 import StepType from "../types/Step";
@@ -50,63 +51,92 @@ function Step({
         [step.isOn, step.repeat, position, trackSample]
     );
 
-    const classNames = ["Step-button"];
-    if (step.isOn) {
-        classNames.push(`Step-button--on-${trackColor}`);
-    }
-
-    const emoji = SAMPLE_EMOJIS[trackSample];
+    const emoji = step.isOn && SAMPLE_EMOJIS[trackSample];
     const displayPlayhead =
         isFirstTrack && isPlaying && position == playheadPosition;
 
+    const buttonClassNames = ["Step-button"];
+    if (step.isOn) {
+        buttonClassNames.push(`Step-button--on-${trackColor}`);
+    }
+    if (step.repeat) {
+        buttonClassNames.push(`Step-button--has-context-menu`);
+    }
+
+    const button = (
+        <button
+            className={buttonClassNames.join(" ")}
+            aria-label={`Step ${position + 1}`}
+            onClick={() => toggleStep(trackId, position)}
+        >
+            {step.repeat ? (
+                <Repeat repeat={step.repeat} />
+            ) : (
+                emoji && <span className="Step-emoji">{emoji}</span>
+            )}
+        </button>
+    );
+
     return (
         <div className="Step">
-            <ContextMenu.Root>
-                <ContextMenu.Trigger>
-                    <button
-                        className={classNames.join(" ")}
-                        aria-label={`Step ${position + 1}`}
-                        onClick={() => toggleStep(trackId, position)}
-                    >
-                        {step.isOn && emoji && (
-                            <span className="Step-emoji">{emoji}</span>
-                        )}
-                    </button>
-                </ContextMenu.Trigger>
-                <ContextMenu.Portal>
-                    <ContextMenu.Content className="Context-Menu-Content">
-                        <ContextMenu.Label className="Context-Menu-Label">
-                            Repeat
-                        </ContextMenu.Label>
-                        <ContextMenu.RadioGroup
-                            value={step.repeat ?? DEFAULT_REPEAT}
-                            onValueChange={(repeat) =>
-                                changeStepRepeat(
-                                    trackId,
-                                    position,
-                                    repeat as Repeat
-                                )
-                            }
-                        >
-                            {ALL_REPEATS.map((repeat, index) => (
-                                <ContextMenu.RadioItem
-                                    value={repeat}
-                                    key={index}
-                                    className="Context-Menu-Item"
-                                >
-                                    <ContextMenu.ItemIndicator>
-                                        {"->"}
-                                    </ContextMenu.ItemIndicator>
-                                    {repeatDescription(repeat)}
-                                </ContextMenu.RadioItem>
-                            ))}
-                        </ContextMenu.RadioGroup>
-                    </ContextMenu.Content>
-                </ContextMenu.Portal>
-            </ContextMenu.Root>
+            {step.isOn ? (
+                <ContextMenu.Root>
+                    <ContextMenu.Trigger>{button}</ContextMenu.Trigger>
+                    <ContextMenu.Portal>
+                        <ContextMenu.Content className="Context-Menu-Content">
+                            <ContextMenu.Label className="Context-Menu-Label">
+                                Repeat
+                            </ContextMenu.Label>
+                            <ContextMenu.RadioGroup
+                                value={step.repeat ?? DEFAULT_REPEAT}
+                                onValueChange={(repeat) =>
+                                    changeStepRepeat(
+                                        trackId,
+                                        position,
+                                        repeat as RepeatType
+                                    )
+                                }
+                            >
+                                {ALL_REPEATS.map((repeat, index) => (
+                                    <ContextMenu.RadioItem
+                                        value={repeat}
+                                        key={index}
+                                        className="Context-Menu-Item"
+                                    >
+                                        <ContextMenu.ItemIndicator>
+                                            {"->"}
+                                        </ContextMenu.ItemIndicator>
+                                        {getRepeatDescription(repeat)}
+                                    </ContextMenu.RadioItem>
+                                ))}
+                            </ContextMenu.RadioGroup>
+                        </ContextMenu.Content>
+                    </ContextMenu.Portal>
+                </ContextMenu.Root>
+            ) : (
+                button
+            )}
             {position % 4 === 0 && <div className="Step-downbeat" />}
             {displayPlayhead && <div className="Step-playhead" />}
         </div>
     );
 }
+
+function Repeat({ repeat }: { repeat: RepeatType }) {
+    const [repeatIndex, repeatDuration] = parseRepeat(repeat);
+
+    return (
+        <div className="Step-repeat">
+            {[...Array(repeatDuration).keys()].map((index) => {
+                const classNames = ["Step-repeat-item"];
+                if (index === repeatIndex) {
+                    classNames.push(`Step-repeat-item--on`);
+                }
+
+                return <div className={classNames.join(" ")} key={index} />;
+            })}
+        </div>
+    );
+}
+
 export default Step;
