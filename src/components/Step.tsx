@@ -55,17 +55,17 @@ function Step({
     const displayPlayhead =
         isFirstTrack && isPlaying && position == playheadPosition;
 
-    const buttonClassNames = ["Step-button"];
+    const classNames = ["Step-button"];
     if (step.isOn) {
-        buttonClassNames.push(`Step-button--on-${trackColor}`);
+        classNames.push(`Step-button--on-${trackColor}`);
     }
     if (step.repeat) {
-        buttonClassNames.push(`Step-button--has-context-menu`);
+        classNames.push(`Step-button--has-context-menu`);
     }
 
     const button = (
         <button
-            className={buttonClassNames.join(" ")}
+            className={classNames.join(" ")}
             aria-label={`Step ${position + 1}`}
             onClick={() => toggleStep(trackId, position)}
         >
