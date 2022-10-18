@@ -39,7 +39,7 @@ export const useJamStore = create<JamState>()(
                 step.isOn = !step.isOn;
 
                 // Unset repeat when step is toggled off.
-                if (!step.isOn && step.repeat !== undefined) {
+                if (!step.isOn && step.repeat) {
                     step.repeat = undefined;
                 }
             }),
