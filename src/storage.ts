@@ -1,4 +1,4 @@
-import Jam, { JamSchema, defaultJam } from "./types/Jam";
+import Jam, { JamSchema, getDefaultJam } from "./types/Jam";
 
 const JAM_KEY = "jam";
 
@@ -6,7 +6,7 @@ export function getJam(): Jam {
     try {
         const jamValue = localStorage.getItem(JAM_KEY);
         if (!jamValue) {
-            return defaultJam();
+            return getDefaultJam();
         }
 
         const jamObject = JSON.parse(jamValue);
@@ -15,7 +15,7 @@ export function getJam(): Jam {
     } catch (error) {
         console.error("Reading jam from local storage failed", error);
 
-        return defaultJam();
+        return getDefaultJam();
     }
 }
 
