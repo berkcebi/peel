@@ -13,7 +13,6 @@ interface TrackProps {
 }
 
 function Track({ track, shortcutKey, isFirst }: TrackProps) {
-    const toggleStep = useJamStore((state) => state.toggleStep);
     const changeVolume = useJamStore((state) => state.changeVolume);
     const mute = useJamStore((state) => state.mute);
 
@@ -62,10 +61,10 @@ function Track({ track, shortcutKey, isFirst }: TrackProps) {
                 <Step
                     step={step}
                     position={position}
+                    trackId={id}
                     isFirstTrack={isFirst}
                     trackSample={sample}
                     trackColor={track.color}
-                    onClick={(stepPosition) => toggleStep(id, stepPosition)}
                     key={position}
                 />
             ))}

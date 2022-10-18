@@ -10,16 +10,19 @@
     --cyan-accent-color: #32ade6;
     --red-accent-color: #ff2d55;
     --pink-accent-color: #ffdfe5;
+    --primary-background-color: #fff;
     --control-background-color: #f2f2f2;
     --error-background-color: rgba(255, 0, 0, 0.1);
     --primary-border-color: rgba(0, 0, 0, 0.2);
     --secondary-border-color: rgba(0, 0, 0, 0.1);
     --tertiary-border-color: rgba(0, 0, 0, 0.05);
     --accent-border-color: rgba(0, 122, 255, 0.25);
+    --primary-shadow-color: rgba(0, 0, 0, 0.1);
 }
 
 body {
     margin: 24px 12px;
+    background-color: var(--primary-background-color);
     font-family: "Space Mono", monospace;
     font-size: 12px;
     color: var(--primary-label-color);
@@ -37,4 +40,49 @@ a {
 
 .secondary {
     color: var(--secondary-label-color);
+}
+
+.Context-Menu-Content {
+    width: 148px;
+    padding: 4px 0;
+    border-radius: 4px;
+    background-color: var(--primary-background-color);
+    box-shadow: 0px 4px 6px -1px var(--primary-shadow-color),
+        0px 2px 4px -2px var(--primary-shadow-color);
+    user-select: none;
+    -webkit-user-select: none;
+    /* Reset cursor to default for Safari. */
+    cursor: default;
+}
+
+.Context-Menu-Label {
+    display: flex;
+    align-items: center;
+    height: 24px;
+    margin: 2px 4px;
+    padding: 0 8px 0 24px;
+    color: var(--secondary-label-color);
+}
+
+.Context-Menu-Item {
+    display: flex;
+    align-items: center;
+    height: 24px;
+    margin: 2px 4px;
+    padding: 0 8px 0 24px;
+    border-radius: 4px;
+}
+
+.Context-Menu-Item[data-state="checked"] {
+    padding: 0 8px;
+}
+
+.Context-Menu-Item[data-highlighted] {
+    outline: none;
+    background-color: var(--accent-color);
+    color: var(--primary-label-on-inverse-color);
+}
+
+.Context-Menu-Item-Indicator {
+    width: 16px;
 }

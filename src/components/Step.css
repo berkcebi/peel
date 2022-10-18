@@ -3,13 +3,15 @@
 }
 
 .Step-button {
-    display: block;
+    display: flex;
     width: 28px;
     height: 28px;
     padding: 0;
     border-radius: 4px;
     background-color: var(--control-background-color);
     border: 2px solid var(--tertiary-border-color);
+    justify-content: center;
+    align-items: center;
 }
 
 .Step-button--on-indigo {
@@ -40,6 +42,10 @@
 .Step-button--on-pink {
     background-color: var(--pink-accent-color);
     border-color: var(--secondary-border-color);
+}
+
+.Step-button--has-context-menu {
+    cursor: context-menu;
 }
 
 .Step-button:focus {
@@ -75,4 +81,29 @@ _:future,
     right: 12px;
     border-radius: 2px;
     background-color: var(--accent-color);
+}
+
+.Step-repeat {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+}
+
+.Step-repeat-item {
+    width: 4px;
+    height: 4px;
+    border-radius: 2px;
+    outline: 2px solid var(--primary-border-color);
+}
+
+/* Outline doesn't adapt to border radius on Safari, use box shadow instead. */
+_::-webkit-full-page-media,
+_:future,
+:root .Step-repeat-item {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--primary-border-color);
+}
+
+.Step-repeat-item--on {
+    background-color: var(--primary-background-color);
 }
