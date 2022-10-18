@@ -96,6 +96,14 @@ _:future,
     outline: 2px solid var(--primary-border-color);
 }
 
+/* Outline doesn't adapt to border radius on Safari, use box shadow instead. */
+_::-webkit-full-page-media,
+_:future,
+:root .Step-repeat-item {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--primary-border-color);
+}
+
 .Step-repeat-item--on {
     background-color: var(--primary-background-color);
 }

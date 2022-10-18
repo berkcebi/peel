@@ -103,7 +103,7 @@ function Step({
                                         key={index}
                                         className="Context-Menu-Item"
                                     >
-                                        <ContextMenu.ItemIndicator>
+                                        <ContextMenu.ItemIndicator className="Context-Menu-Item-Indicator">
                                             {"->"}
                                         </ContextMenu.ItemIndicator>
                                         {getRepeatDescription(repeat)}

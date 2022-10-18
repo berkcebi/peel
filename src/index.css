@@ -50,6 +50,9 @@ a {
     box-shadow: 0px 4px 6px -1px var(--primary-shadow-color),
         0px 2px 4px -2px var(--primary-shadow-color);
     user-select: none;
+    -webkit-user-select: none;
+    /* Reset cursor to default for Safari. */
+    cursor: default;
 }
 
 .Context-Menu-Label {
@@ -63,7 +66,6 @@ a {
 
 .Context-Menu-Item {
     display: flex;
-    gap: 8px;
     align-items: center;
     height: 24px;
     margin: 2px 4px;
@@ -79,4 +81,8 @@ a {
     outline: none;
     background-color: var(--accent-color);
     color: var(--primary-label-on-inverse-color);
+}
+
+.Context-Menu-Item-Indicator {
+    width: 16px;
 }
