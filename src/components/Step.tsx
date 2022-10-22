@@ -1,3 +1,4 @@
+import * as amplitude from "@amplitude/analytics-browser";
 import * as ContextMenu from "@radix-ui/react-context-menu";
 import React, { useEffect } from "react";
 import sequencer from "../sequencer";
@@ -89,13 +90,17 @@ function Step({
                             </ContextMenu.Label>
                             <ContextMenu.RadioGroup
                                 value={step.repeat ?? DEFAULT_REPEAT}
-                                onValueChange={(repeat) =>
-                                    changeStepRepeat(
+                                onValueChange={(repeat) => {
+                                    amplitude.track("Change Step Repeat", {
+                                        Repeat: repeat,
+                                    });
+
+                                    return changeStepRepeat(
                                         trackId,
                                         position,
                                         repeat as RepeatType
-                                    )
-                                }
+                                    );
+                                }}
                             >
                                 {ALL_REPEATS.map((repeat, index) => (
                                     <ContextMenu.RadioItem
