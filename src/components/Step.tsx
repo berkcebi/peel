@@ -14,10 +14,10 @@ import StepType from "../types/Step";
 import { TrackColor } from "../types/Track";
 import "./Step.css";
 
-const SAMPLE_EMOJIS: { [sample in Sample]?: string } = {
-    clap: "👏",
-    cowbell: "🐮",
-};
+const SAMPLE_EMOJIS = new Map<Sample, string>([
+    ["clap", "👏"],
+    ["cowbell", "🐮"],
+]);
 
 interface StepProps {
     step: StepType;
@@ -52,7 +52,7 @@ function Step({
         [step.isOn, step.repeat, position, trackSample]
     );
 
-    const emoji = step.isOn && SAMPLE_EMOJIS[trackSample];
+    const emoji = step.isOn && SAMPLE_EMOJIS.get(trackSample);
     const displayPlayhead =
         isFirstTrack && isPlaying && position == playheadPosition;
 

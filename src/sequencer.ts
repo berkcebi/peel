@@ -20,7 +20,7 @@ interface Sequencer {
     readonly setTempo: (tempo: number) => void;
 }
 
-const PLAYERS = new Tone.Players({
+const players = new Tone.Players({
     urls: ALL_SAMPLES.reduce((urls, sample) => {
         return {
             ...urls,
@@ -38,7 +38,7 @@ Tone.Transport.scheduleRepeat((time) => {
 }, "0:0:1");
 
 let currentSixteenth = 0;
-const transportEventIds: { [id: string]: number } = {};
+const transportEventIds = new Map<string, number>();
 
 function getId(sample: string, sixteenth: number) {
     return `${sample}:${sixteenth}`;
@@ -47,26 +47,34 @@ function getId(sample: string, sixteenth: number) {
 function addTransportEvent(sample: Sample, sixteenth: number, repeat: Repeat) {
     const id = getId(sample, sixteenth);
 
-    const previousId = transportEventIds[id];
-    if (previousId) {
-        Tone.Transport.clear(previousId);
+    const previousTransportId = transportEventIds.get(id);
+    if (previousTransportId) {
+        Tone.Transport.clear(previousTransportId);
     }
 
     const [startBar, intervalBar] = parseRepeat(repeat);
 
-    transportEventIds[id] = Tone.Transport.scheduleRepeat(
-        (time) => {
-            PLAYERS.player(sample).start(time);
-        },
-        `${intervalBar}:0:0`,
-        `${startBar}:0:${sixteenth}`
+    transportEventIds.set(
+        id,
+        Tone.Transport.scheduleRepeat(
+            (time) => {
+                players.player(sample).start(time);
+            },
+            `${intervalBar}:0:0`,
+            `${startBar}:0:${sixteenth}`
+        )
     );
 }
 
 function removeTransportEvent(sample: Sample, sixteenth: number) {
     const id = getId(sample, sixteenth);
-    Tone.Transport.clear(transportEventIds[id]);
-    delete transportEventIds[id];
+    const transportId = transportEventIds.get(id);
+    if (!transportId) {
+        return;
+    }
+
+    Tone.Transport.clear(transportId);
+    transportEventIds.delete(id);
 }
 
 const sequencer: Sequencer = {
@@ -89,7 +97,7 @@ const sequencer: Sequencer = {
         }
     },
     setVolume(sample, value, isMuted) {
-        const player = PLAYERS.player(sample);
+        const player = players.player(sample);
         // Set volume and mute together, since setting volume resets mute.
         player.volume.value = value;
         player.mute = isMuted;
