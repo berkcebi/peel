@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { usePlayStore } from "../store";
 import Logo from "./Logo";
+import Playhead from "./Playhead";
 import Share from "./Share";
 import "./Header.css";
 
 function Header() {
     const isPlaying = usePlayStore((state) => state.isPlaying);
-    const playheadPosition = usePlayStore((state) => state.playheadPosition);
     const toggleIsPlaying = usePlayStore((state) => state.toggleIsPlaying);
 
     useEffect(() => {
@@ -28,7 +28,7 @@ function Header() {
     return (
         <header className="Header">
             <div className="Header-logo-container">
-                <Logo isUpbeat={isPlaying && playheadPosition % 4 !== 0} />
+                <Logo />
             </div>
             <div className="Header-container">
                 <Share />
@@ -39,6 +39,7 @@ function Header() {
                     {isPlaying ? "Stop" : "Play"}
                 </button>
             </div>
+            <Playhead />
         </header>
     );
 }

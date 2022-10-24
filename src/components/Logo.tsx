@@ -1,10 +1,12 @@
 import React from "react";
+import { usePlayStore } from "../store";
 
-interface LogoProps {
-    isUpbeat: boolean;
-}
+function Logo() {
+    const isPlaying = usePlayStore((state) => state.isPlaying);
+    const playheadPosition = usePlayStore((state) => state.playheadPosition);
 
-function Logo({ isUpbeat }: LogoProps) {
+    const isUpbeat = isPlaying && playheadPosition % 4 !== 0;
+
     return (
         <svg
             width="76"

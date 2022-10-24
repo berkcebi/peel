@@ -112,7 +112,6 @@ function App() {
                 <Track
                     track={track}
                     shortcutKey={TRACK_SHORTCUT_KEYS[index]}
-                    isFirst={index === 0}
                     key={track.id}
                 />
             ))}

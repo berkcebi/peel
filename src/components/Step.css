@@ -73,16 +73,6 @@ _:future,
     font-size: 12px;
 }
 
-.Step-playhead {
-    position: absolute;
-    height: 12px;
-    top: -24px;
-    left: 12px;
-    right: 12px;
-    border-radius: 2px;
-    background-color: var(--accent-color);
-}
-
 .Step-repeat {
     display: grid;
     grid-template-columns: 1fr 1fr;

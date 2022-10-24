@@ -9,10 +9,9 @@ import "./Track.css";
 interface TrackProps {
     track: TrackType;
     shortcutKey: string;
-    isFirst: boolean;
 }
 
-function Track({ track, shortcutKey, isFirst }: TrackProps) {
+function Track({ track, shortcutKey }: TrackProps) {
     const changeVolume = useJamStore((state) => state.changeVolume);
     const mute = useJamStore((state) => state.mute);
 
@@ -62,7 +61,6 @@ function Track({ track, shortcutKey, isFirst }: TrackProps) {
                     step={step}
                     position={position}
                     trackId={id}
-                    isFirstTrack={isFirst}
                     trackSample={sample}
                     trackColor={track.color}
                     key={position}

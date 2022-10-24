@@ -2,7 +2,7 @@ import * as amplitude from "@amplitude/analytics-browser";
 import * as ContextMenu from "@radix-ui/react-context-menu";
 import React, { useEffect } from "react";
 import sequencer from "../sequencer";
-import { useJamStore, usePlayStore } from "../store";
+import { useJamStore } from "../store";
 import RepeatType, {
     DEFAULT_REPEAT,
     ALL_REPEATS,
@@ -23,23 +23,13 @@ interface StepProps {
     step: StepType;
     position: number;
     trackId: number;
-    isFirstTrack: boolean;
     trackSample: Sample;
     trackColor: TrackColor;
 }
 
-function Step({
-    step,
-    position,
-    trackId,
-    isFirstTrack,
-    trackSample,
-    trackColor,
-}: StepProps) {
+function Step({ step, position, trackId, trackSample, trackColor }: StepProps) {
     const toggleStep = useJamStore((state) => state.toggleStep);
     const changeStepRepeat = useJamStore((state) => state.changeStepRepeat);
-    const isPlaying = usePlayStore((state) => state.isPlaying);
-    const playheadPosition = usePlayStore((state) => state.playheadPosition);
 
     useEffect(
         () =>
@@ -53,8 +43,6 @@ function Step({
     );
 
     const emoji = step.isOn && SAMPLE_EMOJIS.get(trackSample);
-    const displayPlayhead =
-        isFirstTrack && isPlaying && position == playheadPosition;
 
     const classNames = ["Step-button"];
     if (step.isOn) {
@@ -122,7 +110,6 @@ function Step({
                 button
             )}
             {position % 4 === 0 && <div className="Step-downbeat" />}
-            {displayPlayhead && <div className="Step-playhead" />}
         </div>
     );
 }
