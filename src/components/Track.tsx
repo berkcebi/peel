@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import React, { useEffect } from "react";
 import sequencer from "../sequencer";
 import { useJamStore } from "../store";
@@ -35,13 +36,6 @@ function Track({ track, shortcutKey }: TrackProps) {
             document.removeEventListener("keydown", handleKeyDown);
         };
     }, [id, shortcutKey, mute]);
-
-    const buttonClassNames = ["Track-button"];
-
-    if (track.volume.isMuted) {
-        buttonClassNames.push("Track-button--muted");
-    }
-
     return (
         <div className="Track">
             <div className="Track-name">
@@ -51,7 +45,10 @@ function Track({ track, shortcutKey }: TrackProps) {
                 )}
             </div>
             <button
-                className={buttonClassNames.join(" ")}
+                className={clsx(
+                    "Track-button",
+                    track.volume.isMuted && "Track-button--muted"
+                )}
                 onClick={() => mute(id)}
             >
                 {shortcutKey}

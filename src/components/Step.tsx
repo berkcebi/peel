@@ -1,5 +1,6 @@
 import * as amplitude from "@amplitude/analytics-browser";
 import * as ContextMenu from "@radix-ui/react-context-menu";
+import clsx from "clsx";
 import React, { useEffect } from "react";
 import sequencer from "../sequencer";
 import { useJamStore } from "../store";
@@ -44,17 +45,13 @@ function Step({ step, position, trackId, trackSample, trackColor }: StepProps) {
 
     const emoji = step.isOn && SAMPLE_EMOJIS.get(trackSample);
 
-    const classNames = ["Step-button"];
-    if (step.isOn) {
-        classNames.push(`Step-button--on-${trackColor}`);
-    }
-    if (step.repeat) {
-        classNames.push(`Step-button--has-context-menu`);
-    }
-
     const button = (
         <button
-            className={classNames.join(" ")}
+            className={clsx(
+                "Step-button",
+                step.isOn && `Step-button--on-${trackColor}`,
+                step.repeat && "Step-button--has-context-menu"
+            )}
             aria-label={`Step ${position + 1}`}
             onClick={() => toggleStep(trackId, position)}
         >
@@ -120,12 +117,15 @@ function Repeat({ repeat }: { repeat: RepeatType }) {
     return (
         <div className="Step-repeat">
             {[...Array(repeatDuration).keys()].map((index) => {
-                const classNames = ["Step-repeat-item"];
-                if (index === repeatIndex) {
-                    classNames.push(`Step-repeat-item--on`);
-                }
-
-                return <div className={classNames.join(" ")} key={index} />;
+                return (
+                    <div
+                        className={clsx(
+                            "Step-repeat-item",
+                            index === repeatIndex && "Step-repeat-item--on"
+                        )}
+                        key={index}
+                    />
+                );
             })}
         </div>
     );
