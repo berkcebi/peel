@@ -38,6 +38,7 @@ function Step({ step, position, trackId, trackSample, trackColor }: StepProps) {
                 trackSample,
                 position,
                 step.repeat ?? DEFAULT_REPEAT,
+                false,
                 step.isOn
             ),
         [step.isOn, step.repeat, position, trackSample]
