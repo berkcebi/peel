@@ -42,7 +42,7 @@ function Step({ step, position, trackId, trackSample, trackColor }: StepProps) {
                 step.repeat ?? DEFAULT_REPEAT,
                 step.isOn
             ),
-        [step.isOn, step.repeat, step.accent, position, trackSample]
+        [step.isOn, step.accent, step.repeat, position, trackSample]
     );
 
     const emoji = step.isOn && SAMPLE_EMOJIS.get(trackSample);
