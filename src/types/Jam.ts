@@ -80,7 +80,7 @@ export function getDefaultJam(): Jam {
                             { isOn: true },
                             { isOn: false },
                             { isOn: true },
-                            { isOn: false },
+                            { isOn: true, accent: true },
                             { isOn: true },
                             { isOn: false },
                             { isOn: true },
