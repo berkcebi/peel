@@ -2,6 +2,8 @@ import * as Tone from "tone";
 import Repeat, { parseRepeat } from "./types/Repeat";
 import Sample, { ALL_SAMPLES } from "./types/Sample";
 
+export const ACCENT_VOLUME_VALUE = 8;
+
 interface Sequencer {
     onCurrentSixteenthChange?: (currentSixteenth: number) => void;
     readonly start: () => void;
@@ -9,6 +11,7 @@ interface Sequencer {
     readonly setStepOn: (
         sample: Sample,
         sixteenth: number,
+        accent: boolean,
         repeat: Repeat,
         isOn: boolean
     ) => void;
@@ -44,7 +47,12 @@ function getId(sample: string, sixteenth: number) {
     return `${sample}:${sixteenth}`;
 }
 
-function addTransportEvent(sample: Sample, sixteenth: number, repeat: Repeat) {
+function addTransportEvent(
+    sample: Sample,
+    sixteenth: number,
+    accent: boolean,
+    repeat: Repeat
+) {
     const id = getId(sample, sixteenth);
 
     const previousTransportId = transportEventIds.get(id);
@@ -58,7 +66,13 @@ function addTransportEvent(sample: Sample, sixteenth: number, repeat: Repeat) {
         id,
         Tone.Transport.scheduleRepeat(
             (time) => {
-                players.player(sample).start(time);
+                const player = players.player(sample);
+
+                if (accent) {
+                    accentPlayer(player, time);
+                }
+
+                player.start(time);
             },
             `${intervalBar}:0:0`,
             `${startBar}:0:${sixteenth}`
@@ -77,6 +91,15 @@ function removeTransportEvent(sample: Sample, sixteenth: number) {
     transportEventIds.delete(id);
 }
 
+function accentPlayer(player: Tone.Player, time: number) {
+    const volumeValue = player.volume.value;
+    player.volume.setValueAtTime(volumeValue + ACCENT_VOLUME_VALUE, time);
+    player.volume.setValueAtTime(
+        volumeValue,
+        time + Tone.Time("0:0:1").toSeconds() - 0.01
+    );
+}
+
 const sequencer: Sequencer = {
     async start() {
         await Tone.start();
@@ -89,9 +112,9 @@ const sequencer: Sequencer = {
     stop() {
         Tone.Transport.stop();
     },
-    setStepOn(sample, sixteenth, repeat, isOn) {
+    setStepOn(sample, sixteenth, accent, repeat, isOn) {
         if (isOn) {
-            addTransportEvent(sample, sixteenth, repeat);
+            addTransportEvent(sample, sixteenth, accent, repeat);
         } else {
             removeTransportEvent(sample, sixteenth);
         }
