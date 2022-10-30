@@ -8,6 +8,7 @@ interface JamState {
     jam?: Jam;
     setJam: (jam: Jam) => void;
     toggleStep: (trackId: number, stepPosition: number) => void;
+    toggleStepAccent: (trackId: number, stepPosition: number) => void;
     changeStepRepeat: (
         trackId: number,
         stepPosition: number,
@@ -38,10 +39,29 @@ export const useJamStore = create<JamState>()(
 
                 step.isOn = !step.isOn;
 
+                // Unset accent when step is toggled off.
+                if (!step.isOn && step.accent) {
+                    step.accent = undefined;
+                }
+
                 // Unset repeat when step is toggled off.
                 if (!step.isOn && step.repeat) {
                     step.repeat = undefined;
                 }
+            }),
+        toggleStepAccent: (trackId, stepPosition) =>
+            set((state) => {
+                const pattern = state.jam?.patterns[PATTERN_INDEX];
+                const track = pattern?.tracks.find(
+                    (track) => track.id === trackId
+                );
+                const step = track?.steps[stepPosition];
+                if (!step) {
+                    return;
+                }
+
+                // Unset instead of setting false.
+                step.accent = step.accent ? undefined : true;
             }),
         changeStepRepeat: (trackId, stepPosition, repeat) =>
             set((state) => {

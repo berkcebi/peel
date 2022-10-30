@@ -30,6 +30,7 @@ interface StepProps {
 
 function Step({ step, position, trackId, trackSample, trackColor }: StepProps) {
     const toggleStep = useJamStore((state) => state.toggleStep);
+    const toggleStepAccent = useJamStore((state) => state.toggleStepAccent);
     const changeStepRepeat = useJamStore((state) => state.changeStepRepeat);
 
     useEffect(
@@ -37,11 +38,11 @@ function Step({ step, position, trackId, trackSample, trackColor }: StepProps) {
             sequencer.setStepOn(
                 trackSample,
                 position,
+                step.accent ?? false,
                 step.repeat ?? DEFAULT_REPEAT,
-                false,
                 step.isOn
             ),
-        [step.isOn, step.repeat, position, trackSample]
+        [step.isOn, step.repeat, step.accent, position, trackSample]
     );
 
     const emoji = step.isOn && SAMPLE_EMOJIS.get(trackSample);
@@ -51,11 +52,12 @@ function Step({ step, position, trackId, trackSample, trackColor }: StepProps) {
             className={clsx(
                 "Step-button",
                 step.isOn && `Step-button--on-${trackColor}`,
-                step.repeat && "Step-button--has-context-menu"
+                (step.accent || step.repeat) && "Step-button--has-context-menu"
             )}
             aria-label={`Step ${position + 1}`}
             onClick={() => toggleStep(trackId, position)}
         >
+            {step.accent && <div className="Step-accent" />}
             {step.repeat ? (
                 <Repeat repeat={step.repeat} />
             ) : (
@@ -71,6 +73,19 @@ function Step({ step, position, trackId, trackSample, trackColor }: StepProps) {
                     <ContextMenu.Trigger>{button}</ContextMenu.Trigger>
                     <ContextMenu.Portal>
                         <ContextMenu.Content className="Context-Menu-Content">
+                            <ContextMenu.CheckboxItem
+                                className="Context-Menu-Item"
+                                checked={step.accent}
+                                onCheckedChange={() => {
+                                    toggleStepAccent(trackId, position);
+                                }}
+                            >
+                                <ContextMenu.ItemIndicator className="Context-Menu-Item-Indicator">
+                                    {"*"}
+                                </ContextMenu.ItemIndicator>
+                                Accent
+                            </ContextMenu.CheckboxItem>
+                            <ContextMenu.Separator className="Context-Menu-Separator" />
                             <ContextMenu.Label className="Context-Menu-Label">
                                 Repeat
                             </ContextMenu.Label>
@@ -81,7 +96,7 @@ function Step({ step, position, trackId, trackSample, trackColor }: StepProps) {
                                         Repeat: repeat,
                                     });
 
-                                    return changeStepRepeat(
+                                    changeStepRepeat(
                                         trackId,
                                         position,
                                         repeat as RepeatType

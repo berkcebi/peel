@@ -43,7 +43,7 @@ a {
 }
 
 .Context-Menu-Content {
-    width: 148px;
+    width: 160px;
     padding: 4px 0;
     border-radius: 4px;
     background-color: var(--primary-background-color);
@@ -62,6 +62,13 @@ a {
     margin: 2px 4px;
     padding: 0 8px 0 24px;
     color: var(--secondary-label-color);
+}
+
+.Context-Menu-Separator {
+    height: 2px;
+    margin: 8px 12px;
+    border-radius: 1px;
+    background-color: var(--secondary-border-color);
 }
 
 .Context-Menu-Item {

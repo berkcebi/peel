@@ -11,8 +11,8 @@ interface Sequencer {
     readonly setStepOn: (
         sample: Sample,
         sixteenth: number,
+        accent: boolean,
         repeat: Repeat,
-        isAccented: boolean,
         isOn: boolean
     ) => void;
     readonly setVolume: (
@@ -50,8 +50,8 @@ function getId(sample: string, sixteenth: number) {
 function addTransportEvent(
     sample: Sample,
     sixteenth: number,
-    repeat: Repeat,
-    isAccented: boolean
+    accent: boolean,
+    repeat: Repeat
 ) {
     const id = getId(sample, sixteenth);
 
@@ -68,8 +68,8 @@ function addTransportEvent(
             (time) => {
                 const player = players.player(sample);
 
-                if (isAccented) {
-                    accent(player, time);
+                if (accent) {
+                    accentPlayer(player, time);
                 }
 
                 player.start(time);
@@ -91,7 +91,7 @@ function removeTransportEvent(sample: Sample, sixteenth: number) {
     transportEventIds.delete(id);
 }
 
-function accent(player: Tone.Player, time: number) {
+function accentPlayer(player: Tone.Player, time: number) {
     const volumeValue = player.volume.value;
     player.volume.setValueAtTime(volumeValue + ACCENT_VOLUME_VALUE, time);
     player.volume.setValueAtTime(
@@ -112,9 +112,9 @@ const sequencer: Sequencer = {
     stop() {
         Tone.Transport.stop();
     },
-    setStepOn(sample, sixteenth, repeat, isAccented, isOn) {
+    setStepOn(sample, sixteenth, accent, repeat, isOn) {
         if (isOn) {
-            addTransportEvent(sample, sixteenth, repeat, isAccented);
+            addTransportEvent(sample, sixteenth, accent, repeat);
         } else {
             removeTransportEvent(sample, sixteenth);
         }

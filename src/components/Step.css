@@ -62,6 +62,16 @@
     background-color: var(--secondary-border-color);
 }
 
+.Step-accent {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    width: 4px;
+    height: 4px;
+    border-radius: 2px;
+    background-color: var(--secondary-label-color);
+}
+
 .Step-emoji {
     font-size: 16px;
 }
