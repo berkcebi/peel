@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import sequencer from "../sequencer";
 import { useJamStore } from "../store";
-import { MAX_TEMPO, MIN_TEMPO } from "../types/Pattern";
+import { MIN_TEMPO, MAX_TEMPO } from "../types/Pattern";
 import Slider from "./Slider";
 import "./Tempo.css";
 

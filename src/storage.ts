@@ -1,4 +1,4 @@
-import Jam, { getDefaultJam, JamSchema } from "./types/Jam";
+import Jam, { JamSchema, getDefaultJam } from "./types/Jam";
 
 const JAM_KEY = "jam";
 

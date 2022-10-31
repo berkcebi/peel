@@ -4,8 +4,8 @@ import sequencer from "../sequencer";
 import { useJamStore } from "../store";
 import TrackType from "../types/Track";
 import Step from "./Step";
-import "./Track.css";
 import Volume from "./Volume";
+import "./Track.css";
 
 interface TrackProps {
     track: TrackType;

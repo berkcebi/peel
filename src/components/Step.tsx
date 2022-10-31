@@ -5,8 +5,8 @@ import React, { useEffect } from "react";
 import sequencer from "../sequencer";
 import { useJamStore } from "../store";
 import RepeatType, {
-    ALL_REPEATS,
     DEFAULT_REPEAT,
+    ALL_REPEATS,
     getRepeatDescription,
     parseRepeat,
 } from "../types/Repeat";

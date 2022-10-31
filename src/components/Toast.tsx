@@ -1,8 +1,8 @@
 import clsx from "clsx";
 import React, { useEffect } from "react";
 import { createPortal } from "react-dom";
-import { useToastStore } from "../store";
 import "./Toast.css";
+import { useToastStore } from "../store";
 
 const DURATION = 3000;
 

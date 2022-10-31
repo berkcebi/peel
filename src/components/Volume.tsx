@@ -1,7 +1,7 @@
 import React from "react";
 import VolumeType, {
-    VOLUME_MAX_VALUE,
     VOLUME_MIN_VALUE,
+    VOLUME_MAX_VALUE,
 } from "../types/Volume";
 import Slider from "./Slider";
 import "./Volume.css";
