@@ -1,13 +1,14 @@
 {
     "env": {
         "browser": true,
-        "es2021": true
+        "es2021": true,
+        "node": true
     },
     "extends": [
-        ".eslintrc.base.json",
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
         "plugin:react/recommended",
         "plugin:react-hooks/recommended",
-        // Add prettier config last to disable rules from previous configs.
         "eslint-config-prettier"
     ],
     "parserOptions": {

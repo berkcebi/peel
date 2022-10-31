@@ -6,8 +6,8 @@
         "node": true
     },
     "extends": [
-        "../../.eslintrc.base.json",
-        // Add prettier config last to disable rules from previous configs.
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
         "eslint-config-prettier"
     ],
     "parserOptions": {

@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { usePlayStore } from "../store";
+import "./Header.css";
 import Logo from "./Logo";
 import Playhead from "./Playhead";
 import Share from "./Share";
-import "./Header.css";
 
 function Header() {
     const isPlaying = usePlayStore((state) => state.isPlaying);

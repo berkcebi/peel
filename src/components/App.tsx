@@ -4,11 +4,11 @@ import SOURCE from "../source";
 import * as storage from "../storage";
 import { useJamStore, usePlayStore, useToastStore } from "../store";
 import { JamSchema, PATTERN_INDEX } from "../types/Jam";
+import "./App.css";
 import Footer from "./Footer";
 import Header from "./Header";
 import Toast from "./Toast";
 import Track from "./Track";
-import "./App.css";
 
 const STORAGE_DELAY = 5000;
 // prettier-ignore

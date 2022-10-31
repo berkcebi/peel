@@ -1,6 +1,6 @@
 import React from "react";
-import Tempo from "./Tempo";
 import "./Footer.css";
+import Tempo from "./Tempo";
 
 interface FooterProps {
     tempo: number;
