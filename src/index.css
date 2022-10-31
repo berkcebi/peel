@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
     --primary-label-color: #1a1a1a;
     --secondary-label-color: #808080;
