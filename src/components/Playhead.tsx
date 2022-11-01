@@ -1,6 +1,5 @@
 import React from "react";
 import { usePlayStore } from "../store";
-import "./Playhead.css";
 
 function Playhead() {
     const isPlaying = usePlayStore((state) => state.isPlaying);
@@ -12,7 +11,7 @@ function Playhead() {
 
     return (
         <div
-            className="Playhead"
+            className="absolute left-[164px] -bottom-3 h-3 w-1 translate-x-[60px] rounded-sm bg-blue"
             style={{
                 transform: `translate(${playheadPosition * 40}px, 0px)`,
             }}

@@ -3,7 +3,6 @@ import sequencer from "../sequencer";
 import { useJamStore } from "../store";
 import { MIN_TEMPO, MAX_TEMPO } from "../types/Pattern";
 import Slider from "./Slider";
-import "./Tempo.css";
 
 interface TempoProps {
     value: number;
@@ -15,8 +14,8 @@ function Tempo({ value }: TempoProps) {
     useEffect(() => sequencer.setTempo(value), [value]);
 
     return (
-        <div title={`Tempo ${value} bpm`} className="Tempo">
-            <span className="secondary">{value} bpm</span>
+        <div title={`Tempo ${value} bpm`} className="flex items-center gap-3">
+            <span className="text-gray">{value} bpm</span>
             <Slider
                 min={MIN_TEMPO}
                 max={MAX_TEMPO}

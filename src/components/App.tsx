@@ -8,7 +8,6 @@ import Footer from "./Footer";
 import Header from "./Header";
 import Toast from "./Toast";
 import Track from "./Track";
-import "./App.css";
 
 const STORAGE_DELAY = 5000;
 // prettier-ignore
@@ -94,7 +93,9 @@ function App() {
     if (!jam) {
         return (
             <>
-                <div className="App-title secondary">Fetching jam…</div>
+                <div className="absolute top-[54px] left-1/2 z-10 flex h-7 translate-x-[calc(-50%+40px)] items-center text-gray">
+                    Fetching jam…
+                </div>
                 <Toast />
             </>
         );
@@ -105,7 +106,9 @@ function App() {
     return (
         <>
             {SOURCE.type === "remote" && (
-                <div className="App-title">Shared jam</div>
+                <div className="absolute top-[54px] left-1/2 z-10 flex h-7 translate-x-[calc(-50%+40px)] items-center">
+                    Shared jam
+                </div>
             )}
             <Header />
             {pattern.tracks.map((track, index) => (

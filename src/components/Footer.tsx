@@ -1,6 +1,5 @@
 import React from "react";
 import Tempo from "./Tempo";
-import "./Footer.css";
 
 interface FooterProps {
     tempo: number;
@@ -8,16 +7,17 @@ interface FooterProps {
 
 function Footer({ tempo }: FooterProps) {
     return (
-        <footer className="Footer">
-            <div className="Footer-container">
+        <footer className="mt-3 flex justify-between">
+            <div className="flex w-32 justify-end">
                 <Tempo value={tempo} />
             </div>
-            <span className="secondary">
+            <span className="text-gray">
                 Ping me at{" "}
                 <a
                     href="https://twitter.com/berkcebi"
                     target="_blank"
                     rel="noopener noreferrer"
+                    className="underline underline-offset-2"
                 >
                     @berkcebi
                 </a>{" "}

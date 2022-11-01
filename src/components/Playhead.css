@@ -1,9 +1,0 @@
-.Playhead {
-    position: absolute;
-    left: 164px;
-    bottom: -12px;
-    width: 4px;
-    height: 12px;
-    border-radius: 2px;
-    background-color: var(--accent-color);
-}

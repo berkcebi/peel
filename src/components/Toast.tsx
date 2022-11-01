@@ -1,7 +1,6 @@
 import clsx from "clsx";
 import React, { useEffect } from "react";
 import { createPortal } from "react-dom";
-import "./Toast.css";
 import { useToastStore } from "../store";
 
 const DURATION = 3000;
@@ -29,7 +28,12 @@ function Toast() {
     const isError = typeof message === "object" && message.type === "error";
 
     return createPortal(
-        <div className={clsx("Toast", isError && "Toast--error")}>
+        <div
+            className={clsx(
+                "fixed top-3 left-1/2 -translate-x-1/2 rounded bg-black py-px px-[6px] text-white",
+                isError && "bg-red-10 text-red"
+            )}
+        >
             {typeof message === "object" ? message.text : message}
         </div>,
         document.body

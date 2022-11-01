@@ -5,7 +5,6 @@ import { useJamStore } from "../store";
 import TrackType from "../types/Track";
 import Step from "./Step";
 import Volume from "./Volume";
-import "./Track.css";
 
 interface TrackProps {
     track: TrackType;
@@ -37,17 +36,19 @@ function Track({ track, shortcutKey }: TrackProps) {
         };
     }, [id, shortcutKey, mute]);
     return (
-        <div className="Track">
-            <div className="Track-name">
+        <div className="flex items-center gap-3">
+            <div className="w-24 text-right">
                 {track.name}
                 {track.description && (
-                    <span className="secondary">, {track.description}</span>
+                    <span className="text-gray">, {track.description}</span>
                 )}
             </div>
             <button
                 className={clsx(
-                    "Track-button",
-                    track.volume.isMuted && "Track-button--muted"
+                    "mr-3 h-5 w-5 rounded-full focus:ring-2 focus:ring-blue-25",
+                    track.volume.isMuted
+                        ? "border border-solid border-black text-black"
+                        : "bg-black text-white"
                 )}
                 onClick={() => mute(id)}
             >

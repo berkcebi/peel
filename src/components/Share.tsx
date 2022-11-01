@@ -2,7 +2,6 @@ import * as amplitude from "@amplitude/analytics-browser";
 import React, { useEffect, useState } from "react";
 import SOURCE from "../source";
 import { useJamStore, useToastStore } from "../store";
-import "./Share.css";
 
 const ORIGIN = "peel.fm";
 
@@ -65,11 +64,16 @@ function Share() {
     }
 
     if (isLoading) {
-        return <span className="Share-loading">Fetching link…</span>;
+        return (
+            <span className="cursor-progress text-gray">Fetching link…</span>
+        );
     }
 
     return (
-        <button className="Share-button" onClick={handleButtonClick}>
+        <button
+            className="flex items-center gap-2 text-blue focus:outline-none"
+            onClick={handleButtonClick}
+        >
             <Icon />
             {hash
                 ? `${ORIGIN}/${hash}`
