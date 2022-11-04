@@ -21,15 +21,7 @@
 .Header-button {
     width: 72px;
     height: 28px;
-    padding: 0;
-    border: none;
     border-radius: 4px;
     background-color: var(--accent-color);
     color: var(--primary-label-on-inverse-color);
-    font-family: inherit;
-    font-size: inherit;
-}
-
-.Header-button:focus {
-    outline: 2px solid var(--accent-border-color);
 }

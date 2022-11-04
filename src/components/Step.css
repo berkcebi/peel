@@ -6,7 +6,6 @@
     display: flex;
     width: 28px;
     height: 28px;
-    padding: 0;
     border-radius: 4px;
     background-color: var(--control-background-color);
     border: 2px solid var(--tertiary-border-color);
@@ -46,10 +45,6 @@
 
 .Step-button--has-context-menu {
     cursor: context-menu;
-}
-
-.Step-button:focus {
-    outline: 2px solid var(--accent-border-color);
 }
 
 .Step-downbeat {

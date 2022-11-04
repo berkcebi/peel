@@ -63,10 +63,12 @@ function Track({ track, shortcutKey }: TrackProps) {
                     key={position}
                 />
             ))}
-            <Volume
-                volume={track.volume}
-                onChange={(volumeValue) => changeVolume(id, volumeValue)}
-            />
+            <div className="Track-volume">
+                <Volume
+                    volume={track.volume}
+                    onChange={(volumeValue) => changeVolume(id, volumeValue)}
+                />
+            </div>
         </div>
     );
 }

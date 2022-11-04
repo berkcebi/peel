@@ -2,12 +2,6 @@
     display: flex;
     gap: 8px;
     align-items: center;
-    background: none;
-    border: none;
-    padding: 0;
-    margin: 0;
-    font-family: inherit;
-    font-size: inherit;
     color: var(--accent-color);
     cursor: pointer;
 }

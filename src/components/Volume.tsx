@@ -4,7 +4,6 @@ import VolumeType, {
     VOLUME_MIN_VALUE,
 } from "../types/Volume";
 import Slider from "./Slider";
-import "./Volume.css";
 
 interface VolumeProps {
     volume: VolumeType;
@@ -17,7 +16,6 @@ function Volume({ volume, onChange }: VolumeProps) {
             title={`Volume ${volume.value} dB${
                 volume.isMuted ? " (Muted)" : ""
             }`}
-            className="Volume"
         >
             <Slider
                 min={VOLUME_MIN_VALUE}
