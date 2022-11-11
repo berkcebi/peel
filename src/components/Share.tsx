@@ -71,9 +71,7 @@ function Share() {
     return (
         <button className="Share-button" onClick={handleButtonClick}>
             <Icon />
-            {hash
-                ? `${ORIGIN}/${hash}`
-                : `${SOURCE.type === "remote" ? "Share" : "Share jam"}`}
+            {hash ? `${ORIGIN}/${hash}` : "Share"}
         </button>
     );
 }

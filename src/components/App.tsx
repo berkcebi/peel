@@ -4,9 +4,9 @@ import SOURCE from "../source";
 import * as storage from "../storage";
 import { useJamStore, usePlayStore, useToastStore } from "../store";
 import { JamSchema, PATTERN_INDEX } from "../types/Jam";
-import "./App.css";
 import Footer from "./Footer";
 import Header from "./Header";
+import Title from "./Title";
 import Toast from "./Toast";
 import Track from "./Track";
 
@@ -94,7 +94,7 @@ function App() {
     if (!jam) {
         return (
             <>
-                <div className="App-title secondary">Fetching jam…</div>
+                <Title />
                 <Toast />
             </>
         );
@@ -104,9 +104,7 @@ function App() {
 
     return (
         <>
-            {SOURCE.type === "remote" && (
-                <div className="App-title">Shared jam</div>
-            )}
+            <Title />
             <Header />
             {pattern.tracks.map((track, index) => (
                 <Track

@@ -1,0 +1,23 @@
+.Title {
+    position: absolute;
+    top: 54px;
+    left: 50%;
+    transform: translateX(calc(-50% + 40px));
+    min-height: 28px;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.Title-button {
+    width: 16px;
+    height: 16px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary-label-color);
+    color: var(--primary-label-on-inverse-color);
+    cursor: pointer;
+}

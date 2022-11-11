@@ -1,9 +1,0 @@
-.App-title {
-    position: absolute;
-    top: 54px;
-    left: 50%;
-    transform: translateX(calc(-50% + 40px));
-    min-height: 28px;
-    display: flex;
-    align-items: center;
-}
