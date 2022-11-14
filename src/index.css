@@ -60,7 +60,7 @@ body {
     background-color: var(--primary-background-color);
     box-shadow: 0 10px 15px -3px var(--primary-shadow-color),
         0 4px 6px -4px var(--primary-shadow-color),
-        0 0 0 2px var(--tertiary-border-color);
+        0 0 0 2px var(--accent-border-color);
     user-select: none;
     -webkit-user-select: none;
     /* Reset cursor to default for Safari. */
