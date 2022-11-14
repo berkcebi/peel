@@ -46,7 +46,13 @@ function Title() {
                         <DropdownMenu.Item
                             className="Menu-Item"
                             onSelect={() => {
-                                clear();
+                                if (
+                                    confirm(
+                                        "Clear the jam and start from scratch?"
+                                    )
+                                ) {
+                                    clear();
+                                }
                             }}
                         >
                             Clear
