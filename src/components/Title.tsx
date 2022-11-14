@@ -4,12 +4,43 @@ import SOURCE from "../source";
 import { useJamStore } from "../store";
 import "./title.css";
 
+const ADJECTIVES = [
+    "astonishing",
+    "awe-inspiring",
+    "breathtaking",
+    "fabulous",
+    "magnificent",
+    "majestic",
+    "mind-blowing",
+    "spectacular",
+    "spine-tingling",
+    "sublime",
+    "thrilling",
+    "boring",
+    "mediocre",
+    "shoddy",
+];
+
 function Title() {
     const jam = useJamStore((state) => state.jam);
     const clear = useJamStore((state) => state.clear);
 
     if (!jam) {
         return <div className="Title secondary">Fetching jam…</div>;
+    }
+
+    function save() {
+        const anchor = document.createElement("a");
+
+        const jamJSONString = JSON.stringify(jam);
+        const jamBlob = new Blob([jamJSONString], { type: "application/json" });
+        anchor.href = URL.createObjectURL(jamBlob);
+
+        const adjective =
+            ADJECTIVES[Math.floor(Math.random() * ADJECTIVES.length)];
+        anchor.download = `${adjective}-jam.peel`;
+
+        anchor.click();
     }
 
     return (
@@ -39,7 +70,12 @@ function Title() {
                         <DropdownMenu.Item className="Menu-Item">
                             Open…
                         </DropdownMenu.Item>
-                        <DropdownMenu.Item className="Menu-Item">
+                        <DropdownMenu.Item
+                            className="Menu-Item"
+                            onSelect={() => {
+                                save();
+                            }}
+                        >
                             Save to disk…
                         </DropdownMenu.Item>
                         <DropdownMenu.Separator className="Menu-Separator" />
