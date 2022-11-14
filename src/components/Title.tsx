@@ -1,7 +1,9 @@
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
+import { fileOpen, fileSave } from "browser-fs-access";
 import React from "react";
 import SOURCE from "../source";
-import { useJamStore } from "../store";
+import { useJamStore, useToastStore } from "../store";
+import { JamSchema } from "../types/Jam";
 import "./title.css";
 
 const ADJECTIVES = [
@@ -23,24 +25,58 @@ const ADJECTIVES = [
 
 function Title() {
     const jam = useJamStore((state) => state.jam);
+    const setJam = useJamStore((state) => state.setJam);
     const clear = useJamStore((state) => state.clear);
+    const setMessage = useToastStore((state) => state.setMessage);
 
     if (!jam) {
         return <div className="Title secondary">Fetching jam…</div>;
     }
 
-    function save() {
-        const anchor = document.createElement("a");
+    async function open() {
+        try {
+            const jamBlob = await fileOpen({
+                mimeTypes: ["application/json"],
+                extensions: [".peel"],
+                description: "Choose “.peel” file to open",
+            });
 
-        const jamJSONString = JSON.stringify(jam);
-        const jamBlob = new Blob([jamJSONString], { type: "application/json" });
-        anchor.href = URL.createObjectURL(jamBlob);
+            const jamString = await jamBlob.text();
+            const jamObject = JSON.parse(jamString);
+            const jam = JamSchema.parse(jamObject);
 
+            setJam(jam);
+        } catch (error) {
+            if (error instanceof DOMException && error.name === "AbortError") {
+                return;
+            }
+
+            console.error("Opening jam failed", error);
+
+            setMessage({ text: "Opening jam failed", type: "error" });
+        }
+    }
+
+    async function save() {
+        const jamString = JSON.stringify(jam);
+        const jamBlob = new Blob([jamString], { type: "application/json" });
         const adjective =
             ADJECTIVES[Math.floor(Math.random() * ADJECTIVES.length)];
-        anchor.download = `${adjective}-jam.peel`;
 
-        anchor.click();
+        try {
+            await fileSave(jamBlob, {
+                fileName: `${adjective}-jam.peel`,
+                extensions: [".peel"],
+            });
+        } catch (error) {
+            if (error instanceof DOMException && error.name === "AbortError") {
+                return;
+            }
+
+            console.error("Saving jam to disk failed", error);
+
+            setMessage({ text: "Saving jam to disk failed", type: "error" });
+        }
     }
 
     return (
@@ -67,7 +103,12 @@ function Title() {
                         sideOffset={12}
                         className="Menu-Content"
                     >
-                        <DropdownMenu.Item className="Menu-Item">
+                        <DropdownMenu.Item
+                            className="Menu-Item"
+                            onSelect={() => {
+                                open();
+                            }}
+                        >
                             Open…
                         </DropdownMenu.Item>
                         <DropdownMenu.Item
