@@ -33,6 +33,15 @@ function Title() {
         return <div className="Title secondary">Fetching jam…</div>;
     }
 
+    function getText() {
+        switch (SOURCE.type) {
+            case "local":
+                return "Your jam";
+            case "remote":
+                return "Shared jam";
+        }
+    }
+
     async function open() {
         try {
             const jamBlob = await fileOpen({
@@ -81,62 +90,64 @@ function Title() {
 
     return (
         <div className="Title">
-            {SOURCE.type === "remote" ? "Shared jam" : "Your jam"}
-            <DropdownMenu.Root>
-                <DropdownMenu.Trigger className="Title-button">
-                    <svg
-                        width="10"
-                        height="2"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <path
-                            fillRule="evenodd"
-                            clipRule="evenodd"
-                            d="M0 1a1 1 0 1 1 2 0 1 1 0 0 1-2 0Zm4 0a1 1 0 1 1 2 0 1 1 0 0 1-2 0Zm5-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2Z"
-                            fill="currentColor"
-                        />
-                    </svg>
-                </DropdownMenu.Trigger>
-                <DropdownMenu.Portal>
-                    <DropdownMenu.Content
-                        sideOffset={12}
-                        className="Menu-Content"
-                    >
-                        <DropdownMenu.Item
-                            className="Menu-Item"
-                            onSelect={() => {
-                                open();
-                            }}
+            {getText()}
+            {SOURCE.type === "local" && (
+                <DropdownMenu.Root>
+                    <DropdownMenu.Trigger className="Title-button">
+                        <svg
+                            width="10"
+                            height="2"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
                         >
-                            Open…
-                        </DropdownMenu.Item>
-                        <DropdownMenu.Item
-                            className="Menu-Item"
-                            onSelect={() => {
-                                save();
-                            }}
+                            <path
+                                fillRule="evenodd"
+                                clipRule="evenodd"
+                                d="M0 1a1 1 0 1 1 2 0 1 1 0 0 1-2 0Zm4 0a1 1 0 1 1 2 0 1 1 0 0 1-2 0Zm5-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2Z"
+                                fill="currentColor"
+                            />
+                        </svg>
+                    </DropdownMenu.Trigger>
+                    <DropdownMenu.Portal>
+                        <DropdownMenu.Content
+                            sideOffset={12}
+                            className="Menu-Content"
                         >
-                            Save to disk…
-                        </DropdownMenu.Item>
-                        <DropdownMenu.Separator className="Menu-Separator" />
-                        <DropdownMenu.Item
-                            className="Menu-Item"
-                            onSelect={() => {
-                                if (
-                                    confirm(
-                                        "Clear the jam and start from scratch?"
-                                    )
-                                ) {
-                                    clear();
-                                }
-                            }}
-                        >
-                            Clear
-                        </DropdownMenu.Item>
-                    </DropdownMenu.Content>
-                </DropdownMenu.Portal>
-            </DropdownMenu.Root>
+                            <DropdownMenu.Item
+                                className="Menu-Item"
+                                onSelect={() => {
+                                    open();
+                                }}
+                            >
+                                Open…
+                            </DropdownMenu.Item>
+                            <DropdownMenu.Item
+                                className="Menu-Item"
+                                onSelect={() => {
+                                    save();
+                                }}
+                            >
+                                Save to disk…
+                            </DropdownMenu.Item>
+                            <DropdownMenu.Separator className="Menu-Separator" />
+                            <DropdownMenu.Item
+                                className="Menu-Item"
+                                onSelect={() => {
+                                    if (
+                                        confirm(
+                                            "Clear the jam and start from scratch?"
+                                        )
+                                    ) {
+                                        clear();
+                                    }
+                                }}
+                            >
+                                Clear
+                            </DropdownMenu.Item>
+                        </DropdownMenu.Content>
+                    </DropdownMenu.Portal>
+                </DropdownMenu.Root>
+            )}
         </div>
     );
 }
