@@ -4,7 +4,7 @@ import React from "react";
 import SOURCE from "../source";
 import { useJamStore, useToastStore } from "../store";
 import { JamSchema } from "../types/Jam";
-import "./title.css";
+import "./Title.css";
 
 const ADJECTIVES = [
     "astonishing",
