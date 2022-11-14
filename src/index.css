@@ -53,20 +53,21 @@ body {
     color: var(--secondary-label-color);
 }
 
-.Context-Menu-Content {
-    width: 160px;
+.Menu-Content {
+    width: 172px;
     padding: 4px 0;
     border-radius: 4px;
     background-color: var(--primary-background-color);
-    box-shadow: 0px 4px 6px -1px var(--primary-shadow-color),
-        0px 2px 4px -2px var(--primary-shadow-color);
+    box-shadow: 0 10px 15px -3px var(--primary-shadow-color),
+        0 4px 6px -4px var(--primary-shadow-color),
+        0 0 0 2px var(--tertiary-border-color);
     user-select: none;
     -webkit-user-select: none;
     /* Reset cursor to default for Safari. */
     cursor: default;
 }
 
-.Context-Menu-Label {
+.Menu-Label {
     display: flex;
     align-items: center;
     height: 24px;
@@ -75,14 +76,14 @@ body {
     color: var(--secondary-label-color);
 }
 
-.Context-Menu-Separator {
+.Menu-Separator {
     height: 2px;
     margin: 8px 12px;
     border-radius: 1px;
     background-color: var(--secondary-border-color);
 }
 
-.Context-Menu-Item {
+.Menu-Item {
     display: flex;
     align-items: center;
     height: 24px;
@@ -91,16 +92,16 @@ body {
     border-radius: 4px;
 }
 
-.Context-Menu-Item[data-state="checked"] {
+.Menu-Item[data-state="checked"] {
     padding: 0 8px;
 }
 
-.Context-Menu-Item[data-highlighted] {
+.Menu-Item[data-highlighted] {
     outline: none;
     background-color: var(--accent-color);
     color: var(--primary-label-on-inverse-color);
 }
 
-.Context-Menu-Item-Indicator {
+.Menu-Item-Indicator {
     width: 16px;
 }

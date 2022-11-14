@@ -72,21 +72,21 @@ function Step({ step, position, trackId, trackSample, trackColor }: StepProps) {
                 <ContextMenu.Root>
                     <ContextMenu.Trigger>{button}</ContextMenu.Trigger>
                     <ContextMenu.Portal>
-                        <ContextMenu.Content className="Context-Menu-Content">
+                        <ContextMenu.Content className="Menu-Content">
                             <ContextMenu.CheckboxItem
-                                className="Context-Menu-Item"
+                                className="Menu-Item"
                                 checked={step.accent}
                                 onCheckedChange={() => {
                                     toggleStepAccent(trackId, position);
                                 }}
                             >
-                                <ContextMenu.ItemIndicator className="Context-Menu-Item-Indicator">
+                                <ContextMenu.ItemIndicator className="Menu-Item-Indicator">
                                     {"*"}
                                 </ContextMenu.ItemIndicator>
                                 Accent
                             </ContextMenu.CheckboxItem>
-                            <ContextMenu.Separator className="Context-Menu-Separator" />
-                            <ContextMenu.Label className="Context-Menu-Label">
+                            <ContextMenu.Separator className="Menu-Separator" />
+                            <ContextMenu.Label className="Menu-Label">
                                 Repeat
                             </ContextMenu.Label>
                             <ContextMenu.RadioGroup
@@ -107,9 +107,9 @@ function Step({ step, position, trackId, trackSample, trackColor }: StepProps) {
                                     <ContextMenu.RadioItem
                                         value={repeat}
                                         key={index}
-                                        className="Context-Menu-Item"
+                                        className="Menu-Item"
                                     >
-                                        <ContextMenu.ItemIndicator className="Context-Menu-Item-Indicator">
+                                        <ContextMenu.ItemIndicator className="Menu-Item-Indicator">
                                             {"->"}
                                         </ContextMenu.ItemIndicator>
                                         {getRepeatDescription(repeat)}
