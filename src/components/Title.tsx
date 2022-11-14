@@ -2,7 +2,7 @@ import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { fileOpen, fileSave } from "browser-fs-access";
 import React from "react";
 import SOURCE from "../source";
-import { useJamStore, useToastStore } from "../store";
+import { useJamStore, usePlayStore, useToastStore } from "../store";
 import { JamSchema } from "../types/Jam";
 import "./Title.css";
 
@@ -28,6 +28,8 @@ function Title() {
     const setJam = useJamStore((state) => state.setJam);
     const clear = useJamStore((state) => state.clear);
     const setMessage = useToastStore((state) => state.setMessage);
+    const isPlaying = usePlayStore((state) => state.isPlaying);
+    const toggleIsPlaying = usePlayStore((state) => state.toggleIsPlaying);
 
     if (!jam) {
         return <div className="Title secondary">Fetching jam…</div>;
@@ -116,6 +118,10 @@ function Title() {
                             <DropdownMenu.Item
                                 className="Menu-Item"
                                 onSelect={() => {
+                                    if (isPlaying) {
+                                        toggleIsPlaying();
+                                    }
+
                                     open();
                                 }}
                             >
@@ -133,13 +139,20 @@ function Title() {
                             <DropdownMenu.Item
                                 className="Menu-Item"
                                 onSelect={() => {
-                                    if (
-                                        confirm(
-                                            "Clear the jam and start from scratch?"
-                                        )
-                                    ) {
-                                        clear();
+                                    if (isPlaying) {
+                                        toggleIsPlaying();
                                     }
+
+                                    // Defer for the menu to close and playback to stop.
+                                    setTimeout(() => {
+                                        if (
+                                            confirm(
+                                                "Clear the jam and start from scratch?"
+                                            )
+                                        ) {
+                                            clear();
+                                        }
+                                    }, 100);
                                 }}
                             >
                                 Clear
