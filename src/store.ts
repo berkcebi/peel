@@ -17,6 +17,7 @@ interface JamState {
     changeVolume: (trackId: number, volumeValue: number) => void;
     mute: (trackId: number) => void;
     changeTempo: (tempo: number) => void;
+    clear: () => void;
 }
 
 export const useJamStore = create<JamState>()(
@@ -109,6 +110,21 @@ export const useJamStore = create<JamState>()(
                 }
 
                 pattern.tempo = tempo;
+            }),
+        clear: () =>
+            set((state) => {
+                const pattern = state.jam?.patterns[PATTERN_INDEX];
+                if (!pattern) {
+                    return;
+                }
+
+                for (const track of pattern.tracks) {
+                    for (const step of track.steps) {
+                        step.isOn = false;
+                        step.accent = undefined;
+                        step.repeat = undefined;
+                    }
+                }
             }),
     }))
 );
