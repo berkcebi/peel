@@ -7,7 +7,7 @@
 }
 
 .Share-button:focus {
-    outline: none;
+    box-shadow: none;
 }
 
 .Share-loading {
