@@ -1,9 +1,0 @@
-{
-    "compilerOptions": {
-        "strict": true,
-        "allowJs": false,
-        "skipLibCheck": true,
-        "forceConsistentCasingInFileNames": true,
-        "moduleResolution": "node"
-    }
-}
