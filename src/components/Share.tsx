@@ -1,6 +1,5 @@
 import * as amplitude from "@amplitude/analytics-browser";
 import React, { useEffect, useState } from "react";
-import SOURCE from "../source";
 import { useJamStore, useToastStore } from "../store";
 import "./Share.css";
 
