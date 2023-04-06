@@ -1,4 +1,4 @@
-import create from "zustand";
+import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
 import Jam, { PATTERN_INDEX } from "./types/Jam";
 import Message from "./types/Message";
