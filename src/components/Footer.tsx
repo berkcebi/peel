@@ -21,7 +21,15 @@ function Footer({ tempo }: FooterProps) {
                 >
                     @berkcebi
                 </a>{" "}
-                for any feedback.
+                for feedback, or peek at the{" "}
+                <a
+                    href="https://github.com/berkcebi/peel"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    source code
+                </a>
+                .
             </span>
         </footer>
     );
