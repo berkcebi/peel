@@ -14,7 +14,7 @@ function Logo() {
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
         >
-            <title>Peel — Drum machine in your browser</title>
+            <title>Peel logo</title>
             <path
                 fillRule="evenodd"
                 clipRule="evenodd"
