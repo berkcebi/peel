@@ -13,11 +13,28 @@
     --primary-background-color: #fff;
     --control-background-color: #f2f2f2;
     --error-background-color: rgba(255, 0, 0, 0.1);
-    --primary-border-color: rgba(0, 0, 0, 0.2);
-    --secondary-border-color: rgba(0, 0, 0, 0.1);
-    --tertiary-border-color: rgba(0, 0, 0, 0.05);
+    --border-color: #e6e6e6;
     --accent-border-color: rgba(0, 122, 255, 0.25);
+    --primary-border-on-inverse-color: rgba(0, 0, 0, 0.2);
+    --secondary-border-on-inverse-color: rgba(0, 0, 0, 0.1);
     --primary-shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --primary-label-color: #e6edf3;
+        --secondary-label-color: #7d8590;
+        --accent-color: #0a84ff;
+        --indigo-accent-color: #5e5ce6;
+        --yellow-accent-color: #ffd60a;
+        --green-accent-color: #30d158;
+        --cyan-accent-color: #64d2ff;
+        --red-accent-color: #ff375f;
+        --primary-background-color: #111827;
+        --control-background-color: #1f2937;
+        --border-color: #27303e;
+        --accent-border-color: rgba(0, 122, 255, 0.5);
+    }
 }
 
 button {
@@ -81,7 +98,7 @@ body {
     height: 2px;
     margin: 8px 12px;
     border-radius: 1px;
-    background-color: var(--secondary-border-color);
+    background-color: var(--border-color);
 }
 
 .Menu-Item {

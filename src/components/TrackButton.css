@@ -1,0 +1,35 @@
+.Track-button {
+    display: flex;
+    gap: 4px;
+    height: 14px;
+    align-items: center;
+    margin-right: 12px;
+    padding: 0px 4px;
+    border-radius: 2px;
+    background-color: var(--control-background-color);
+    cursor: pointer;
+}
+
+.Track-button-indicator {
+    width: 6px;
+    height: 6px;
+    border-radius: 3px;
+    background-color: var(--green-accent-color);
+}
+
+.Track-button-indicator--muted {
+    background-color: var(--secondary-label-color);
+}
+
+.Track-button-text {
+    padding-bottom: 1px;
+    color: var(--secondary-label-color);
+    font-size: 10px;
+}
+
+/* Shift text up on Safari to center. */
+_::-webkit-full-page-media,
+_:future,
+:root .Track-button-text {
+    padding-bottom: 0px;
+}

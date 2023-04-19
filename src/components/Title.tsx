@@ -18,6 +18,7 @@ const ADJECTIVES = [
     "spine-tingling",
     "sublime",
     "thrilling",
+    "jammy",
     "boring",
     "mediocre",
     "shoddy",

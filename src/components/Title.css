@@ -21,3 +21,10 @@
     color: var(--primary-label-on-inverse-color);
     cursor: pointer;
 }
+
+@media (prefers-color-scheme: dark) {
+    .Title-button {
+        background-color: var(--control-background-color);
+        color: var(--secondary-label-color);
+    }
+}
