@@ -9,20 +9,9 @@
     text-align: right;
 }
 
-.Track-button {
-    width: 20px;
-    height: 20px;
-    border-radius: 10px;
-    background-color: var(--primary-label-color);
-    color: var(--primary-label-on-inverse-color);
-    margin-right: 12px;
-    cursor: pointer;
-}
-
-.Track-button--muted {
-    border: 1px solid var(--primary-label-color);
-    background: none;
-    color: var(--primary-label-color);
+.Track-name--muted {
+    color: var(--secondary-label-color);
+    text-decoration: line-through;
 }
 
 .Track-volume {

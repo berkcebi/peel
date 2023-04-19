@@ -5,6 +5,7 @@ import { useJamStore } from "../store";
 import TrackType from "../types/Track";
 import Step from "./Step";
 import "./Track.css";
+import TrackButton from "./TrackButton";
 import Volume from "./Volume";
 
 interface TrackProps {
@@ -38,21 +39,25 @@ function Track({ track, shortcutKey }: TrackProps) {
     }, [id, shortcutKey, mute]);
     return (
         <div className="Track">
-            <div className="Track-name">
+            <div
+                className={clsx(
+                    "Track-name",
+                    track.volume.isMuted && "Track-name--muted"
+                )}
+            >
                 {track.name}
                 {track.description && (
                     <span className="secondary">, {track.description}</span>
                 )}
             </div>
-            <button
-                className={clsx(
-                    "Track-button",
-                    track.volume.isMuted && "Track-button--muted"
-                )}
-                onClick={() => mute(id)}
-            >
-                {shortcutKey}
-            </button>
+            <TrackButton
+                isMuted={track.volume.isMuted}
+                onToggle={() => {
+                    mute(id);
+                }}
+                shortcutKey={shortcutKey}
+            />
+
             {track.steps.map((step, position) => (
                 <Step
                     step={step}
