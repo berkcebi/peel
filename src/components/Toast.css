@@ -9,6 +9,12 @@
     color: var(--primary-label-on-inverse-color);
 }
 
+@media (prefers-color-scheme: dark) {
+    .Toast {
+        background-color: var(--accent-color);
+    }
+}
+
 .Toast--error {
     background-color: var(--error-background-color);
     color: var(--error-label-color);
