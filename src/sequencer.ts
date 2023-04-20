@@ -67,6 +67,9 @@ function addTransportEvent(
         Tone.Transport.scheduleRepeat(
             (time) => {
                 const player = players.player(sample);
+                if (player.mute) {
+                    return;
+                }
 
                 if (accent) {
                     accentPlayer(player, time);
