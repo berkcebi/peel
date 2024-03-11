@@ -1,4 +1,3 @@
-import * as amplitude from "@amplitude/analytics-browser";
 import * as ContextMenu from "@radix-ui/react-context-menu";
 import clsx from "clsx";
 import React, { useEffect } from "react";
@@ -92,10 +91,6 @@ function Step({ step, position, trackId, trackSample, trackColor }: StepProps) {
                             <ContextMenu.RadioGroup
                                 value={step.repeat ?? DEFAULT_REPEAT}
                                 onValueChange={(repeat) => {
-                                    amplitude.track("Change Step Repeat", {
-                                        Repeat: repeat,
-                                    });
-
                                     changeStepRepeat(
                                         trackId,
                                         position,

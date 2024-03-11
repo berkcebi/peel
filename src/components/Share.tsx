@@ -1,4 +1,3 @@
-import * as amplitude from "@amplitude/analytics-browser";
 import React, { useEffect, useState } from "react";
 import { useJamStore, useToastStore } from "../store";
 import "./Share.css";
@@ -50,8 +49,6 @@ function Share() {
             const responseHash = responseJSON.hash;
 
             setHash(responseHash);
-
-            amplitude.track("Share Jam");
 
             await writeLinkToClipboard(responseHash);
         } catch (error) {
