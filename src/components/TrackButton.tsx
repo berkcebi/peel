@@ -18,7 +18,7 @@ function TrackButton({ isMuted, onToggle, shortcutKey }: TrackButtonProps) {
             <div
                 className={clsx(
                     "Track-button-indicator",
-                    isMuted && "Track-button-indicator--muted"
+                    isMuted && "Track-button-indicator--muted",
                 )}
             />
             <div className="Track-button-text">{shortcutKey}</div>

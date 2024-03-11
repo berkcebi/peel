@@ -13,12 +13,12 @@ interface Sequencer {
         sixteenth: number,
         accent: boolean,
         repeat: Repeat,
-        isOn: boolean
+        isOn: boolean,
     ) => void;
     readonly setVolume: (
         sample: Sample,
         value: number,
-        isMuted: boolean
+        isMuted: boolean,
     ) => void;
     readonly setTempo: (tempo: number) => void;
 }
@@ -51,7 +51,7 @@ function addTransportEvent(
     sample: Sample,
     sixteenth: number,
     accent: boolean,
-    repeat: Repeat
+    repeat: Repeat,
 ) {
     const id = getId(sample, sixteenth);
 
@@ -78,8 +78,8 @@ function addTransportEvent(
                 player.start(time);
             },
             `${intervalBar}:0:0`,
-            `${startBar}:0:${sixteenth}`
-        )
+            `${startBar}:0:${sixteenth}`,
+        ),
     );
 }
 
@@ -99,7 +99,7 @@ function accentPlayer(player: Tone.Player, time: number) {
     player.volume.setValueAtTime(volumeValue + ACCENT_VOLUME_VALUE, time);
     player.volume.setValueAtTime(
         volumeValue,
-        time + Tone.Time("0:0:1").toSeconds() - 0.01
+        time + Tone.Time("0:0:1").toSeconds() - 0.01,
     );
 }
 

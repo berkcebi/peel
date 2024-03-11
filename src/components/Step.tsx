@@ -40,9 +40,9 @@ function Step({ step, position, trackId, trackSample, trackColor }: StepProps) {
                 position,
                 step.accent ?? false,
                 step.repeat ?? DEFAULT_REPEAT,
-                step.isOn
+                step.isOn,
             ),
-        [step.isOn, step.accent, step.repeat, position, trackSample]
+        [step.isOn, step.accent, step.repeat, position, trackSample],
     );
 
     const emoji = step.isOn && SAMPLE_EMOJIS.get(trackSample);
@@ -52,7 +52,7 @@ function Step({ step, position, trackId, trackSample, trackColor }: StepProps) {
             className={clsx(
                 "Step-button",
                 step.isOn && `Step-button--on-${trackColor}`,
-                (step.accent || step.repeat) && "Step-button--has-context-menu"
+                (step.accent || step.repeat) && "Step-button--has-context-menu",
             )}
             aria-label={`Step ${position + 1}`}
             onClick={() => toggleStep(trackId, position)}
@@ -99,7 +99,7 @@ function Step({ step, position, trackId, trackSample, trackColor }: StepProps) {
                                     changeStepRepeat(
                                         trackId,
                                         position,
-                                        repeat as RepeatType
+                                        repeat as RepeatType,
                                     );
                                 }}
                             >
@@ -137,7 +137,7 @@ function Repeat({ repeat }: { repeat: RepeatType }) {
                     <div
                         className={clsx(
                             "Step-repeat-item",
-                            index === repeatIndex && "Step-repeat-item--on"
+                            index === repeatIndex && "Step-repeat-item--on",
                         )}
                         key={index}
                     />

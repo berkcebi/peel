@@ -148,7 +148,7 @@ function Title() {
                                     setTimeout(() => {
                                         if (
                                             confirm(
-                                                "Clear the jam and start from scratch?"
+                                                "Clear the jam and start from scratch?",
                                             )
                                         ) {
                                             clear();

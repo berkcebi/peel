@@ -42,7 +42,7 @@ function Track({ track, shortcutKey }: TrackProps) {
             <div
                 className={clsx(
                     "Track-name",
-                    track.volume.isMuted && "Track-name--muted"
+                    track.volume.isMuted && "Track-name--muted",
                 )}
             >
                 {track.name}

@@ -76,7 +76,8 @@ body {
     padding: 4px 0;
     border-radius: 4px;
     background-color: var(--primary-background-color);
-    box-shadow: 0 10px 15px -3px var(--primary-shadow-color),
+    box-shadow:
+        0 10px 15px -3px var(--primary-shadow-color),
         0 4px 6px -4px var(--primary-shadow-color),
         0 0 0 2px var(--accent-border-color);
     user-select: none;

@@ -43,7 +43,7 @@ function Share() {
                         "Content-Type": "application/json",
                     },
                     body: JSON.stringify(jam),
-                }
+                },
             );
 
             const responseJSON = await response.json();

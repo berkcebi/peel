@@ -19,7 +19,7 @@ function App() {
     const setJam = useJamStore((state) => state.setJam);
     const isPlaying = usePlayStore((state) => state.isPlaying);
     const setPlayheadPosition = usePlayStore(
-        (state) => state.setPlayheadPosition
+        (state) => state.setPlayheadPosition,
     );
     const setMessage = useToastStore((state) => state.setMessage);
 
@@ -39,7 +39,7 @@ function App() {
                         const response = await fetch(
                             `https://${
                                 import.meta.env.VITE_PEEL_AWS_S3_BUCKET
-                            }.s3.amazonaws.com/jams/${SOURCE.hash}`
+                            }.s3.amazonaws.com/jams/${SOURCE.hash}`,
                         );
 
                         if (didCancel) {
