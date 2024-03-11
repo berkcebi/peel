@@ -5,11 +5,7 @@
         "es2021": true,
         "node": true
     },
-    "extends": [
-        "eslint:recommended",
-        "plugin:@typescript-eslint/recommended",
-        "eslint-config-prettier"
-    ],
+    "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
     "parserOptions": {
         "ecmaVersion": 2021
     }
