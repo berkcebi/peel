@@ -1,4 +1,3 @@
-import React from "react";
 import { usePlayStore } from "../store";
 import "./Playhead.css";
 

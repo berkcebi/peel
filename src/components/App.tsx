@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import sequencer from "../sequencer";
 import SOURCE from "../source";
 import * as storage from "../storage";

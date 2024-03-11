@@ -1,6 +1,5 @@
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { fileOpen, fileSave } from "browser-fs-access";
-import React from "react";
 import SOURCE from "../source";
 import { useJamStore, usePlayStore, useToastStore } from "../store";
 import { JamSchema } from "../types/Jam";

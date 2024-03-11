@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { usePlayStore } from "../store";
 import "./Header.css";
 import Logo from "./Logo";

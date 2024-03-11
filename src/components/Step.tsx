@@ -1,6 +1,6 @@
 import * as ContextMenu from "@radix-ui/react-context-menu";
 import clsx from "clsx";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import sequencer from "../sequencer";
 import { useJamStore } from "../store";
 import RepeatType, {
