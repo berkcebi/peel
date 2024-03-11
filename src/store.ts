@@ -12,7 +12,7 @@ interface JamState {
     changeStepRepeat: (
         trackId: number,
         stepPosition: number,
-        repeat: Repeat
+        repeat: Repeat,
     ) => void;
     changeVolume: (trackId: number, volumeValue: number) => void;
     mute: (trackId: number) => void;
@@ -31,7 +31,7 @@ export const useJamStore = create<JamState>()(
             set((state) => {
                 const pattern = state.jam?.patterns[PATTERN_INDEX];
                 const track = pattern?.tracks.find(
-                    (track) => track.id === trackId
+                    (track) => track.id === trackId,
                 );
                 const step = track?.steps[stepPosition];
                 if (!step) {
@@ -54,7 +54,7 @@ export const useJamStore = create<JamState>()(
             set((state) => {
                 const pattern = state.jam?.patterns[PATTERN_INDEX];
                 const track = pattern?.tracks.find(
-                    (track) => track.id === trackId
+                    (track) => track.id === trackId,
                 );
                 const step = track?.steps[stepPosition];
                 if (!step) {
@@ -68,7 +68,7 @@ export const useJamStore = create<JamState>()(
             set((state) => {
                 const pattern = state.jam?.patterns[PATTERN_INDEX];
                 const track = pattern?.tracks.find(
-                    (track) => track.id === trackId
+                    (track) => track.id === trackId,
                 );
                 const step = track?.steps[stepPosition];
                 if (!step) {
@@ -82,7 +82,7 @@ export const useJamStore = create<JamState>()(
             set((state) => {
                 const pattern = state.jam?.patterns[PATTERN_INDEX];
                 const track = pattern?.tracks.find(
-                    (track) => track.id === trackId
+                    (track) => track.id === trackId,
                 );
                 if (!track) {
                     return;
@@ -94,7 +94,7 @@ export const useJamStore = create<JamState>()(
             set((state) => {
                 const pattern = state.jam?.patterns[PATTERN_INDEX];
                 const track = pattern?.tracks.find(
-                    (track) => track.id === trackId
+                    (track) => track.id === trackId,
                 );
                 if (!track) {
                     return;
@@ -126,7 +126,7 @@ export const useJamStore = create<JamState>()(
                     }
                 }
             }),
-    }))
+    })),
 );
 
 interface PlayState {
@@ -148,7 +148,7 @@ export const usePlayStore = create<PlayState>()(
             set((state) => {
                 state.playheadPosition = playheadPosition;
             }),
-    }))
+    })),
 );
 
 interface ToastState {
@@ -163,5 +163,5 @@ export const useToastStore = create<ToastState>()(
             set((state) => {
                 state.message = message;
             }),
-    }))
+    })),
 );

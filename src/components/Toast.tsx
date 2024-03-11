@@ -32,7 +32,7 @@ function Toast() {
         <div className={clsx("Toast", isError && "Toast--error")}>
             {typeof message === "object" ? message.text : message}
         </div>,
-        document.body
+        document.body,
     );
 }
 
